@@ -96,6 +96,7 @@ Write:
 - professional
 - technically accurate
 - easy to scan
+- friendly and natural when the user asks for a softer LinkedIn tone
 
 Prefer:
 
@@ -103,6 +104,8 @@ Prefer:
 - direct statements
 - concrete outcomes
 - engineering-focused language
+- clean spacing for copy-paste readability
+- lightweight icons when they improve scanability
 
 Avoid:
 
@@ -163,6 +166,27 @@ Avoid:
 - marketing-style language
 - exaggerated claims
 
+## Open Source Release Announcements
+
+When announcing a new release:
+
+Prefer:
+
+- what improved
+- why it matters
+- practical engineering impact
+- user-facing value
+- concise explanation of the project when useful
+
+Avoid:
+
+- generic release announcements
+- version-only announcements
+- lists of internal implementation details without user value
+- unsupported performance claims
+
+Lead with value delivered to users rather than the fact that a release happened.
+
 ## AI Agent Content Rules
 
 Position AI as:
@@ -215,6 +239,7 @@ Start with:
 - a metric
 - a technical insight
 - a surprising engineering finding
+- a short release announcement when the user asks for a project release post
 
 Avoid:
 
@@ -232,6 +257,28 @@ Explain:
 3. Result
 
 Keep focus on engineering value.
+
+For open-source release announcements, prefer a friendly, easy-to-read structure:
+
+1. Short announcement.
+2. What changed.
+3. Why it matters.
+4. What the tool/project does.
+5. Practical benefits.
+6. Repository link.
+7. Lightweight discussion question.
+
+### Icons and Formatting
+
+For LinkedIn posts, especially open-source announcements and project updates:
+
+- Use a small number of relevant icons when they make the post easier to scan.
+- Prefer professional icons such as 🚀, ⚡, 🧠, 🔁, 💸, 📦, 📄, 🏗️, 🔌, ⚙️, 🧩, 🔗.
+- Use icons as visual anchors, not decoration.
+- Avoid overusing icons or placing an icon on every sentence.
+- Keep the tone friendly and approachable while preserving technical credibility.
+- Use bullet-like lines for lists of features, entities, and benefits.
+- Keep spacing clean so the post looks good after copy-paste into LinkedIn.
 
 ### Closing
 
@@ -280,8 +327,11 @@ Provide:
 
 1. Strong hook
 2. Main content
-3. Suggested attachment title (if applicable)
-4. Suggested hashtags
+3. Copy-ready post in a fenced `text` block when the user asks for a post or copy-ready output
+4. Suggested attachment title (if applicable)
+5. Suggested hashtags
+
+When the user asks for a LinkedIn post directly, default to providing the final post inside a clean copy block unless another format is clearly requested.
 
 ### LinkedIn Summary
 
@@ -324,6 +374,8 @@ Before finalizing content verify:
 - aligned with engineering positioning
 - free of hype
 - free of generic statements
+- copy-paste friendly for LinkedIn when applicable
+- icons are useful and not excessive when used
 
 ## Completion Criteria
 
@@ -334,6 +386,7 @@ Content is complete only when:
 - value is communicated effectively
 - claims are supported
 - content remains concise and professional
+- formatting is convenient for direct LinkedIn posting when requested
 
 ## Skill Improvement
 
