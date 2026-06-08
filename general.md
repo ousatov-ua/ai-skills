@@ -15,8 +15,8 @@ Loading process:
 3. Fetch `skills-list.md` from repository `ousatov-ua/ai-skills`.
 4. Select the best matching skill or skills for the current task.
 5. Fetch each selected skill from `skills/<skill-name>/SKILL.md`.
-6. Follow both this entry point file and the selected skill instructions when answering.
-7. At the beginning of the response, mention which skill or skills were used.
+6. At the beginning of the response, explicitly mention which skill or skills you are connecting/using, or state that no task-specific skill applies.
+7. Follow both this entry point file and the selected skill instructions when answering.
 
 Fallback rules:
 - If the GitHub connector is unavailable, try web retrieval.
