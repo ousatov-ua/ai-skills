@@ -49,6 +49,28 @@ Unless explicitly specified otherwise:
 - Java 25 LTS
 - Maven
 
+## Java Docs
+
+**BLOCKING** Please add short Java Docs. Also, please add "@author Oleksii Usatov" on Class level.
+
+**BLOCKING** Don't embed SQL, cypher etc queries into the Java source code (**allow for Junit tests**): keep them in appropriate file (.sql, .cypher) in appropriate folder.
+
+## Git
+
+Don't add verification and validation information into the commit message, e.g. ("Verification passed", "Validation", etc):
+
+- No information about passed tests
+- No `git diff` information
+- No `mvn ...` information
+
+Preserve only `What changed` section of commit message.
+
+## Maven
+
+**BLOCKING** Use `-q` argument whenever you need to check only errors and severe problems.
+
+**BLOCKING** When you run all/specific tests in the project, e.g. `mvn test`, `mvn -q test` always use additional filtering for errors if your intention is to only check if all tests pass.
+
 ## Project Conventions
 
 When modifying existing code:
