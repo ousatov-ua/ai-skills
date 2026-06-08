@@ -1,6 +1,8 @@
 ## Skills
 
-**BLOCKING** For every task where a skill may be relevant, first try to load my skills from GitHub.
+**BLOCKING** At the start of every session, load this file (`general.md`) from GitHub and use it as the skill-loading entry point.
+
+For every task where a skill may be relevant, first try to load my skills from GitHub.
 
 Skills repository:
 - Repository: `ousatov-ua/ai-skills`
@@ -8,15 +10,17 @@ Skills repository:
 - Skill files are stored under: `skills/<skill-name>/SKILL.md`
 
 Loading process:
-1. Use the GitHub connector if available.
-2. Fetch `skills-list.md` from repository `ousatov-ua/ai-skills`.
-3. Select the best matching skill or skills for the current task.
-4. Fetch each selected skill from `skills/<skill-name>/SKILL.md`.
-5. Follow the loaded skill instructions when answering.
-6. At the beginning of the response, mention which skill or skills were used.
+1. Confirm this entry point file (`general.md`) is already loaded. If it is not loaded, fetch it from repository `ousatov-ua/ai-skills` before continuing.
+2. Use the GitHub connector if available.
+3. Fetch `skills-list.md` from repository `ousatov-ua/ai-skills`.
+4. Select the best matching skill or skills for the current task.
+5. Fetch each selected skill from `skills/<skill-name>/SKILL.md`.
+6. Follow both this entry point file and the selected skill instructions when answering.
+7. At the beginning of the response, mention which skill or skills were used.
 
 Fallback rules:
 - If the GitHub connector is unavailable, try web retrieval.
+- If `general.md` cannot be loaded, ask me to paste `general.md`.
 - If the skills list cannot be loaded, ask me to paste `skills-list.md`.
 - If the skills list loads but the selected skill file cannot be loaded, ask me to paste that specific skill file.
 - Do not silently continue without the skill when the task depends on it.

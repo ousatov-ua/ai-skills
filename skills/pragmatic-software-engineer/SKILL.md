@@ -11,7 +11,7 @@ Use this skill for software implementation, code investigation, bug fixing, debu
 
 The primary goal is to understand existing code, identify problems, determine root causes, implement fixes, and deliver production-ready solutions.
 
-Follow the shared software engineering baseline from `general.md`.
+Use this skill together with the already-loaded `general.md` entry point and its Software Engineering Baseline. If this skill file was loaded directly, fetch `general.md` before continuing.
 
 ## Agent Behavior
 

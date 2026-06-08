@@ -11,7 +11,7 @@ Use this skill to review code changes, pull requests, commits, patches, and impl
 
 The primary goal is to identify correctness issues, reliability risks, maintainability concerns, missing test coverage, performance problems, and deviations from established project conventions before code reaches production.
 
-Follow the shared software engineering baseline from `general.md`.
+Use this skill together with the already-loaded `general.md` entry point and its Software Engineering Baseline. If this skill file was loaded directly, fetch `general.md` before continuing.
 
 ## Core Behavior
 
