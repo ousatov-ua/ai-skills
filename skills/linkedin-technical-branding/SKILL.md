@@ -187,6 +187,13 @@ Avoid:
 
 Lead with value delivered to users rather than the fact that a release happened.
 
+When release data includes measured benchmark results, treat the post as a benchmark-supported release announcement:
+
+1. Lead with the strongest measured outcome.
+2. Mention the release after the result.
+3. Connect release improvements to the measured impact.
+4. Keep implementation details secondary to user-facing value.
+
 ## AI Agent Content Rules
 
 Position AI as:
@@ -209,15 +216,27 @@ Avoid:
 - speculative claims
 - fear-of-missing-out messaging
 
+## Memgraph Ingester Positioning
+
+When writing about Memgraph Ingester:
+
+- Describe it as a code and memory knowledge graph for AI agents.
+- Explain that it helps agents query architecture, code relationships, and project memory instead of repeatedly scanning source files.
+- Emphasize structured retrieval, better context quality, lower token usage, and improved agent reasoning.
+- Highlight improved incremental ingestion when relevant.
+- Highlight refined agent instructions when relevant.
+- Connect features to real software engineering workflows such as onboarding, performance investigation, impact analysis, semantic search, bug fixing, and CI triage.
+- Avoid presenting it as only a parser, only a RAG tool, or only a Memgraph demo.
+
 ## Technical Benchmark Post Rules
 
 Preferred structure:
 
-1. Result
-2. Test setup
-3. What was measured
-4. Findings
-5. Practical implications
+1. Strongest measured result.
+2. Test setup.
+3. What was measured.
+4. Findings.
+5. Practical implications.
 
 Whenever possible include:
 
@@ -228,6 +247,34 @@ Whenever possible include:
 - limitations
 
 Prefer real-world engineering tasks over synthetic benchmarks.
+
+When benchmark data is available:
+
+- Lead with percentage improvement before raw numbers.
+- Include absolute numbers after the percentage.
+- Highlight the strongest per-task result when it is meaningful.
+- Summarize total impact in practical terms, such as fewer tokens consumed, lower cost, faster investigation, or reduced repeated scanning.
+- Use careful wording: "reduced token usage in this benchmark" instead of universal claims like "always reduces token usage".
+- Mention baseline clearly, for example "Memgraph-assisted run vs regular tools only".
+
+Good benchmark headline patterns:
+
+- "Reduced agent token usage by 41% across 6 real-world software engineering tasks."
+- "Used 250,608 fewer tokens in benchmark runs on a real codebase."
+- "The biggest improvement appeared in performance investigation: 62% fewer tokens."
+
+## Benchmark PDF / Attachment Rules
+
+When creating or recommending benchmark attachments:
+
+- Add task descriptions before charts.
+- Add codebase size and context when available.
+- Add methodology: tools used, baseline, comparison method, and what was measured.
+- Add one clear chart per page when possible.
+- Include a small summary table with percentage reductions.
+- Add callouts for the strongest result and overall result.
+- Keep visual design clean and professional for LinkedIn sharing.
+- Avoid overcrowding the PDF with too much implementation detail.
 
 ## LinkedIn Post Rules
 
@@ -397,9 +444,12 @@ Evaluate whether the content:
 - increases credibility
 - increases technical authority
 - improves discoverability
+- captures a reusable user preference
 
 If improvements are identified:
 
 - describe the improvement
 - provide an improved version
 - suggest an update to this skill
+
+If the user accepts or directly requests the improvement, update the actual skill file when repository access is available.
