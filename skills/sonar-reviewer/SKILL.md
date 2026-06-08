@@ -1,50 +1,87 @@
 ---
 name: sonar-reviewer
-description: Use for Sonar cleanup, SonarQube/SonarLint-oriented review, and pre-final checks of changed or added code and tests for common static-analysis issues such as empty bodies, assertThrows lambdas, resource handling, reflection-heavy tests, comments, and sleep-based JUnit tests.
+description: Use for Sonar cleanup, SonarQube/SonarLint-oriented review, static-analysis validation, and checking changed or added code and tests for common Sonar issues before finalizing implementation work.
 ---
 
 # Sonar Reviewer
 
 ## Purpose
 
-Use this skill to review changed or added code and tests for common Sonar issues before considering implementation work complete.
+Use this skill to review changed or added code and tests for common Sonar issues.
 
-The goal is to catch practical static-analysis problems early, especially issues that are easy to miss during normal implementation or code review.
+The primary goal is to identify and resolve static-analysis problems before implementation work is considered complete.
 
 ## Core Behavior
 
 Act as a focused Sonar cleanup reviewer.
 
-Review only relevant changed or added files unless the user asks for a broader scan.
+Optimize for:
 
-Prefer fixing clear issues when code edits are in scope. If the user asked only for a review, report actionable findings instead of editing.
+- static-analysis cleanliness
+- maintainability
+- readability
+- reliability
+- test quality
+- low-noise fixes
 
-Prioritize issues likely to be raised by SonarQube, SonarLint, or equivalent static analysis.
+Prefer practical findings that are likely to be raised by SonarQube, SonarLint, or equivalent static-analysis tools.
 
-Avoid speculative style churn and unrelated refactoring.
+Focus on issues in changed or added files unless the user asks for a broader scan.
 
-## Primary Checks
+Avoid unrelated refactoring and subjective style churn.
 
-Focus especially on:
+## Review Principles
 
-- empty methods, constructors, lambdas, overrides, or blocks
-- exception-testing lambdas with more than the single invocation expected to throw
-- manual resource closing where try-with-resources fits
-- reflection-based test setup where direct constructors or helpers are available
-- comments that are stale, verbose, generic, or only restate the code
-- JUnit tests that use `sleep()` instead of Awaitility when Awaitility is available
+Prioritize:
 
-## Empty Bodies
+1. Correctness
+2. Resource safety
+3. Test clarity
+4. Maintainability
+5. Static-analysis compliance
+6. Comment quality
 
-For empty methods, constructors, lambdas, overrides, or blocks:
+Prefer existing project conventions over introducing new patterns.
+
+Fix clear issues when code edits are in scope.
+
+If the user asks only for a review, report actionable findings instead of editing.
+
+## Engineering Defaults
+
+Unless explicitly specified otherwise:
+
+- Java 25 LTS
+- Maven
+- JUnit
+- SonarQube or SonarLint style analysis
+
+## Review Process
+
+1. Identify changed or added files.
+2. Understand the purpose of the change.
+3. Review implementation code for common Sonar issues.
+4. Review test code for common Sonar issues.
+5. Check resource handling.
+6. Check exception assertions.
+7. Check empty bodies and comments.
+8. Run formatting when the project has a formatter.
+9. Run relevant tests for changed files.
+10. Report fixed issues, remaining concerns, and skipped verification.
+
+## Empty Body Review
+
+Verify empty methods, constructors, lambdas, overrides, and blocks.
+
+For each empty body:
 
 1. Complete the implementation when behavior is required.
 2. Throw `UnsupportedOperationException` when the operation is intentionally unsupported.
-3. Add a short nested comment only when the empty body is intentional and valid.
+3. Add a short nested comment when the empty body is intentional and valid.
 
-Do not leave an unexplained empty body.
+Do not leave unexplained empty bodies.
 
-## Exception Tests
+## Exception Test Review
 
 For `assertThrows` and similar exception-testing helpers:
 
@@ -54,17 +91,19 @@ For `assertThrows` and similar exception-testing helpers:
 - move builders, mocks, fixtures, and setup outside the lambda
 - avoid multiple calls inside the throwing lambda
 
-Prefer making the tested failure point obvious.
+Prefer making the exact failure point obvious.
 
-## Resources
+## Resource Review
 
-For `Closeable` or `AutoCloseable` resources:
+For `Closeable` and `AutoCloseable` objects:
 
 - use try-with-resources where possible
 - avoid manual `close()` when try-with-resources fits
-- keep cleanup behavior clear for exceptional paths
+- verify cleanup behavior on exceptional paths
 
-## Tests
+Prefer structured resource management over manual cleanup.
+
+## Test Review
 
 For test code:
 
@@ -73,49 +112,80 @@ For test code:
 - avoid `sleep()` in JUnit tests
 - use Awaitility for asynchronous waits when it is available as a dependency
 
-## Comments
+Tests should make setup, action, and assertion boundaries clear.
+
+## Comment Review
 
 Keep comments short and specific.
 
 Add comments only when they clarify non-obvious intent, explain an intentionally empty body, or satisfy a legitimate static-analysis concern.
 
-Remove comments that only repeat the code.
+Remove comments that only restate the code.
 
-## Verification Workflow
+## Pattern Search
 
-Before final response after code or test changes:
-
-1. Run formatting if the project has a formatter.
-2. Run relevant tests for the changed files.
-3. Search changed or added files for obvious Sonar-triggering patterns.
-4. Resolve clear issues.
-5. Mention any Sonar issue that could not be resolved and why.
+Search changed or added files for obvious Sonar-triggering patterns when appropriate.
 
 Useful search targets include:
 
 - empty bodies: `{}`
-- `assertThrows(..., () -> ...)` lambdas with setup inside
-- manual `try { ... close(); }` patterns
+- exception assertions with setup inside the throwing lambda
+- manual close patterns
 - reflection usage in tests
 - `sleep()` in JUnit tests
 
+Treat search hits as leads, not automatic findings.
+
 ## Output Style
 
-When reporting a Sonar review, provide:
+### Sonar Review Summary
 
-1. Issues found, ordered by severity.
-2. File and line references where available.
-3. Recommended fixes.
-4. Verification performed.
-5. Any unresolved Sonar concerns.
+Provide:
 
-If no issues are found, say that clearly and include the verification performed.
+1. Overall assessment
+2. Files reviewed
+3. Verification performed
+4. Remaining risk
+
+### Findings
+
+For each finding provide:
+
+1. Severity
+2. Problem
+3. Evidence
+4. Recommended fix
+
+### Final Verdict
+
+Provide one of:
+
+- Clean
+- Clean after fixes
+- Issues found
+- Verification incomplete
+
+If no issues are found, say that clearly.
 
 ## Completion Criteria
 
 A Sonar cleanup pass is complete only when:
 
-- changed or added files were checked for the primary Sonar patterns
-- clear issues were fixed or reported
-- relevant formatting/tests were run when available
-- unresolved issues and skipped verification are explicitly mentioned
+- changed or added files were reviewed
+- empty bodies were checked
+- exception assertions were checked
+- resource handling was checked
+- test-specific Sonar issues were checked
+- formatting and relevant tests were run when available
+- unresolved issues and skipped verification were explicitly mentioned
+
+## Skill Improvement
+
+After completing a Sonar cleanup pass:
+
+Evaluate whether this skill was sufficient.
+
+If improvement is identified:
+
+- describe the improvement
+- provide a ready-to-paste update for this skill
