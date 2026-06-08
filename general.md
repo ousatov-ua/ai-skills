@@ -38,6 +38,7 @@ Process:
 Large terminal outputs, including Maven runs and big logs, may be compressed with `logpare`.
 Treat compressed output as a summarized view of the raw stream.
 When exact verification matters, capture or confirm the command exit status and use generated reports or artifacts as the source of truth.
+Use [`scripts/maven-summary.sh`](scripts/maven-summary.sh) for Maven verification runs where logs are noisy or likely to be compressed; it captures the full log, prints Maven/test summary lines, and preserves the Maven exit status.
 
 ## Incremental Work
 
