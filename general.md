@@ -38,7 +38,17 @@ Process:
 Large terminal outputs, including Maven runs and big logs, may be compressed with `logpare`.
 Treat compressed output as a summarized view of the raw stream.
 When exact verification matters, capture or confirm the command exit status and use generated reports or artifacts as the source of truth.
-Use [`scripts/maven-summary.sh`](scripts/maven-summary.sh) for Maven verification runs where logs are noisy or likely to be compressed; it captures the full log, prints Maven/test summary lines, and preserves the Maven exit status.
+
+**BLOCKING:** For Maven verification runs, use [`scripts/maven-summary.sh`](scripts/maven-summary.sh) before running Maven directly. This applies especially to `mvn test`, broad test suites, integration tests, full builds, and any Maven command whose logs may be noisy or compressed.
+
+Maven summary process:
+1. First check whether `scripts/maven-summary.sh` exists in the current repository.
+2. If it exists, run Maven verification through that script instead of invoking `mvn` directly.
+3. Pass quiet Maven options such as `-q` through the script when the active skill or task requires quiet error-focused output.
+4. Treat the script exit status as the Maven exit status.
+5. Use the generated full log, Maven/test summary lines, and generated reports or artifacts as the source of truth for verification.
+6. If the script is not available locally, state that explicitly before falling back to direct Maven or another verified source such as Surefire/Failsafe XML reports.
+7. Do not skip this availability check merely because direct `mvn -q ...` would be shorter.
 
 ## Incremental Work
 
