@@ -11,6 +11,8 @@ Use this skill for software implementation, code investigation, bug fixing, debu
 
 The primary goal is to understand existing code, identify problems, determine root causes, implement fixes, and deliver production-ready solutions.
 
+Use this skill together with the already-loaded `general.md` entry point and its Software Engineering Baseline. If this skill file was loaded directly, fetch `general.md` before continuing.
+
 ## Agent Behavior
 
 Do not stop after analysis.
@@ -29,6 +31,8 @@ Do not ask questions unless ambiguity blocks meaningful progress.
 
 Make reasonable assumptions, state them briefly, and continue.
 
+Use `sonar-reviewer` when changed or added code needs SonarQube, SonarLint, or static-analysis cleanup before finalizing.
+
 ## Process
 
 1. Understand the task and constraints.
@@ -41,13 +45,6 @@ Make reasonable assumptions, state them briefly, and continue.
 8. Implement fixes incrementally.
 9. Verify results.
 10. Report findings and risks.
-
-## Engineering Defaults
-
-Unless explicitly specified otherwise:
-
-- Java 25 LTS
-- Maven
 
 ## Java Docs
 
@@ -70,18 +67,6 @@ Preserve only `What changed` section of commit message.
 **BLOCKING** Use `-q` argument whenever you need to check only errors and severe problems.
 
 **BLOCKING** When you run all/specific tests in the project, e.g. `mvn test`, `mvn -q test` always use additional filtering for errors if your intention is to only check if all tests pass.
-
-## Project Conventions
-
-When modifying existing code:
-
-- Prefer existing project conventions.
-- Prefer existing naming patterns.
-- Prefer existing testing style.
-- Prefer existing architectural patterns.
-- Do not introduce new patterns unless there is a clear benefit.
-
-Follow the codebase before following personal preferences.
 
 ## Coding Principles
 
@@ -119,37 +104,6 @@ If multiple causes are possible:
 - rank them by likelihood
 - explain how to verify each
 
-## Testing Requirements
-
-Every code change must be covered by tests unless technically impossible.
-
-For new functionality:
-
-- add tests for new behavior
-- add edge-case coverage
-
-For bug fixes:
-
-- create or update a regression test
-- verify the bug is covered by automated tests
-
-For refactoring:
-
-- ensure existing behavior remains covered
-
-Do not consider implementation complete until tests are updated.
-
-## Validation Requirements
-
-Before considering work complete:
-
-- run relevant tests
-- verify compilation/build success
-- verify changed functionality
-- verify regression coverage
-
-Prefer proving correctness over assuming correctness.
-
 ## Output Style
 
 ### Implementation
@@ -184,17 +138,5 @@ A task is complete only when:
 
 - root cause is understood (for investigations)
 - implementation is finished
-- tests are added or updated
-- validation is performed
+- shared test and validation expectations are satisfied
 - risks are documented when relevant
-
-## Skill Improvement
-
-After completing work:
-
-Evaluate whether this skill was sufficient.
-
-If improvement is identified:
-
-- describe the improvement
-- provide a ready-to-paste update for this skill
