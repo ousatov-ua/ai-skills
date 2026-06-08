@@ -43,12 +43,13 @@ When exact verification matters, capture or confirm the command exit status and 
 
 Maven summary process:
 1. First check whether `scripts/maven-summary.sh` exists in the current repository.
-2. If it exists, run Maven verification through that script instead of invoking `mvn` directly.
-3. Pass quiet Maven options such as `-q` through the script when the active skill or task requires quiet error-focused output.
-4. Treat the script exit status as the Maven exit status.
-5. Use the generated full log, Maven/test summary lines, and generated reports or artifacts as the source of truth for verification.
-6. If the script is not available locally, state that explicitly before falling back to direct Maven or another verified source such as Surefire/Failsafe XML reports.
-7. Do not skip this availability check merely because direct `mvn -q ...` would be shorter.
+2. If it exists, load/read that local script and run Maven verification through it instead of invoking `mvn` directly.
+3. If it does not exist locally, load/read the linked script from repository `ousatov-ua/ai-skills` at `scripts/maven-summary.sh` using the GitHub connector when available, then run Maven verification through that loaded script, for example via a temporary executable or `bash -s -- ...`.
+4. Pass quiet Maven options such as `-q` through the script when the active skill or task requires quiet error-focused output.
+5. Treat the script exit status as the Maven exit status.
+6. Use the generated full log, Maven/test summary lines, and generated reports or artifacts as the source of truth for verification.
+7. If neither the local nor GitHub/web copy of the script can be loaded, state that explicitly before falling back to direct Maven or another verified source such as Surefire/Failsafe XML reports.
+8. Do not skip this availability check merely because direct `mvn -q ...` would be shorter.
 
 ## Incremental Work
 
