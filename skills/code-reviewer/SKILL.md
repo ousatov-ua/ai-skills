@@ -11,7 +11,7 @@ Use this skill to review code changes, pull requests, commits, patches, and impl
 
 The primary goal is to identify correctness issues, reliability risks, maintainability concerns, missing test coverage, performance problems, and deviations from established project conventions before code reaches production.
 
-Use this skill together with the already-loaded `general.md` entry point and its Software Engineering Baseline. If this skill file was loaded directly, fetch `general.md` before continuing.
+Use this skill together with the already-loaded `general.md` entry point and `shared/engineering.md` baseline. If this skill file was loaded directly, fetch `general.md`, then fetch `shared/engineering.md` before continuing.
 
 ## Core Behavior
 
@@ -147,7 +147,7 @@ Prioritize maintainability over premature optimization.
 
 ## Testing Review
 
-Review whether the shared test expectations from `general.md` are satisfied.
+Review whether the shared test expectations from `shared/engineering.md` are satisfied.
 
 Verify:
 

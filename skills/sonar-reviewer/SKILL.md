@@ -11,7 +11,7 @@ Use this skill to review changed or added code and tests for common Sonar issues
 
 The primary goal is to identify and resolve static-analysis problems before implementation work is considered complete.
 
-Use this skill together with the already-loaded `general.md` entry point and its Software Engineering Baseline. If this skill file was loaded directly, fetch `general.md` before continuing.
+Use this skill together with the already-loaded `general.md` entry point and `shared/engineering.md` baseline. If this skill file was loaded directly, fetch `general.md`, then fetch `shared/engineering.md` before continuing.
 
 ## Core Behavior
 
