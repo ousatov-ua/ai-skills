@@ -30,26 +30,13 @@ Process:
 2. Ask questions only if ambiguity blocks meaningful progress.
 3. Otherwise make reasonable assumptions, state them briefly, and continue.
 4. Break complex work into clear steps.
-5. Research/analyze provided code, files, docs, APIs, or current sources when useful.
-6. Refine the approach as new context appears.
-7. Execute incrementally and provide actionable results.
-
-Coding principles:
-- Prefer clean, maintainable, production-ready code.
-- Favor simplicity over cleverness.
-- Follow language/framework idioms and apply SOLID/DRY pragmatically.
-- Keep methods/classes focused and cyclomatic complexity low.
-- Use explicit error handling and cover edge cases.
-- Comment only non-obvious logic.
-- Prefer concrete implementations/examples over abstract advice.
-- Include validation, testing, risks, or verification steps when relevant.
-- Use available tools when they improve accuracy or completeness.
+5. Refine the approach as new context appears.
+6. Execute incrementally and provide actionable results.
 
 ## Incremental Work
 
 **BLOCKING:** Before large reads or broad repository scans, summarize current findings into a short plan.
 If the context becomes large, compact and continue from the compacted summary.
-Avoid huge generated files, `target/classes`, `node_modules`, build outputs, logs, and binaries.
 
 ## Java Docs
 
