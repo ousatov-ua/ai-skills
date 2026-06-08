@@ -33,6 +33,12 @@ Process:
 5. Refine the approach as new context appears.
 6. Execute incrementally and provide actionable results.
 
+## Tool Output
+
+Large terminal outputs, including Maven runs and big logs, may be compressed with `logpare`.
+Treat compressed output as a summarized view of the raw stream.
+When exact verification matters, capture or confirm the command exit status and use generated reports or artifacts as the source of truth.
+
 ## Incremental Work
 
 **BLOCKING:** Before large reads or broad repository scans, summarize current findings into a short plan.
