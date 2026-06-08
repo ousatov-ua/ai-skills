@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Use for pull request reviews, code reviews, change reviews, implementation validation, quality assessment, maintainability analysis, and identifying correctness, reliability, testing, and production-readiness issues.
+description: Use for pull request reviews, code reviews, change reviews, implementation validation, quality assessment, maintainability analysis, and identifying correctness, reliability, testing, and production-readiness issues. Use with sonar-reviewer when static-analysis or Sonar cleanup checks are needed.
 ---
 
 # Code Reviewer
@@ -20,15 +20,23 @@ Optimize for:
 - correctness
 - maintainability
 - reliability
-- readability
 - production readiness
-- testability
+- test coverage
+- merge readiness
 
 Prefer evidence-based findings.
 
 Focus on issues that materially improve the quality of the codebase.
 
-Avoid subjective nitpicks unless they significantly affect maintainability, readability, or correctness.
+Avoid subjective nitpicks unless they significantly affect maintainability, correctness, reliability, or production support.
+
+## Skill Coordination
+
+Use `sonar-reviewer` for SonarQube, SonarLint, static-analysis cleanup, and low-level changed-file hygiene.
+
+Do not duplicate Sonar-specific checks in this skill.
+
+When both skills apply, let this skill own the overall code review and let `sonar-reviewer` own static-analysis validation.
 
 ## Review Principles
 
@@ -39,7 +47,7 @@ Prioritize:
 1. Correctness
 2. Reliability
 3. Security
-4. Testability
+4. Test coverage
 5. Maintainability
 6. Performance
 7. Consistency
@@ -68,7 +76,8 @@ Unless explicitly specified otherwise:
 7. Review failure scenarios.
 8. Review maintainability.
 9. Review consistency with the codebase.
-10. Produce prioritized findings.
+10. Use `sonar-reviewer` for static-analysis cleanup when changed or added code is involved.
+11. Produce prioritized findings.
 
 ## Correctness Review
 
@@ -79,7 +88,6 @@ Verify:
 - edge cases are handled
 - error scenarios are handled
 - null handling is appropriate
-- resource management is correct
 - data consistency is preserved
 
 Prioritize correctness over style.
@@ -88,13 +96,13 @@ Prioritize correctness over style.
 
 Evaluate:
 
-- readability
 - complexity
 - method size
 - class responsibilities
 - naming quality
 - duplication
 - separation of concerns
+- long-term understandability
 
 Prefer:
 
@@ -112,11 +120,25 @@ Verify:
 - failure scenarios are handled
 - exceptions are managed appropriately
 - retries are justified
-- cleanup logic is correct
 - concurrency concerns are addressed
 - state transitions are valid
+- operational behavior is predictable
 
 Identify production risks.
+
+## Security Review
+
+Review security when the change affects:
+
+- authentication
+- authorization
+- input validation
+- sensitive data
+- external calls
+- persistence
+- dependency boundaries
+
+Prioritize concrete risks over speculative concerns.
 
 ## Performance Review
 
@@ -141,7 +163,7 @@ Verify:
 - bug fixes include regression tests
 - edge cases are tested
 - failure scenarios are tested
-- existing tests remain valid
+- existing behavior remains protected
 
 Flag missing coverage.
 
@@ -201,7 +223,7 @@ Should normally be addressed before merge.
 
 Issues that improve:
 
-- readability
+- clarity
 - consistency
 - maintainability
 
@@ -220,6 +242,7 @@ Provide:
 1. Overall assessment
 2. Merge readiness
 3. Risk level
+4. Sonar review status when `sonar-reviewer` applies
 
 ### Findings
 
@@ -258,6 +281,7 @@ Before finalizing a review verify:
 - failure scenarios were reviewed
 - tests were reviewed
 - project conventions were reviewed
+- `sonar-reviewer` was used when static-analysis cleanup applies
 - findings are prioritized appropriately
 
 ## Completion Criteria
@@ -268,6 +292,7 @@ A review is complete only when:
 - reliability has been evaluated
 - test coverage has been evaluated
 - maintainability has been evaluated
+- static-analysis cleanup has been delegated to `sonar-reviewer` when applicable
 - findings are prioritized by severity
 - actionable recommendations are provided
 
