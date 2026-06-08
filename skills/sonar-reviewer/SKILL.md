@@ -76,6 +76,10 @@ Focus especially on:
 - Comments:
   - keep comments short and specific;
   - add comments only where needed to satisfy clarity or Sonar rules.
+- Workspace hygiene:
+  - inspect untracked files and generated artifacts when reviewing current local changes;
+  - remove or ignore clearly accidental OS/editor metadata, logs, caches, and generated reports when edits are in scope;
+  - leave ambiguous untracked files untouched and mention them in the final response.
 
 Fix vs suppress:
 
@@ -94,7 +98,8 @@ Verification before final response:
    - `assertThrows(..., () -> ...)` with setup inside the lambda
    - manual `try { ... close(); }` patterns
    - reflection usage in tests
-4. Mention any Sonar issue that could not be resolved and why.
+4. Inspect worktree status for accidental untracked artifacts, especially OS/editor metadata, logs, reports, caches, and generated local outputs.
+5. Mention any Sonar issue or artifact hygiene issue that could not be resolved and why.
 
 Don't use `sleep()` in JUnit tests - use Awaitility if available as dependency.
 
@@ -149,6 +154,7 @@ A Sonar cleanup pass is complete only when:
 - the Sonar Cleanup Rule was applied
 - clear issues were fixed or reported
 - intentional issues were suppressed with exact Sonar rule ids when suppression is the better outcome
+- accidental untracked/generated artifacts were fixed or explicitly reported for current-change/local-worktree reviews
 - formatting and relevant tests were run when available
 - unresolved issues and skipped verification were explicitly mentioned
 
