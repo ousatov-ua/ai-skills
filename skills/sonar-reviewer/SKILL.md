@@ -77,6 +77,14 @@ Focus especially on:
   - keep comments short and specific;
   - add comments only where needed to satisfy clarity or Sonar rules.
 
+Fix vs suppress:
+
+- Prefer fixing the code when the rule exposes real complexity, risk, dead code, unclear tests, resource leaks, or avoidable style debt.
+- Suppress only when the current behavior is intentional, the direct fix would make the code worse, or the rule conflicts with the project/runtime constraints.
+- Use the smallest reasonable suppression scope and include the exact Sonar rule id, for example `@SuppressWarnings("java:S127")`, `@SuppressWarnings("java:S1171")`, or `# NOSONAR python:S3776 - reason`.
+- Add a short reason when the suppression syntax allows it, especially for complexity, console output, security-hotspot, deprecated API, and test-fixture suppressions.
+- Do not use broad or rule-less suppressions when a specific Sonar id is known.
+
 Verification before final response:
 
 1. Run formatting if the project has a formatter.
@@ -97,9 +105,10 @@ Don't use `sleep()` in JUnit tests - use Awaitility if available as dependency.
 3. Apply the Sonar Cleanup Rule.
 4. Treat search hits as leads, not automatic findings.
 5. Fix clear issues when code edits are in scope.
-6. Report actionable findings when the user asked only for review.
-7. Run required verification when available.
-8. Report fixed issues, remaining concerns, and skipped verification.
+6. Suppress only intentional or better-left-as-is issues with the narrowest scope and exact Sonar rule id.
+7. Report actionable findings when the user asked only for review.
+8. Run required verification when available.
+9. Report fixed issues, suppressions, remaining concerns, and skipped verification.
 
 ## Output Style
 
@@ -139,6 +148,7 @@ A Sonar cleanup pass is complete only when:
 - changed or added files were reviewed
 - the Sonar Cleanup Rule was applied
 - clear issues were fixed or reported
+- intentional issues were suppressed with exact Sonar rule ids when suppression is the better outcome
 - formatting and relevant tests were run when available
 - unresolved issues and skipped verification were explicitly mentioned
 
