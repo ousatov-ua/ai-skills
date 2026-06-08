@@ -76,8 +76,9 @@ Unless explicitly specified otherwise:
 7. Review failure scenarios.
 8. Review maintainability.
 9. Review consistency with the codebase.
-10. Use `sonar-reviewer` for static-analysis cleanup when changed or added code is involved.
-11. Produce prioritized findings.
+10. Check worktree hygiene, including untracked files, generated artifacts, OS/editor metadata, logs, reports, and local-only outputs that may have been created during development or verification.
+11. Use `sonar-reviewer` for static-analysis cleanup when changed or added code is involved.
+12. Produce prioritized findings.
 
 ## Correctness Review
 
@@ -194,6 +195,15 @@ Prefer:
 
 Avoid introducing new frameworks, patterns, or conventions without strong justification.
 
+## Worktree Hygiene Review
+
+When reviewing current changes or a local worktree:
+
+- Inspect tracked and untracked files, not only the tracked diff.
+- Treat OS/editor metadata, local logs, generated reports, cache files, and ad hoc experiment outputs as review leads.
+- Fix clearly accidental artifacts when edits are in scope, usually by removing the artifact and adding a narrow ignore rule.
+- Do not delete or ignore ambiguous untracked files that may be intentional; call them out separately in the review.
+
 ## Review Severity Levels
 
 ### Critical
@@ -281,6 +291,7 @@ Before finalizing a review verify:
 - failure scenarios were reviewed
 - tests were reviewed
 - project conventions were reviewed
+- worktree hygiene was reviewed, including untracked files and accidental generated artifacts
 - `sonar-reviewer` was used when static-analysis cleanup applies
 - findings are prioritized appropriately
 
@@ -292,6 +303,7 @@ A review is complete only when:
 - reliability has been evaluated
 - test coverage has been evaluated
 - maintainability has been evaluated
+- worktree hygiene has been evaluated for current-change/local-worktree reviews
 - static-analysis cleanup has been delegated to `sonar-reviewer` when applicable
 - findings are prioritized by severity
 - actionable recommendations are provided
