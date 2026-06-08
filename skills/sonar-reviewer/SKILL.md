@@ -58,8 +58,6 @@ Unless explicitly specified otherwise:
 
 ## Sonar Cleanup Rule
 
-**BLOCKING** Before finishing any code or test change, check the changed/added files for common Sonar issues and resolve them.
-
 Focus especially on:
 
 - Empty methods, constructors, lambdas, or overrides:
