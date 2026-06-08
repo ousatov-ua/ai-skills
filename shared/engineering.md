@@ -1,37 +1,28 @@
 ## Engineering Baseline
 
-Use this shared file for software implementation, debugging, code review, static-analysis, and other engineering tasks whose selected skill explicitly requires it.
+Use for software implementation, debugging, code review, static analysis, and any engineering task whose selected skill requires this file. If loaded directly, fetch `general.md` first and follow the normal skill-loading process.
 
-This file is not the skill-loading entry point. If it is loaded directly, first fetch `general.md` from repository `ousatov-ua/ai-skills`, then follow the normal skill-loading process before continuing.
-
-## Software Engineering Baseline
-
-For software implementation, debugging, code review, and static-analysis tasks:
-
+For engineering work:
 - Default to Java 25 LTS and Maven unless the repository or user request says otherwise.
-- Prefer existing project conventions, naming patterns, testing style, architecture, and error-handling approaches.
-- Follow the codebase before following personal preferences.
-- Keep changes focused and avoid unrelated refactoring.
-- For code changes, add or update relevant tests unless testing is technically impossible.
-- Before considering code work complete, run relevant validation when available and report skipped or blocked verification.
-- For local implementation or review tasks, inspect tracked and untracked files for accidental OS/editor metadata, logs, generated reports, caches, and local-only outputs.
+- Follow existing project conventions, architecture, naming, testing, and error-handling before personal preferences.
+- Keep changes focused; avoid unrelated refactoring.
+- Add or update relevant tests for code changes unless technically impossible.
+- Run available validation before completion; report skipped or blocked verification.
+- For local implementation or review, inspect tracked and untracked files for accidental OS/editor metadata, logs, reports, caches, and local-only outputs.
 - Fix clearly accidental artifacts when edits are in scope; leave ambiguous untracked files untouched and mention them.
-- After completing work, evaluate whether the selected skill was sufficient and suggest a concrete skill improvement when one is found.
+- After finishing, note whether the selected skill was sufficient and suggest a concrete skill improvement when useful.
 
 ## Tool Output
 
-Large terminal outputs, including Maven runs and big logs, may be compressed with `logpare`.
-Treat compressed output as a summarized view of the raw stream.
-When exact verification matters, capture or confirm the command exit status and use generated reports or artifacts as the source of truth.
+Large logs may be compressed with `logpare`; treat them as summaries. When exact verification matters, rely on exit status plus generated reports, artifacts, or full logs.
 
-**BLOCKING:** For Maven verification runs, use [`scripts/maven-summary.sh`](../scripts/maven-summary.sh) before running Maven directly. This applies especially to `mvn test`, broad test suites, integration tests, full builds, and any Maven command whose logs may be noisy or compressed.
+**BLOCKING:** For Maven verification runs, use [`scripts/maven-summary.sh`](../scripts/maven-summary.sh) before direct `mvn`, especially for tests, integration tests, full builds, and noisy Maven commands.
 
 Maven summary process:
-1. First check whether `scripts/maven-summary.sh` exists in the current repository.
-2. If it exists, load/read that local script and run Maven verification through it instead of invoking `mvn` directly.
-3. If it does not exist locally, load/read the linked script from repository `ousatov-ua/ai-skills` at `scripts/maven-summary.sh` using the GitHub connector when available, then run Maven verification through that loaded script, for example via a temporary executable or `bash -s -- ...`.
-4. Pass quiet Maven options such as `-q` through the script when the active skill or task requires quiet error-focused output.
-5. Treat the script exit status as the Maven exit status.
-6. Use the generated full log, Maven/test summary lines, and generated reports or artifacts as the source of truth for verification.
-7. If neither the local nor GitHub/web copy of the script can be loaded, state that explicitly before falling back to direct Maven or another verified source such as Surefire/Failsafe XML reports.
-8. Do not skip this availability check merely because direct `mvn -q ...` would be shorter.
+1. Check for local `scripts/maven-summary.sh`; if present, read it and run Maven through it.
+2. Otherwise fetch `scripts/maven-summary.sh` from `ousatov-ua/ai-skills` with the GitHub connector when available, then run it via a temporary executable or `bash -s -- ...`.
+3. Pass quiet options such as `-q` when the task or skill asks for error-focused output.
+4. Treat the script exit status as the Maven exit status.
+5. Use the full log, Maven/test summary lines, and reports or artifacts as verification truth.
+6. If neither local nor GitHub/web script can be loaded, say so before falling back to direct Maven or reports such as Surefire/Failsafe XML.
+7. Do not skip this availability check merely because direct `mvn -q ...` is shorter.

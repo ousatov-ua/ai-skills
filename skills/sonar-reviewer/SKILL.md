@@ -5,140 +5,50 @@ description: Use for Sonar cleanup, SonarQube/SonarLint-oriented review, static-
 
 # Sonar Reviewer
 
-## Purpose
+## Use
 
-Use this skill to review changed or added code and tests for common Sonar issues.
+Use to review changed or added code/tests for likely SonarQube, SonarLint, or equivalent static-analysis issues and resolve practical findings before implementation work is complete.
 
-The primary goal is to identify and resolve static-analysis problems before implementation work is considered complete.
+Use with already-loaded `general.md` and `shared/engineering.md`. If loaded directly, fetch both before continuing.
 
-Use this skill together with the already-loaded `general.md` entry point and `shared/engineering.md` baseline. If this skill file was loaded directly, fetch `general.md`, then fetch `shared/engineering.md` before continuing.
+## Behavior
 
-## Core Behavior
+- Focus on changed or added files unless the user asks for a broader scan.
+- Optimize for static-analysis cleanliness, readability, reliability, maintainability, test quality, and low-noise fixes.
+- Fix clear issues when code edits are in scope; if the user asks only for review, report actionable findings.
+- Avoid unrelated refactoring and subjective style churn.
 
-Act as a focused Sonar cleanup reviewer.
+## Cleanup Rules
 
-Optimize for:
+Check especially:
+- Empty methods, constructors, lambdas, and overrides: implement them, throw `UnsupportedOperationException`, or add a short nested comment explaining intentional emptiness.
+- `assertThrows` and exception-testing lambdas: keep only the single invocation expected to throw inside the lambda; move setup outside.
+- Resources: prefer try-with-resources for `Closeable`/`AutoCloseable`; avoid manual `close()` when try-with-resources fits.
+- Tests: avoid reflection-based setup when direct constructors/helpers work; prefer explicit fixtures over hidden mutable state.
+- Comments: keep them short and specific; add only where needed for clarity or Sonar rules.
+- JUnit waits: do not use `sleep()`; use Awaitility when available.
 
-- static-analysis cleanliness
-- maintainability
-- readability
-- reliability
-- test quality
-- low-noise fixes
+Fix rather than suppress when the rule exposes real complexity, risk, dead code, unclear tests, resource leaks, or avoidable debt.
 
-Prefer practical findings that are likely to be raised by SonarQube, SonarLint, or equivalent static-analysis tools.
+Suppress only when intentional, when the direct fix is worse, or when the rule conflicts with constraints. Use the smallest scope, exact rule id such as `@SuppressWarnings("java:S127")`, `@SuppressWarnings("java:S1171")`, or `# NOSONAR python:S3776 - reason`, and add a short reason when syntax allows it. Do not use broad or rule-less suppressions when a specific id is known.
 
-Focus on issues in changed or added files unless the user asks for a broader scan.
+## Process
 
-Avoid unrelated refactoring and subjective style churn.
+1. Identify changed or added files and understand the change purpose.
+2. Apply the cleanup rules; treat search hits as leads, not automatic findings.
+3. Fix clear issues or report them when review-only.
+4. Suppress only intentional or better-left-as-is issues with narrow scope and exact rule ids.
+5. Before final response, run formatting if available, run relevant tests, and search changed/added files for obvious patterns such as `{}`, setup inside `assertThrows`, manual close patterns, and reflection in tests.
+6. Report fixed issues, suppressions, remaining concerns, skipped verification, and unresolved Sonar issues with reasons.
 
-## Review Principles
+## Output
 
-Prioritize:
+- Sonar review summary: overall assessment, files reviewed, verification performed, remaining risk.
+- Findings: severity, problem, evidence, recommended fix.
+- Final verdict: Clean, Clean after fixes, Issues found, or Verification incomplete.
 
-1. Correctness
-2. Resource safety
-3. Test clarity
-4. Maintainability
-5. Static-analysis compliance
-6. Comment quality
+If no issues are found, say so clearly.
 
-Fix clear issues when code edits are in scope.
+## Completion
 
-If the user asks only for a review, report actionable findings instead of editing.
-
-## Sonar Cleanup Rule
-
-Focus especially on:
-
-- Empty methods, constructors, lambdas, or overrides:
-  - complete the implementation, or
-  - throw `UnsupportedOperationException`, or
-  - add a short nested comment explaining why the empty body is intentional.
-- `assertThrows` / exception-testing lambdas:
-  - the lambda should contain only the single invocation expected to throw;
-  - move object construction, path resolution, builders, mocks, and other setup outside the lambda.
-- Resources:
-  - use try-with-resources for `Closeable` / `AutoCloseable` objects where possible;
-  - avoid manual `close()` when try-with-resources fits.
-- Test code:
-  - avoid reflection-based setup where direct constructors/helpers can be used;
-  - prefer explicit fixtures over hidden mutable state.
-- Comments:
-  - keep comments short and specific;
-  - add comments only where needed to satisfy clarity or Sonar rules.
-
-Fix vs suppress:
-
-- Prefer fixing the code when the rule exposes real complexity, risk, dead code, unclear tests, resource leaks, or avoidable style debt.
-- Suppress only when the current behavior is intentional, the direct fix would make the code worse, or the rule conflicts with the project/runtime constraints.
-- Use the smallest reasonable suppression scope and include the exact Sonar rule id, for example `@SuppressWarnings("java:S127")`, `@SuppressWarnings("java:S1171")`, or `# NOSONAR python:S3776 - reason`.
-- Add a short reason when the suppression syntax allows it, especially for complexity, console output, security-hotspot, deprecated API, and test-fixture suppressions.
-- Do not use broad or rule-less suppressions when a specific Sonar id is known.
-
-Verification before final response:
-
-1. Run formatting if the project has a formatter.
-2. Run the relevant tests for changed files.
-3. Search changed/added files for obvious Sonar-triggering patterns, such as:
-   - empty bodies: `{}`
-   - `assertThrows(..., () -> ...)` with setup inside the lambda
-   - manual `try { ... close(); }` patterns
-   - reflection usage in tests
-4. Mention any Sonar issue that could not be resolved and why.
-
-Don't use `sleep()` in JUnit tests - use Awaitility if available as dependency.
-
-## Review Process
-
-1. Identify changed or added files.
-2. Understand the purpose of the change.
-3. Apply the Sonar Cleanup Rule.
-4. Treat search hits as leads, not automatic findings.
-5. Fix clear issues when code edits are in scope.
-6. Suppress only intentional or better-left-as-is issues with the narrowest scope and exact Sonar rule id.
-7. Report actionable findings when the user asked only for review.
-8. Run required verification when available.
-9. Report fixed issues, suppressions, remaining concerns, and skipped verification.
-
-## Output Style
-
-### Sonar Review Summary
-
-Provide:
-
-1. Overall assessment
-2. Files reviewed
-3. Verification performed
-4. Remaining risk
-
-### Findings
-
-For each finding provide:
-
-1. Severity
-2. Problem
-3. Evidence
-4. Recommended fix
-
-### Final Verdict
-
-Provide one of:
-
-- Clean
-- Clean after fixes
-- Issues found
-- Verification incomplete
-
-If no issues are found, say that clearly.
-
-## Completion Criteria
-
-A Sonar cleanup pass is complete only when:
-
-- changed or added files were reviewed
-- the Sonar Cleanup Rule was applied
-- clear issues were fixed or reported
-- intentional issues were suppressed with exact Sonar rule ids when suppression is the better outcome
-- formatting and relevant tests were run when available
-- unresolved issues and skipped verification were explicitly mentioned
+A Sonar pass is complete only when changed/added files were reviewed, cleanup rules applied, clear issues fixed or reported, intentional issues narrowly suppressed with exact rule ids when needed, formatting/tests run when available, and unresolved issues or skipped verification are mentioned.

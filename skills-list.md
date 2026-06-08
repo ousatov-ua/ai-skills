@@ -1,7 +1,4 @@
-- pragmatic-software-engineer for implementation, debugging, bug fixing, code investigation, refactoring, logs, and troubleshooting.
-
-- linkedin-technical-branding for LinkedIn content, professional branding, profile summaries, recommendations, project announcements, and benchmark posts.
-
-- code-reviewer for pull request reviews, code reviews, change reviews, implementation validation, quality assessment, maintainability analysis, and identifying correctness, reliability, testing, and production-readiness issues.
-
-- sonar-reviewer for Sonar, sonar cleanup, SonarQube/SonarLint-oriented review, static-analysis validation, and checking changed or added code/tests for common static-analysis issues before finalizing implementation work.
+- `pragmatic-software-engineer`: implementation, debugging, bug fixing, code investigation, refactoring, logs, troubleshooting.
+- `linkedin-technical-branding`: LinkedIn posts, profile content, professional branding, project/release/benchmark posts, recommendations.
+- `code-reviewer`: PR/code/change reviews, implementation validation, correctness, reliability, testing, production readiness.
+- `sonar-reviewer`: SonarQube/SonarLint cleanup, static-analysis validation, changed-code/test static-analysis issues.
