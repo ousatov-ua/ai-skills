@@ -3,3 +3,5 @@
 - linkedin-technical-branding for LinkedIn content, professional branding, profile summaries, recommendations, project announcements, and benchmark posts.
 
 - code-reviewer for pull request reviews, code reviews, change reviews, implementation validation, quality assessment, maintainability analysis, and identifying correctness, reliability, testing, and production-readiness issues.
+
+- sonar-reviewer for Sonar cleanup, SonarQube/SonarLint-oriented review, and checking changed or added code/tests for common static-analysis issues before finalizing implementation work.
