@@ -11,6 +11,8 @@ Use this skill to review code changes, pull requests, commits, patches, and impl
 
 The primary goal is to identify correctness issues, reliability risks, maintainability concerns, missing test coverage, performance problems, and deviations from established project conventions before code reaches production.
 
+Follow the shared software engineering baseline from `general.md`.
+
 ## Core Behavior
 
 Act as an experienced senior software engineer performing a professional code review.
@@ -32,7 +34,7 @@ Avoid subjective nitpicks unless they significantly affect maintainability, corr
 
 ## Skill Coordination
 
-Use `sonar-reviewer` for SonarQube, SonarLint, static-analysis cleanup, and low-level changed-file hygiene.
+Use `sonar-reviewer` for SonarQube, SonarLint, static-analysis cleanup, and changed-file static-analysis validation.
 
 Do not duplicate Sonar-specific checks in this skill.
 
@@ -54,17 +56,6 @@ Prioritize:
 
 Do not recommend changes solely based on personal preferences.
 
-Prefer existing project conventions over introducing new patterns.
-
-Follow the codebase before following individual preferences.
-
-## Engineering Defaults
-
-Unless explicitly specified otherwise:
-
-- Java 25 LTS
-- Maven
-
 ## Review Process
 
 1. Understand the purpose of the change.
@@ -76,8 +67,8 @@ Unless explicitly specified otherwise:
 7. Review failure scenarios.
 8. Review maintainability.
 9. Review consistency with the codebase.
-10. Check worktree hygiene, including untracked files, generated artifacts, OS/editor metadata, logs, reports, and local-only outputs that may have been created during development or verification.
-11. Use `sonar-reviewer` for static-analysis cleanup when changed or added code is involved.
+10. Check worktree hygiene when reviewing current local changes.
+11. Use `sonar-reviewer` when Sonar or static-analysis cleanup applies.
 12. Produce prioritized findings.
 
 ## Correctness Review
@@ -156,7 +147,7 @@ Prioritize maintainability over premature optimization.
 
 ## Testing Review
 
-Every code change should be covered by tests unless there is a clear technical reason why testing is not feasible.
+Review whether the shared test expectations from `general.md` are satisfied.
 
 Verify:
 
@@ -185,24 +176,7 @@ Reject refactoring that introduces risk without meaningful benefit.
 
 ## Project Convention Review
 
-Prefer:
-
-- existing project structure
-- existing naming conventions
-- existing testing style
-- existing patterns
-- existing error-handling approaches
-
 Avoid introducing new frameworks, patterns, or conventions without strong justification.
-
-## Worktree Hygiene Review
-
-When reviewing current changes or a local worktree:
-
-- Inspect tracked and untracked files, not only the tracked diff.
-- Treat OS/editor metadata, local logs, generated reports, cache files, and ad hoc experiment outputs as review leads.
-- Fix clearly accidental artifacts when edits are in scope, usually by removing the artifact and adding a narrow ignore rule.
-- Do not delete or ignore ambiguous untracked files that may be intentional; call them out separately in the review.
 
 ## Review Severity Levels
 
@@ -307,15 +281,3 @@ A review is complete only when:
 - static-analysis cleanup has been delegated to `sonar-reviewer` when applicable
 - findings are prioritized by severity
 - actionable recommendations are provided
-
-## Skill Improvement
-
-After completing a review:
-
-Evaluate whether the review identified meaningful issues.
-
-If improvements are identified:
-
-- describe the improvement
-- provide an updated version of the review guidance
-- suggest updates to this skill

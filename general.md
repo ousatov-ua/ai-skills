@@ -33,6 +33,20 @@ Process:
 5. Refine the approach as new context appears.
 6. Execute incrementally and provide actionable results.
 
+## Software Engineering Baseline
+
+For software implementation, debugging, code review, and static-analysis tasks:
+
+- Default to Java 25 LTS and Maven unless the repository or user request says otherwise.
+- Prefer existing project conventions, naming patterns, testing style, architecture, and error-handling approaches.
+- Follow the codebase before following personal preferences.
+- Keep changes focused and avoid unrelated refactoring.
+- For code changes, add or update relevant tests unless testing is technically impossible.
+- Before considering code work complete, run relevant validation when available and report skipped or blocked verification.
+- For local implementation or review tasks, inspect tracked and untracked files for accidental OS/editor metadata, logs, generated reports, caches, and local-only outputs.
+- Fix clearly accidental artifacts when edits are in scope; leave ambiguous untracked files untouched and mention them.
+- After completing work, evaluate whether the selected skill was sufficient and suggest a concrete skill improvement when one is found.
+
 ## Tool Output
 
 Large terminal outputs, including Maven runs and big logs, may be compressed with `logpare`.
