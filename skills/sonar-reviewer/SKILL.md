@@ -56,85 +56,52 @@ Unless explicitly specified otherwise:
 - JUnit
 - SonarQube or SonarLint style analysis
 
+## Sonar Cleanup Rule
+
+**BLOCKING** Before finishing any code or test change, check the changed/added files for common Sonar issues and resolve them.
+
+Focus especially on:
+
+- Empty methods, constructors, lambdas, or overrides:
+  - complete the implementation, or
+  - throw `UnsupportedOperationException`, or
+  - add a short nested comment explaining why the empty body is intentional.
+- `assertThrows` / exception-testing lambdas:
+  - the lambda should contain only the single invocation expected to throw;
+  - move object construction, path resolution, builders, mocks, and other setup outside the lambda.
+- Resources:
+  - use try-with-resources for `Closeable` / `AutoCloseable` objects where possible;
+  - avoid manual `close()` when try-with-resources fits.
+- Test code:
+  - avoid reflection-based setup where direct constructors/helpers can be used;
+  - prefer explicit fixtures over hidden mutable state.
+- Comments:
+  - keep comments short and specific;
+  - add comments only where needed to satisfy clarity or Sonar rules.
+
+Verification before final response:
+
+1. Run formatting if the project has a formatter.
+2. Run the relevant tests for changed files.
+3. Search changed/added files for obvious Sonar-triggering patterns, such as:
+   - empty bodies: `{}`
+   - `assertThrows(..., () -> ...)` with setup inside the lambda
+   - manual `try { ... close(); }` patterns
+   - reflection usage in tests
+4. Mention any Sonar issue that could not be resolved and why.
+
+Don't use `sleep()` in JUnit tests - use Awaitility if available as dependency.
+
 ## Review Process
 
 1. Identify changed or added files.
 2. Understand the purpose of the change.
-3. Review implementation code for common Sonar issues.
-4. Review test code for common Sonar issues.
-5. Check resource handling.
-6. Check exception assertions.
-7. Check empty bodies and comments.
-8. Run formatting when the project has a formatter.
-9. Run relevant tests for changed files.
-10. Report fixed issues, remaining concerns, and skipped verification.
-
-## Empty Body Review
-
-Verify empty methods, constructors, lambdas, overrides, and blocks.
-
-For each empty body:
-
-1. Complete the implementation when behavior is required.
-2. Throw `UnsupportedOperationException` when the operation is intentionally unsupported.
-3. Add a short nested comment when the empty body is intentional and valid.
-
-Do not leave unexplained empty bodies.
-
-## Exception Test Review
-
-For `assertThrows` and similar exception-testing helpers:
-
-- keep the lambda to the single invocation expected to throw
-- move object construction outside the lambda
-- move path resolution outside the lambda
-- move builders, mocks, fixtures, and setup outside the lambda
-- avoid multiple calls inside the throwing lambda
-
-Prefer making the exact failure point obvious.
-
-## Resource Review
-
-For `Closeable` and `AutoCloseable` objects:
-
-- use try-with-resources where possible
-- avoid manual `close()` when try-with-resources fits
-- verify cleanup behavior on exceptional paths
-
-Prefer structured resource management over manual cleanup.
-
-## Test Review
-
-For test code:
-
-- avoid reflection-based setup when direct constructors, factories, or helpers can be used
-- prefer explicit fixtures over hidden mutable state
-- avoid `sleep()` in JUnit tests
-- use Awaitility for asynchronous waits when it is available as a dependency
-
-Tests should make setup, action, and assertion boundaries clear.
-
-## Comment Review
-
-Keep comments short and specific.
-
-Add comments only when they clarify non-obvious intent, explain an intentionally empty body, or satisfy a legitimate static-analysis concern.
-
-Remove comments that only restate the code.
-
-## Pattern Search
-
-Search changed or added files for obvious Sonar-triggering patterns when appropriate.
-
-Useful search targets include:
-
-- empty bodies: `{}`
-- exception assertions with setup inside the throwing lambda
-- manual close patterns
-- reflection usage in tests
-- `sleep()` in JUnit tests
-
-Treat search hits as leads, not automatic findings.
+3. Apply the Sonar Cleanup Rule.
+4. Treat search hits as leads, not automatic findings.
+5. Fix clear issues when code edits are in scope.
+6. Report actionable findings when the user asked only for review.
+7. Run required verification when available.
+8. Report fixed issues, remaining concerns, and skipped verification.
 
 ## Output Style
 
@@ -172,10 +139,8 @@ If no issues are found, say that clearly.
 A Sonar cleanup pass is complete only when:
 
 - changed or added files were reviewed
-- empty bodies were checked
-- exception assertions were checked
-- resource handling was checked
-- test-specific Sonar issues were checked
+- the Sonar Cleanup Rule was applied
+- clear issues were fixed or reported
 - formatting and relevant tests were run when available
 - unresolved issues and skipped verification were explicitly mentioned
 
