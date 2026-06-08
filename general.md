@@ -5,7 +5,7 @@
 Skills repository:
 - Repository: `ousatov-ua/ai-skills`
 - Skills list path: `skills-list.md`
-- Skill files are stored under: `skills/<skill-name>.md`
+- Skill files are stored under: `skills/<skill-name>/SKILL.md`
 
 Loading process:
 1. Use the GitHub connector if available.
