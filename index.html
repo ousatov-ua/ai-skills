@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ai-skills – Claude Endpoints</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; color: #222; }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    p.sub { color: #666; margin-top: 0; }
+    h2 { font-size: 1rem; margin-top: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { text-align: left; padding: 6px 8px; background: #f5f5f5; }
+    td { padding: 6px 8px; border-top: 1px solid #eee; vertical-align: top; }
+    code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.85em; }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .tag { background: #e8f4e8; color: #2a6b2a; border-radius: 3px; padding: 1px 5px; font-size: 0.78em; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<h1>ousatov-ua/ai-skills</h1>
+<p class="sub">Claude skill content served via GitHub Pages. Fetch any file directly or load everything in one request.</p>
+
+<h2>Entry points</h2>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr>
+    <td><a href="general.md"><code>general.md</code></a></td>
+    <td>Session bootstrap — load first every session</td>
+  </tr>
+  <tr>
+    <td><a href="skills-list.md"><code>skills-list.md</code></a></td>
+    <td>Index of available skills</td>
+  </tr>
+</table>
+
+<h2>Skills</h2>
+<table>
+  <tr><th>URL</th><th>Use when</th></tr>
+  <tr>
+    <td><a href="skills/code-reviewer/SKILL.md"><code>skills/code-reviewer/SKILL.md</code></a></td>
+    <td>PR / code review, implementation validation</td>
+  </tr>
+  <tr>
+    <td><a href="skills/pragmatic-software-engineer/SKILL.md"><code>skills/pragmatic-software-engineer/SKILL.md</code></a></td>
+    <td>Implementation, debugging, refactoring, troubleshooting</td>
+  </tr>
+  <tr>
+    <td><a href="skills/linkedin-technical-branding/SKILL.md"><code>skills/linkedin-technical-branding/SKILL.md</code></a></td>
+    <td>LinkedIn posts, profile content, professional branding</td>
+  </tr>
+  <tr>
+    <td><a href="skills/sonar-reviewer/SKILL.md"><code>skills/sonar-reviewer/SKILL.md</code></a></td>
+    <td>SonarQube / SonarLint cleanup, static-analysis validation</td>
+  </tr>
+</table>
+
+<h2>Shared</h2>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr>
+    <td><a href="shared/engineering.md"><code>shared/engineering.md</code></a></td>
+    <td>Engineering baseline — loaded by all engineering skills</td>
+  </tr>
+</table>
+
+<h2>Scripts</h2>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr>
+    <td><a href="scripts/maven-summary.sh"><code>scripts/maven-summary.sh</code></a></td>
+    <td>Maven wrapper that prints BUILD/test summary and saves full log</td>
+  </tr>
+</table>
+
+<h2>Usage in Claude</h2>
+<p>Files are loaded <strong>on demand only</strong> — each file is fetched at the moment it is needed, not upfront.</p>
+<p>Fetch priority:</p>
+<ol>
+  <li>GitHub connector (when connected)</li>
+  <li><code>https://ousatov-ua.github.io/ai-skills/&lt;path&gt;</code> — GitHub Pages</li>
+  <li><code>https://cdn.jsdelivr.net/gh/ousatov-ua/ai-skills@main/&lt;path&gt;</code> — jsDelivr CDN</li>
+</ol>
+
+</body>
+</html>

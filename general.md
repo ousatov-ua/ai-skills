@@ -10,16 +10,20 @@ For any task where a skill may be relevant, first try my GitHub skills repositor
 - Shared support files: `shared/<file-name>.md`
 
 Loading process:
-1. Confirm `general.md` is loaded; if not, fetch it from `ousatov-ua/ai-skills`.
-2. Use the GitHub connector when available.
-3. Fetch `skills-list.md`, select the matching skill or skills, then fetch each selected `SKILL.md`.
-4. Fetch any shared support files required by the selected skills.
-5. At the beginning of the response, mention the skill or skills being used, or state that no task-specific skill applies.
-6. Follow `general.md`, selected skills, and selected shared support files.
+1. Confirm `general.md` is loaded; if not, fetch `https://ousatov-ua.github.io/ai-skills/general.md`.
+2. Fetch `skills-list.md`, select the matching skill or skills, then fetch each selected `SKILL.md`.
+3. Fetch any shared support files required by the selected skills.
+4. At the beginning of the response, mention the skill or skills being used, or state that no task-specific skill applies.
+5. Follow `general.md`, selected skills, and selected shared support files.
+
+Fetch URL pattern (always use GitHub Pages):
+`https://ousatov-ua.github.io/ai-skills/<path>`
+
+Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
+Never pre-load skills, shared files, or scripts that are not required for the current task.
 
 Fallback rules:
-- If the GitHub connector is unavailable, try web retrieval.
-- If `general.md`, `skills-list.md`, a selected skill, or a required shared file cannot be loaded, ask me to paste that specific file.
+- If a required file cannot be loaded, ask me to paste that specific file.
 - Do not silently continue without a required skill or shared file.
 - Do not guess missing skill content or substitute unrelated README files.
 
