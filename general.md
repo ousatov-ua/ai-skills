@@ -10,7 +10,7 @@ For any task where a skill may be relevant, first try my GitHub skills repositor
 - Shared support files: `shared/<file-name>.md`
 
 Loading process:
-1. Confirm `general.md` is loaded; if not, fetch `https://ousatov-ua.github.io/ai-skills/general.md`.
+1. Confirm `general.md` is loaded; if not, fetch `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/general.md`.
 2. Fetch `skills-list.md`, select the matching skill or skills, then fetch each selected `SKILL.md`.
 3. Fetch any shared support files required by the selected skills.
 4. At the beginning of the response, mention the skill or skills being used, or state that no task-specific skill applies.
