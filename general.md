@@ -19,7 +19,7 @@ Loading process:
 Fetch URL pattern:
 `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/<path>`
 For skills:
-`https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/<skill-name>/SKILL.md`
+`https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/skills/<skill-name>/SKILL.md`
 
 Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
 Never pre-load skills, shared files, or scripts that are not required for the current task.
