@@ -4,7 +4,6 @@
 
 For any task where a skill may be relevant, first try my GitHub skills repository:
 
-- Repository: `ousatov-ua/ai-skills`
 - Skills list: `skills-list.md`
 - Skill files: `skills/<skill-name>/SKILL.md`
 - Shared support files: `shared/<file-name>.md`
