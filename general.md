@@ -17,7 +17,7 @@ Loading process:
 5. Follow `general.md`, selected skills, and selected shared support files.
 
 Fetch URL pattern (always use GitHub Pages):
-`https://ousatov-ua.github.io/ai-skills/<path>`
+`https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/<path>`
 
 Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
 Never pre-load skills, shared files, or scripts that are not required for the current task.
