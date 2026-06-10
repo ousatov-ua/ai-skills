@@ -15,9 +15,7 @@ Loading process:
 4. At the beginning of the response, mention the skill or skills being used, or state that no task-specific skill applies.
 5. Follow `general.md`, selected skills, and selected shared support files.
 
-Fetch URL pattern:
-`https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/<path>`
-For skills:
+Fetch URL pattern for skills:
 `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/skills/<skill-name>/SKILL.md`
 
 Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
