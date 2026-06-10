@@ -4,9 +4,9 @@
 
 For any task where a skill may be relevant, first try my GitHub skills repository:
 
-- Skills list: `skills-list.md`
-- Skill files: `skills/<skill-name>/SKILL.md`
-- Shared support files: `shared/<file-name>.md`
+- Skills list: **`skills-list.md`**
+- Skill files: **`skills/<skill-name>/SKILL.md`**
+- Shared support files: **`shared/<file-name>.md`**
 
 Loading process:
 1. Confirm `general.md` is loaded; if not, fetch `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/ai-skills/general.md`.
