@@ -18,7 +18,7 @@ engineer, lead backend engineer, platform engineer, or technical leader.
 Goal: strengthen credibility, technical authority, recruiter discoverability,
 professional reputation, and measurable impact.
 
-Requires `/general.md`. If not already loaded, fetch it.
+Requires `general.md`. If not already loaded, fetch it.
 If it cannot be fetched, ask the user to paste it; do not continue without it.
 
 ## Positioning
