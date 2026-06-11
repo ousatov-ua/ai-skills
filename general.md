@@ -38,7 +38,6 @@ Fallback rules:
 
 **BLOCKING:** Before broad reads or repository scans, summarize current findings into a short plan. If context grows large, compact and continue from the compacted summary.
 
-
 ## Skill Improvement
 
 After producing content, evaluate whether the session revealed a reusable
