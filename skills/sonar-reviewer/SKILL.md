@@ -14,12 +14,15 @@ description: >-
 
 ## Use
 
+### Requires
+
+- `general.md` from `__ROOT__/general.md
+- `engineering.md` from `__ROOT__/shared/engineering.md`
+- `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
+
 Review changed or added code/tests for likely SonarQube, SonarLint, or
 equivalent static-analysis issues and resolve practical findings before
 implementation work is complete.
-
-Requires `general.md` and `shared/engineering.md`. If either is not already
-loaded, fetch them.
 
 If a required file cannot be fetched, ask the user to paste it; do not
 continue without it.
@@ -72,7 +75,7 @@ known.
 3. Fix clear issues, or report them when review-only.
 4. Apply the Suppression Policy to intentional or better-left-as-is issues.
 5. Before the final response: run formatting if available, run relevant
-   tests per `shared/engineering.md` (Maven through `scripts/maven-summary.sh`), and
+   tests per `engineering.md` (Maven through `maven-summary.sh`), and
    search changed/added files for obvious patterns such as `{}`, setup
    inside `assertThrows`, manual close patterns, and reflection in tests.
 6. Report fixed issues, suppressions, remaining concerns, skipped
