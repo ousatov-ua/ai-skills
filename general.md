@@ -4,7 +4,7 @@
 
 **BLOCKING:** In all paths replace `__ROOT__` with `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main`
 
-For any task where a skill may be relevant, first try my GitHub skills repository:
+For any task where a skill may be relevant (select the best matching skill(s) based on task intent), first try my GitHub skills repository:
 
 - Skills list: **`__ROOT__/skills-list.md`**
 - Skill files: **`__ROOT__/skills/<skill-name>/SKILL.md`**
