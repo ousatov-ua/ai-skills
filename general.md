@@ -37,3 +37,11 @@ Fallback rules:
 ## Incremental Work
 
 **BLOCKING:** Before broad reads or repository scans, summarize current findings into a short plan. If context grows large, compact and continue from the compacted summary.
+
+
+## Skill Improvement
+
+After producing content, evaluate whether the session revealed a reusable
+preference or a way to improve credibility, authority, or discoverability.
+If so, describe the improvement and suggest a skill update; apply it to the
+skill file when the user accepts and repository access is available.
