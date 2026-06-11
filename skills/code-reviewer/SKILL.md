@@ -65,7 +65,7 @@ that baseline.
    reject risky refactoring without meaningful benefit.
 9. For local/current-change reviews, apply the worktree-hygiene checks from
    `engineering.md` (untracked files, accidental artifacts).
-10. Delegate to `sonar-reviewer` when static-analysis cleanup applies.
+10. Delegate to `__ROOT__/sonar-reviewer` when static-analysis cleanup applies.
 11. Produce prioritized findings.
 
 ## Severity
