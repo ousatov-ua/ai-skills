@@ -64,7 +64,7 @@ that baseline.
 8. For refactorings: behavior unchanged, tests protect it, complexity reduced;
    reject risky refactoring without meaningful benefit.
 9. For local/current-change reviews, apply the worktree-hygiene checks from
-   `shared/engineering.md` (untracked files, accidental artifacts).
+   `engineering.md` (untracked files, accidental artifacts).
 10. Delegate to `sonar-reviewer` when static-analysis cleanup applies.
 11. Produce prioritized findings.
 
