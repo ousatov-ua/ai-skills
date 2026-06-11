@@ -12,12 +12,18 @@ description: >-
 
 # Code Reviewer
 
-## Requires
+## Resources
+
+** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+
+### Requires
 
 - `general.md` from `__ROOT__/general.md`
 - `engineering.md` from `__ROOT__/shared/engineering.md`
 
-** If a required file cannot be fetched, ask the user to paste it; do not continue without it. **
+### On Demand
+
+- Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
 
 ## Use
 
@@ -38,7 +44,7 @@ that baseline.
   maintainability, performance, consistency.
 - Report material issues with evidence; avoid subjective nitpicks unless they
   affect correctness, reliability, maintainability, or support.
-- This skill owns the overall review; `__ROOT__/sonar-reviewer` owns SonarQube,
+- This skill owns the overall review; `sonar-reviewer` owns SonarQube,
   SonarLint, and static-analysis validation. Delegate, do not duplicate
   Sonar-specific checks.
 
@@ -65,7 +71,7 @@ that baseline.
    reject risky refactoring without meaningful benefit.
 9. For local/current-change reviews, apply the worktree-hygiene checks from
    `engineering.md` (untracked files, accidental artifacts).
-10. Delegate to `__ROOT__/sonar-reviewer` when static-analysis cleanup applies.
+10. Delegate to `sonar-reviewer` when static-analysis cleanup applies.
 11. Produce prioritized findings.
 
 ## Severity
