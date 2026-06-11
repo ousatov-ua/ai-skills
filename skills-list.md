@@ -2,3 +2,4 @@
 - `linkedin-technical-branding`: LinkedIn posts, profile content, professional branding, project/release/benchmark posts, recommendations.
 - `code-reviewer`: PR/code/change reviews, implementation validation, correctness, reliability, testing, production readiness.
 - `sonar-reviewer`: SonarQube/SonarLint cleanup, static-analysis validation, changed-code/test static-analysis issues.
+- `sales-investigator`: evidence-based real estate purchase/sale investigation, property price analysis, buy-vs-wait decisions, negotiation preparation, affordability modeling, and legal/transaction risk screening.
