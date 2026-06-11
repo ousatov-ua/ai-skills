@@ -19,6 +19,7 @@ Loading process:
 
 
 Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
+
 **Never pre-load skills, shared files, or scripts that are not required for the current task**
 
 Fallback rules:
