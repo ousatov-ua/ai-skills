@@ -1,8 +1,22 @@
+## Resources
+
+** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+** If resource is already fetched, skip re-fetching **
+
+### Requires
+
+- `general.md` from `__ROOT__/general.md
+- `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
+
+### On Demand
+
+- Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
+
 ## Engineering Baseline
 
 Shared baseline for engineering skills: implementation, debugging, code review,
 static analysis, and any task whose selected skill requires this file. If loaded
-directly, fetch `../general.md` first and follow the normal 
+directly, fetch `general.md` first and follow the normal 
 skill-loading process.
 Skills extend this baseline; on conflict, the more specific skill wins.
 
@@ -29,11 +43,11 @@ verification matters, rely on exit status plus generated reports, artifacts, or
 full logs.
 
 **BLOCKING:** Run Maven verification (tests, integration tests, full builds,
-noisy commands) through `scripts/maven-summary.sh`, 
+noisy commands) through `maven-summary.sh`, 
 never bare `mvn` — even when
 direct `mvn -q ...` would be shorter:
 1. If a local `scripts/maven-summary.sh` exists, read it and run Maven through it.
-2. Otherwise fetch it from `../scripts/maven-summary.sh` and run it via a temporary executable or
+2. Otherwise fetch it and run it via a temporary executable or
    `bash -s -- ...`.
 3. Pass `-q` when the task or skill asks for error-focused output.
 4. Treat the script exit status as the Maven exit status; judge results by
