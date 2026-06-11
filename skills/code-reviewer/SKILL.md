@@ -66,7 +66,8 @@ that baseline.
 5. Review security when authentication, authorization, validation, sensitive
    data, external calls, persistence, or dependency boundaries change.
 6. Review performance only for hot paths, large datasets, high throughput, or
-   obvious inefficiencies; no speculative micro-optimizations.
+   obvious inefficiencies; no speculative micro-optimizations. Back any
+   performance claim per Performance Evidence.
 7. Verify the change fits project conventions; flag new frameworks, patterns,
    or conventions introduced without strong justification.
 8. For refactorings: behavior unchanged, tests protect it, complexity reduced;
@@ -75,6 +76,32 @@ that baseline.
    `engineering.md` (untracked files, accidental artifacts).
 10. Delegate to `sonar-reviewer` when static-analysis cleanup applies.
 11. Produce prioritized findings.
+
+## Performance Evidence
+
+When a change claims, implies, or is asked about a performance effect, back
+the assessment with evidence at the cheapest sufficient tier:
+
+1. **Reason from code** (always required): identify what moved on or off the
+   critical path, estimate per-call cost times call frequency, and bound the
+   effect — best case, worst case, and the conditions where it is ~0.
+2. **Measure with existing verification artifacts**: timings, counters, and
+   reports produced by the test/build runs already executed for the review.
+   Use only evidence sources the user has approved; do not mine local logs or
+   private data files uninvited.
+3. **Benchmark**: when a hard number matters and analysis cannot bound it,
+   propose a dedicated reproducible A/B benchmark (baseline vs change,
+   cold/warm state controlled) and let the user opt in; never run heavy
+   benchmarks unprompted.
+
+Rules:
+
+- Never state a performance number without saying how it was obtained.
+- Report magnitude with its bound and the conditions where the effect
+  vanishes, not a single optimistic figure.
+- Flag observability shifts: when work moves into or out of a measured
+  phase or metric, note that historical metric comparisons will shift even
+  if wall-clock behavior is unchanged.
 
 ## Severity
 
