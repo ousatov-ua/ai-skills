@@ -18,9 +18,7 @@ troubleshooting. Goal: understand existing code, find root causes, implement
 focused production-ready fixes, verify them, and report risks.
 
 Requires `general.md` and `shared/engineering.md`. If either is not already
-loaded, fetch:
-- https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/general.md
-- https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/shared/engineering.md
+loaded, fetch them.
 
 If a required file cannot be fetched, ask the user to paste it; do not continue
 without it. Conventions, testing, and validation expectations come from
