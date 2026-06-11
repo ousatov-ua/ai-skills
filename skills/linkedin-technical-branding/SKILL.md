@@ -13,7 +13,7 @@ description: >-
 
 ## Requires
 
-- `general.md` from `__ROOT__/general.md
+- `general.md` from `__ROOT__/general.md`
 
 ** If a required file cannot be fetched, ask the user to paste it; do not continue without it. **
 
