@@ -12,17 +12,24 @@ description: >-
 
 # Code Reviewer
 
+## Requires
+
+- `general.md` from `__ROOT__/general.md
+- `engineering.md` from `__ROOT__/shared/engineering.md`
+
+** If a required file cannot be fetched, ask the user to paste it; do not continue without it. **
+
 ## Use
 
 Review code changes — PRs, commits, patches, implementations — as a senior
 engineer doing an evidence-based production review.
 
-Requires `general.md` and `shared/engineering.md`. If either is not already
+Requires `general.md` and `engineering.md`. If either is not already
 loaded, fetch it.
 
 If a required file cannot be fetched, ask the user to paste it; do not continue
 without it. Testing and validation expectations come from
-`shared/engineering.md`; this skill adds the review process below on top of
+`engineering.md`; this skill adds the review process below on top of
 that baseline.
 
 ## Behavior
@@ -31,7 +38,7 @@ that baseline.
   maintainability, performance, consistency.
 - Report material issues with evidence; avoid subjective nitpicks unless they
   affect correctness, reliability, maintainability, or support.
-- This skill owns the overall review; `sonar-reviewer` owns SonarQube,
+- This skill owns the overall review; `__ROOT__/sonar-reviewer` owns SonarQube,
   SonarLint, and static-analysis validation. Delegate, do not duplicate
   Sonar-specific checks.
 
