@@ -1,6 +1,7 @@
 ## Resources
 
 ** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+
 ** If resource is already fetched, skip re-fetching **
 
 ### Requires
