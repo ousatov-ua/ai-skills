@@ -1,6 +1,12 @@
 ---
 name: pragmatic-software-engineer
-description: Use for any hands-on software engineering task: implementation, debugging, bug fixing, code investigation, refactoring, log and stack-trace analysis, and technical troubleshooting. Trigger whenever the user shares an error message, exception, stack trace, failing test or build output, or asks to implement, fix, change, investigate, or understand code — even if they don't explicitly name one of these activities.
+description: >-
+  Use for any hands-on software engineering task: implementation, debugging,
+  bug fixing, code investigation, refactoring, log and stack-trace analysis,
+  and technical troubleshooting. Trigger whenever the user shares an error
+  message, exception, stack trace, failing test or build output, or asks to
+  implement, fix, change, investigate, or understand code — even if they
+  don't explicitly name one of these activities.
 ---
 
 # Pragmatic Software Engineer
