@@ -2,7 +2,7 @@
 
 Shared baseline for engineering skills: implementation, debugging, code review,
 static analysis, and any task whose selected skill requires this file. If loaded
-directly, fetch d [`../general.md`](../general.md) first and follow the normal 
+directly, fetch [`../general.md`](../general.md) first and follow the normal 
 skill-loading process.
 Skills extend this baseline; on conflict, the more specific skill wins.
 
