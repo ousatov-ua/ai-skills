@@ -176,10 +176,3 @@ Content is complete only when it is technically accurate, claims are
 evidence-backed or carefully bounded, positioning matches the Positioning
 section, formatting is copy-paste ready when requested, and the Content
 Standards are satisfied.
-
-## Skill Improvement
-
-After producing content, evaluate whether the session revealed a reusable
-preference or a way to improve credibility, authority, or discoverability.
-If so, describe the improvement and suggest a skill update; apply it to the
-skill file when the user accepts and repository access is available.
