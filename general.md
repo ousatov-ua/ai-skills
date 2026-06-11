@@ -1,6 +1,7 @@
 ## Skills
 
 **BLOCKING:** At the start of every session, load this file (`general.md`) from GitHub and use it as the skill-loading entry point.
+
 **BLOCKING:** Prefix for all paths is `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main`
 
 For any task where a skill may be relevant, first try my GitHub skills repository:
