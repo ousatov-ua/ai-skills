@@ -12,13 +12,15 @@ description: >-
 
 # Sonar Reviewer
 
-## Use
-
-### Requires
+## Requires
 
 - `general.md` from `__ROOT__/general.md
 - `engineering.md` from `__ROOT__/shared/engineering.md`
 - `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
+
+** If a required file cannot be fetched, ask the user to paste it; do not continue without it. **
+
+## Use
 
 Review changed or added code/tests for likely SonarQube, SonarLint, or
 equivalent static-analysis issues and resolve practical findings before
