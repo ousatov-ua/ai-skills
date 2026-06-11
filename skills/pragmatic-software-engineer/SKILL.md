@@ -11,13 +11,19 @@ description: >-
 
 # Pragmatic Software Engineer
 
-## Requires
+## Resources
+
+** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+
+### Requires
 
 - `general.md` from `__ROOT__/general.md
 - `engineering.md` from `__ROOT__/shared/engineering.md`
 - `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
 
-** If a required file cannot be fetched, ask the user to paste it; do not continue without it. **
+### On Demand
+
+- Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
 
 ## Use
 
@@ -74,7 +80,7 @@ classes; explicit error handling; defensive edge-case handling.
 
 Avoid: speculative fixes, over-engineering, large rewrites.
 
-Hand off to `sonar-reviewer` (`__ROOT__/skills/sonar-reviewer/SKILL.md`) when changed or added code needs SonarQube,
+Hand off to `sonar-reviewer` when changed or added code needs SonarQube,
 SonarLint, or static-analysis cleanup.
 
 ## Output
