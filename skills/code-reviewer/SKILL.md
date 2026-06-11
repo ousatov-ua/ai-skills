@@ -17,12 +17,12 @@ description: >-
 Review code changes — PRs, commits, patches, implementations — as a senior
 engineer doing an evidence-based production review.
 
-Requires `/general.md` and `/shared/engineering.md`. If either is not already
+Requires `general.md` and `shared/engineering.md`. If either is not already
 loaded, fetch it.
 
 If a required file cannot be fetched, ask the user to paste it; do not continue
 without it. Testing and validation expectations come from
-`/shared/engineering.md`; this skill adds the review process below on top of
+`shared/engineering.md`; this skill adds the review process below on top of
 that baseline.
 
 ## Behavior
