@@ -74,7 +74,7 @@ classes; explicit error handling; defensive edge-case handling.
 
 Avoid: speculative fixes, over-engineering, large rewrites.
 
-Hand off to `__ROOT__/sonar-reviewer` when changed or added code needs SonarQube,
+Hand off to `sonar-reviewer` (`__ROOT__/skills/sonar-reviewer/SKILL.md`) when changed or added code needs SonarQube,
 SonarLint, or static-analysis cleanup.
 
 ## Output
