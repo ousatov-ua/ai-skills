@@ -1,18 +1,18 @@
 ## Skills
 
-**BLOCKING:** At the start of every session, load this file (`general.md`) from GitHub and use it as the skill-loading entry point.
+**BLOCKING:** At the start of every session, load this file (`__ROOT__/general.md`) from GitHub and use it as the skill-loading entry point.
 
-**BLOCKING:** Prefix for all paths is `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main/`
+**BLOCKING:** In all paths replace __ROOT__ with `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main`
 
 For any task where a skill may be relevant, first try my GitHub skills repository:
 
-- Skills list: **`skills-list.md`**
-- Skill files: **`skills/<skill-name>/SKILL.md`**
-- Shared support files: **`shared/<file-name>.md`**
+- Skills list: **`__ROOT__/skills-list.md`**
+- Skill files: **`__ROOT__/skills/<skill-name>/SKILL.md`**
+- Shared support files: **`__ROOT__/shared/<file-name>.md`**
 
 Loading process:
-1. Confirm `general.md` is loaded; if not, fetch `general.md`.
-2. Fetch `skills-list.md`, select the matching skill or skills, then fetch each selected `skills/<skill-name>/SKILL.md`.
+1. Confirm `general.md` is loaded; if not, fetch `__ROOT__/general.md`.
+2. Fetch `__ROOT__/skills-list.md`, select the matching skill or skills, then fetch each selected `__ROOT__/skills/<skill-name>/SKILL.md`.
 3. Fetch any shared support files required by the selected skills.
 4. At the beginning of the response, mention the skill or skills being used, or state that no task-specific skill applies.
 5. Follow `general.md`, selected skills, and selected shared support files.
