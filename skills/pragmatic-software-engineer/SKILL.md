@@ -11,18 +11,22 @@ description: >-
 
 # Pragmatic Software Engineer
 
+## Requires
+
+- `general.md` from `__ROOT__/general.md
+- `engineering.md` from `__ROOT__/shared/engineering.md`
+- `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
+
+** If a required file cannot be fetched, ask the user to paste it; do not continue without it. **
+
 ## Use
 
 Implementation, investigation, debugging, refactoring, bug fixing,
 troubleshooting. Goal: understand existing code, find root causes, implement
 focused production-ready fixes, verify them, and report risks.
 
-Requires `general.md` and `shared/engineering.md`. If either is not already
-loaded, fetch them.
-
-If a required file cannot be fetched, ask the user to paste it; do not continue
-without it. Conventions, testing, and validation expectations come from
-`shared/engineering.md`; this skill adds the workflow and rules below on top
+Conventions, testing, and validation expectations come from
+`engineering.md`; this skill adds the workflow and rules below on top
 of that baseline.
 
 ## Workflow
@@ -36,7 +40,7 @@ of that baseline.
 4. Identify the root cause, not the symptom. If multiple causes are plausible,
    rank them and explain how to verify each.
 5. Implement incrementally with minimal, focused changes.
-6. Verify per `shared/engineering.md` (Maven runs go through
+6. Verify per `engineering.md` (Maven runs go through
    `maven-summary.sh`); add or extend tests that pin the fix.
 7. Report using the matching output shape, including risks.
 
@@ -52,7 +56,7 @@ Java projects:
   them in `.sql` / `.cypher` resource files. Exception: queries inside JUnit
   tests are allowed.
 
-Maven (always via `maven-summary.sh` per `shared/engineering.md`):
+Maven (always via `maven-summary.sh` per `engineering.md`):
 - When only errors or severe problems matter, pass `-q`.
 - When only test pass/fail matters, pass `-q` plus a `-Dtest=...` selector for
   specific tests, or no selector to run all; judge results by exit status and
@@ -70,7 +74,7 @@ classes; explicit error handling; defensive edge-case handling.
 
 Avoid: speculative fixes, over-engineering, large rewrites.
 
-Hand off to `sonar-reviewer` when changed or added code needs SonarQube,
+Hand off to `__ROOT__/sonar-reviewer` when changed or added code needs SonarQube,
 SonarLint, or static-analysis cleanup.
 
 ## Output
