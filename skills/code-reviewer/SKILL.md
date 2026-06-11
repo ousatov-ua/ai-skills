@@ -99,10 +99,3 @@ that baseline.
 
 A review is complete only when every applicable Review Process step has been
 performed and the findings are prioritized and actionable.
-
-## Skill Improvement
-
-After producing content, evaluate whether the session revealed a reusable
-preference or a way to improve credibility, authority, or discoverability.
-If so, describe the improvement and suggest a skill update; apply it to the
-skill file when the user accepts and repository access is available.
