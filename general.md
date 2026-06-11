@@ -2,7 +2,7 @@
 
 **BLOCKING:** At the start of every session, load this file (`__ROOT__/general.md`) from GitHub and use it as the skill-loading entry point.
 
-**BLOCKING:** In all paths replace __ROOT__ with `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main`
+**BLOCKING:** In all paths replace `__ROOT__` with `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main`
 
 For any task where a skill may be relevant, first try my GitHub skills repository:
 
@@ -19,7 +19,7 @@ Loading process:
 
 
 Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
-Never pre-load skills, shared files, or scripts that are not required for the current task.
+**Never pre-load skills, shared files, or scripts that are not required for the current task**
 
 Fallback rules:
 - If a required file cannot be loaded, ask me to paste that specific file.
