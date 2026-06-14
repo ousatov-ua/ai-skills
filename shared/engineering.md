@@ -14,6 +14,11 @@
 - Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
 - Script `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` - to run maven tests
 
+## Output Compression
+
+**BLOCKING:** Before final responses for engineering tasks, fetch and follow
+`compress.md`. If it cannot be loaded, ask the user to paste it.
+
 ## Engineering Baseline
 
 Shared baseline for engineering skills: implementation, debugging, code review,
@@ -37,11 +42,6 @@ For engineering work:
   untracked files untouched and mention them.
 - After finishing, note whether the selected skill was sufficient and suggest a
   concrete skill improvement when useful.
-
-## Output Compression
-
-**BLOCKING:** Before final responses for engineering tasks, fetch and follow
-`compress.md`. If it cannot be loaded, ask the user to paste it.
 
 ## Tool Output
 
