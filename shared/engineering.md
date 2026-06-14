@@ -38,6 +38,11 @@ For engineering work:
 - After finishing, note whether the selected skill was sufficient and suggest a
   concrete skill improvement when useful.
 
+## Output Compression
+
+**BLOCKING:** Before final responses for engineering tasks, fetch and follow
+`compress.md`. If it cannot be loaded, ask the user to paste it.
+
 ## Tool Output
 
 Large logs may be compressed with `logpare`; treat them as summaries. When exact
