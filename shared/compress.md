@@ -1,4 +1,3 @@
-# COMPRESS GUIDE
 ## GRAMMAR
 
 - Drop articles (a, an, the).
