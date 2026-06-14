@@ -8,7 +8,7 @@
 
 - `general.md` from `__ROOT__/general.md
 - `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
-- `compress.md` from `__ROOT__/shared/compress`
+- `compress.md` from `__ROOT__/shared/compress.md`
 
 ### On Demand
 
