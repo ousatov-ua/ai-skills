@@ -24,6 +24,7 @@ Loading process:
 - Never pre-load skills, shared files, or scripts that are not required for the current task
 - Don't make any changes until you have **95% confidence** in what you need to build. Ask me
 follow up questions until you reach confidence level.
+- Before building anything multistep, include a verification plan.
 
 ### Fallback
 - If a required file cannot be loaded, ask me to paste that specific file.
