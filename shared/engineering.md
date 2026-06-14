@@ -4,20 +4,16 @@
 
 ** If resource is already fetched, skip re-fetching **
 
+**BLOCKING:** Fetch and follow `__ROOT__/shared/compress.md`. If it cannot be loaded, ask the user to paste it.
+
 ### Requires
 
 - `general.md` from `__ROOT__/general.md
-- `compress.md` from `__ROOT__/shared/compress.md`
 
 ### On Demand
 
 - Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
 - Script `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` - to run maven tests
-
-## Output Compression
-
-**BLOCKING:** Before final responses for engineering tasks, fetch and follow
-`compress.md`. If it cannot be loaded, ask the user to paste it.
 
 ## Engineering Baseline
 
