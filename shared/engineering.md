@@ -4,7 +4,7 @@
 
 ** If resource is already fetched, skip re-fetching **
 
-**BLOCKING:** Fetch and follow `__ROOT__/shared/compress.md`. If it cannot be loaded, ask the user to paste it.
+**BLOCKING:** Fetch and follow `__ROOT__/shared/compress.md`. For engineering tasks, final handoffs and progress updates are not “prose explanation” unless the user explicitly asks for an explanation. If it cannot be loaded, ask the user to paste it.
 
 ### Requires
 
