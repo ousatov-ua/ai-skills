@@ -9,13 +9,10 @@
 - `general.md` from `__ROOT__/general.md
 - `compress.md` from `__ROOT__/shared/compress.md`
 
-### On demand
-
-- `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` - to run maven tests
-
 ### On Demand
 
 - Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
+- Script `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` - to run maven tests
 
 ## Engineering Baseline
 
