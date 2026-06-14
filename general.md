@@ -17,12 +17,15 @@ Loading process:
 4. At the beginning of the response, mention the skill or skills being used, or state that no task-specific skill applies.
 5. Follow `general.md`, selected skills, and selected shared support files.
 
+## Rules
 
-Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
+### Hard
+- Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
+- Never pre-load skills, shared files, or scripts that are not required for the current task
+- Don't make any changes until you have **95% confidence** in what you need to build. Ask me
+follow up questions until you reach confidence level.
 
-**Never pre-load skills, shared files, or scripts that are not required for the current task**
-
-Fallback rules:
+### Fallback
 - If a required file cannot be loaded, ask me to paste that specific file.
 - Do not silently continue without a required skill or shared file.
 - Do not guess missing skill content or substitute unrelated README files.
