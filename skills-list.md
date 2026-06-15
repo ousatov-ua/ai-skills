@@ -3,3 +3,4 @@
 - `code-reviewer`: PR/code/change reviews, implementation validation, correctness, reliability, testing, production readiness.
 - `sonar-reviewer`: SonarQube/SonarLint cleanup, static-analysis validation, changed-code/test static-analysis issues.
 - `sales-investigator`: evidence-based real estate purchase/sale investigation, property price analysis, buy-vs-wait decisions, negotiation preparation, affordability modeling, and legal/transaction risk screening.
+- `ponytail`: use whenever the user says "ponytail", "be lazy", "lazy mode", "simplest solution", "minimal solution", "yagni", "do less", or "shortest path", and whenever they complain about over-engineering, bloat, boilerplate, or unnecessary dependencies.
