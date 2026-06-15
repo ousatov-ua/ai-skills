@@ -1,0 +1,14 @@
+iteration	commit	target_metric	secondary_metrics	status	description	comparison
+0	5df7309	82.000000	method=manual-rubric;prompts=5	keep	baseline after prior single-pass improvement	baseline
+1	manual1	85.000000	method=manual-rubric;prompts=5	keep	add research procedure and source-bounded popularity language	improved
+2	manual2	87.000000	method=manual-rubric;prompts=5	keep	add platform-fit signal: professional relevance and expertise over shallow engagement	improved
+3	manual3	89.000000	method=manual-rubric;prompts=5	keep	add best-match post models for measured result, constraint, release, build log, and profile positioning	improved
+4	manual4	91.000000	method=manual-rubric;prompts=5	keep	add wording bank by release, benchmark, architecture, and AI-agent goals	improved
+5	manual5	92.000000	method=manual-rubric;prompts=5	keep	add hook lab requiring multiple candidate first lines before final selection	improved
+6	manual6	93.000000	method=manual-rubric;prompts=5	keep	add tone calibration for dry, too friendly, promotional, defensive, or generic drafts	improved
+7	manual7	94.000000	method=manual-rubric;prompts=5	keep	add preferred Memgraph Ingester framing for code and memory knowledge graph positioning	improved
+8	manual8	95.000000	method=manual-rubric;prompts=5	keep	add draft variant workflow for metric-led, constraint-led, and release-led variants	improved
+9	manual9	96.000000	method=manual-rubric;prompts=5	keep	add hard gates for self-focused hooks, concrete artifacts, scoped claims, and AI-hype rejection	improved
+10	manual10	97.000000	method=manual-rubric;prompts=5	keep	add technical credibility checklist before publishing	improved
+11	manual11	98.000000	method=manual-rubric;prompts=5	keep	consolidate completion criteria around best-match variant selection	improved
+12	manual12	99.000000	method=manual-rubric;prompts=5	keep	final consistency pass: remove duplication risk while preserving actionable generation rules	improved
