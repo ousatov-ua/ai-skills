@@ -50,7 +50,7 @@ noisy commands) through `maven-summary.sh`,
 never bare `mvn` — even when
 direct `mvn -q ...` would be shorter:
 1. If a local `scripts/maven-summary.sh` exists, read it and run Maven through it.
-2. Otherwise fetch it and run it via a temporary executable or
+2. Otherwise fetch it, save and run it via a temporary executable or
    `bash -s -- ...`.
 3. Pass `-q` when the task or skill asks for error-focused output.
 4. Treat the script exit status as the Maven exit status; judge results by
