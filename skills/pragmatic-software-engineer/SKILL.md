@@ -47,8 +47,7 @@ of that baseline.
 4. Identify the root cause, not the symptom. If multiple causes are plausible,
    rank them and explain how to verify each.
 5. Implement incrementally with minimal, focused changes.
-6. Verify per `engineering.md` (Maven runs go through
-   `maven-summary.sh`); add or extend tests that pin the fix.
+6. Verify per `engineering.md` add or extend tests that pin the fix.
 7. Report using the matching output shape, including risks.
 
 Do not stop at analysis when enough information exists to act.
