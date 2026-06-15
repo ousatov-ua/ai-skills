@@ -92,8 +92,27 @@ or skill improvement:
 - intonation: professional, precise, calm, friendly, and human
 - credibility signals: codebase size, baseline, benchmark setup, production scale,
   limitation, repository link, PDF/chart, concrete artifact, or reproducible step
+- platform fit: professional relevance, author expertise, and opportunity value
+  are more important than shallow engagement bait
 
 Use these patterns as a model, not as text to copy.
+
+## Research Procedure For Current Posts
+
+When the user asks for a post that depends on current trends, examples, or
+popular wording:
+
+1. Search for recent comparable examples or credible secondary sources.
+2. Identify 3-5 recurring patterns in hooks, structure, wording, and tone.
+3. Reject patterns that depend on clickbait, exaggerated claims, or generic AI
+   hype.
+4. Draft from the strongest matching pattern for the user's topic.
+5. Run the Model-Based Quality Check before returning the post.
+
+Do not claim that a pattern is based on "most popular LinkedIn posts" unless the
+source exposes popularity or engagement. If popularity cannot be verified, phrase
+the finding as "accessible high-signal examples suggest..." or "current public
+evidence suggests...".
 
 ## Content Standards
 
@@ -161,6 +180,134 @@ For benchmark posts, prefer: "baseline", "scenario", "token usage",
 For architecture posts, prefer: "boundary", "dependency", "flow", "contract",
 "failure mode", "replay", "consistency", "operational behavior".
 
+## Wording Bank By Post Goal
+
+Use this as a starting vocabulary, not as a template to copy mechanically.
+
+### Release / Open Source
+
+Good:
+- "released a new version"
+- "added support for"
+- "improved incremental updates"
+- "reduced repeated work"
+- "made the workflow easier to reproduce"
+- "the main change is practical"
+
+Avoid:
+- "huge launch"
+- "massive breakthrough"
+- "finally changing developer productivity forever"
+
+### Benchmark / Measurement
+
+Good:
+- "same task, same codebase"
+- "baseline run"
+- "Memgraph-assisted run"
+- "absolute token reduction"
+- "percentage reduction"
+- "quality observation"
+- "bounded benchmark"
+
+Avoid:
+- "proves that"
+- "always faster"
+- "guaranteed cost savings"
+- "industry-changing result"
+
+### Architecture / Technical Lesson
+
+Good:
+- "the boundary matters"
+- "the failure mode was"
+- "the bottleneck moved"
+- "the trade-off was"
+- "operationally, this means"
+- "under production constraints"
+
+Avoid:
+- "clean architecture solves everything"
+- "just use"
+- "simple trick"
+
+### AI Agent / Developer Tooling
+
+Good:
+- "agent context"
+- "structured retrieval"
+- "code relationships"
+- "queryable project memory"
+- "less repeated source scanning"
+- "better investigation path"
+
+Avoid:
+- "AI magic"
+- "autonomous developer"
+- "replace engineers"
+- "10x coding overnight"
+
+## Best-Match Post Models
+
+Pick the model that best matches the user's topic.
+
+### Model A: Measured Result
+
+Use for benchmark, performance, latency, token, cost, or reliability posts.
+
+Sequence:
+1. Strongest measured result.
+2. Baseline and comparison.
+3. What was tested.
+4. Why the result happened.
+5. Practical implication.
+6. Limitation.
+7. Link/attachment/technical CTA.
+
+### Model B: Engineering Constraint
+
+Use when the insight is about a real limitation, trade-off, or failure mode.
+
+Sequence:
+1. Name the constraint.
+2. Explain why it appears in real systems.
+3. Show the technical approach.
+4. Explain the trade-off.
+5. End with the lesson.
+
+### Model C: Release Value
+
+Use for open source and product/tool releases.
+
+Sequence:
+1. What engineers can do now that they could not do as easily before.
+2. Release name or project name.
+3. 3-5 technical changes.
+4. Workflow impact.
+5. Repository link or invitation to test.
+
+### Model D: Build Log / Technical Journey
+
+Use for personal project progress without strong benchmark data.
+
+Sequence:
+1. Small but specific technical problem.
+2. Why it mattered.
+3. What was built or changed.
+4. What was learned.
+5. What is next.
+
+### Model E: Credibility / Profile Positioning
+
+Use for summaries, headlines, and profile sections.
+
+Sequence:
+1. Technical identity.
+2. Core systems and technologies.
+3. Scale or impact.
+4. Current direction.
+5. Selected evidence such as patents, production systems, or open source work.
+
 ## Hook Rules
 
 The first 1-3 lines must make the target audience want to read the next lines.
@@ -200,6 +347,24 @@ Avoid hooks that are vague, self-focused, or generic:
 - "The future of coding is here."
 - "Developers, this one is for you."
 - "Let's talk about AI."
+
+## Hook Lab
+
+Before finalizing a post, create at least 3 candidate opening hooks internally:
+
+1. Metric/result hook.
+2. Technical tension hook.
+3. Practical release/workflow hook.
+
+Pick the hook that is:
+- most concrete
+- most credible
+- least generic
+- most aligned with Software Engineering audience
+- strong enough to make line 2 feel necessary
+
+Discard hooks that rely on artificial suspense, personal excitement, vague
+urgency, or unsupported claims.
 
 ## Line Sequence For Posts
 
@@ -257,6 +422,13 @@ Friendly part:
 - use 0-3 relevant icons only when they improve scanning
 - sound like a thoughtful engineer sharing work, not a marketer selling a product
 
+Tone calibration:
+- Too dry: reads like changelog only; add one sentence explaining why it matters.
+- Too friendly: reads like personal diary; add technical evidence and constraints.
+- Too promotional: reads like marketing; replace adjectives with measured facts.
+- Too defensive: reads like an apology; state limitations calmly and move on.
+- Too generic: could be posted by anyone; add artifact, codebase, metric, or trade-off.
+
 ## Profile Content
 
 For headlines, summaries, experience, and project descriptions, optimize for
@@ -290,6 +462,13 @@ For Memgraph Ingester:
 - Connect features to workflows such as onboarding, performance investigation,
   impact analysis, semantic search, bug fixing, and CI triage.
 - Never present it as only a parser, only a RAG tool, or only a Memgraph demo.
+
+Preferred Memgraph Ingester framing:
+- "code and memory knowledge graph for AI coding agents"
+- "queryable project memory"
+- "structured retrieval over code relationships"
+- "less repeated source scanning"
+- "better context before code changes"
 
 ## Benchmark Content
 
@@ -338,6 +517,17 @@ question, link the repository, invite people to test the release, or point to an
 attached PDF. Do not use engagement bait such as "comment YES" or generic
 "what do you think?" when a more precise technical CTA is possible.
 
+## Draft Variant Workflow
+
+For important posts, generate variants internally before choosing the final text:
+
+1. Variant A: metric/result-led.
+2. Variant B: engineering-constraint-led.
+3. Variant C: practical-release-led or human-build-log-led.
+
+Score each variant with the Model-Based Quality Check. Return the strongest
+variant by default. Mention alternates only if the user asks for options.
+
 ## Model-Based Quality Check
 
 Before returning a post, perform a quality check against the best available model
@@ -363,9 +553,30 @@ and have no category below 3.
    - Would a senior software engineer find the post technically credible and not
      embarrassing to share?
 
+Additional hard gates:
+- First lines must not be self-focused unless the personal context is the point.
+- At least one concrete artifact should appear when available: metric, repo,
+  codebase, benchmark, release, production constraint, architecture detail, or
+  observed trade-off.
+- Claims about speed, quality, or cost must name the scope or comparison.
+- No generic AI hype, engagement bait, or unsupported universal claims.
+
 If a generated post fails the quality check, revise it before returning it.
 When multiple variants are generated, pick the best match according to this
 rubric and briefly explain why it was selected if useful.
+
+## Technical Credibility Checklist
+
+Before publishing, verify:
+
+- Is the strongest claim supported by the user's data or a clear assumption?
+- Is the baseline/comparison explicit?
+- Is the scope bounded?
+- Is the post useful to another engineer?
+- Is the wording specific enough that a recruiter can index the expertise?
+- Is there a real artifact: repository, benchmark, PDF, graph, codebase, release,
+  production result, or architecture decision?
+- Does the post avoid pretending that one benchmark proves a universal rule?
 
 ## Recommendations And Branding Reviews
 
@@ -405,3 +616,4 @@ For Software Engineering community posts, completion additionally requires:
 - sequence of lines is coherent and easy to scan
 - intonation is professional with a friendly human touch
 - claims are bounded by evidence, benchmark setup, or clearly stated assumptions
+- the final selected post is the best match among plausible hook/sequence variants
