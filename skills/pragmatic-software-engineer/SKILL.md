@@ -21,7 +21,6 @@ description: >-
 
 - `general.md` from `__ROOT__/general.md
 - `engineering.md` from `__ROOT__/shared/engineering.md`
-- `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
 
 ### On Demand
 
@@ -63,12 +62,6 @@ Java projects:
 - Never embed SQL, Cypher, or similar query languages in Java source; keep
   them in `.sql` / `.cypher` resource files. Exception: queries inside JUnit
   tests are allowed.
-
-Maven (always via `maven-summary.sh` per `engineering.md`):
-- When only errors or severe problems matter, pass `-q`.
-- When only test pass/fail matters, pass `-q` plus a `-Dtest=...` selector for
-  specific tests, or no selector to run all; judge results by exit status and
-  summary lines.
 
 All projects:
 - Commit messages contain only the "what changed" content. Never include
