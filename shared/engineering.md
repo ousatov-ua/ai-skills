@@ -14,7 +14,7 @@
 
 - Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
 - Skill `ponytail` from `_ROOT_/skills/ponytail/SKILL.md`
-- Script `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` - to run maven tests
+- **Only for Maven projects** `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` - to run maven tests
 
 ## Engineering Baseline
 
@@ -47,8 +47,7 @@ verification matters, rely on exit status plus generated reports, artifacts, or
 full logs.
 
 **BLOCKING:** Run Maven verification (tests, integration tests, full builds,
-noisy commands) through `maven-summary.sh`, 
-never bare `mvn` — even when
+noisy commands) through `maven-summary.sh`, never bare `mvn` — even when 
 direct `mvn -q ...` would be shorter:
 1. If a local `scripts/maven-summary.sh` exists, read it and run Maven through it.
 2. Otherwise fetch it, save and run it via a temporary executable or
