@@ -114,6 +114,24 @@ source exposes popularity or engagement. If popularity cannot be verified, phras
 the finding as "accessible high-signal examples suggest..." or "current public
 evidence suggests...".
 
+## Intake Rules
+
+Before drafting, identify the user's likely content type and missing evidence.
+Ask a follow-up only when the missing information blocks a credible post.
+Otherwise make bounded assumptions and state them briefly if needed.
+
+Minimum useful intake for posts:
+- topic or artifact: release, benchmark, profile update, recommendation, project,
+  architecture lesson, or technical discovery
+- audience: software engineers by default, recruiters only when profile/search
+  visibility is central
+- strongest available evidence: metric, codebase size, repository, production
+  scale, benchmark setup, observed trade-off, or limitation
+- desired output: final post, variants, review, rewrite, or skill improvement
+
+If the user gives only a repository link or short release note, produce a strong
+post using safe assumptions and clearly avoid unsupported claims.
+
 ## Content Standards
 
 These standards apply to every output of this skill.
@@ -148,6 +166,23 @@ Avoid:
 Use evidence whenever available; otherwise keep claims careful and bounded
 (e.g. "in this benchmark", "on this codebase", "in this release", "for this
 workflow", "early result").
+
+## Evidence Hierarchy
+
+Prefer stronger evidence over weaker evidence:
+
+1. Direct user-provided metrics, benchmark files, charts, source code, or release
+   notes.
+2. Repository content, changelog, README, issues, commits, package metadata, or
+   project documentation.
+3. User-provided production experience or clearly stated personal observation.
+4. Current public sources about platform behavior, hiring trends, or comparable
+   posts.
+5. Assumptions, marked as assumptions and kept modest.
+
+Never inflate weak evidence into strong claims. If the post has no hard metric,
+lead with a concrete engineering problem, constraint, or release value instead of
+inventing numbers.
 
 ## Best Wording For Software Engineer Posts
 
@@ -247,6 +282,38 @@ Avoid:
 - "replace engineers"
 - "10x coding overnight"
 
+## Anti-Pattern Rewrite Rules
+
+When a draft contains generic or weak wording, rewrite it using the stronger
+engineering frame.
+
+- Replace "excited to announce" with the concrete outcome or capability.
+- Replace "game changer" with the measured result or workflow improvement.
+- Replace "AI-powered" with what the tool actually changes: retrieval, context,
+  ingestion, search, validation, or investigation.
+- Replace "improved performance" with the specific dimension: ingestion time,
+  token usage, latency, throughput, repeated scans, or freshness.
+- Replace "developers can be more productive" with the task that becomes easier:
+  onboarding, impact analysis, bug fixing, performance investigation, CI triage,
+  or architecture review.
+- Replace "best" or "better" with the comparison, scenario, and limitation.
+
+Example rewrites:
+
+Weak:
+"I'm excited to announce a game-changing AI tool for developers."
+
+Better:
+"AI coding agents waste context when they rediscover the same code relationships
+on every task. I built Memgraph Ingester to make those relationships queryable."
+
+Weak:
+"This release improves performance a lot."
+
+Better:
+"This release focuses on faster ingestion and cleaner incremental updates, so the
+code graph can stay fresh with less repeated work."
+
 ## Best-Match Post Models
 
 Pick the model that best matches the user's topic.
@@ -308,6 +375,43 @@ Sequence:
 4. Current direction.
 5. Selected evidence such as patents, production systems, or open source work.
 
+### Model F: Before / After Workflow
+
+Use when the post explains how an engineering workflow changed.
+
+Sequence:
+1. Before: concrete friction.
+2. After: concrete workflow improvement.
+3. What changed technically.
+4. What evidence supports it.
+5. Where it is still limited.
+
+### Model G: Debugging / Investigation Story
+
+Use for posts about bug fixing, performance investigation, or incident learning.
+
+Sequence:
+1. Symptom or misleading first guess.
+2. Investigation path.
+3. Actual cause or useful finding.
+4. Fix or mitigation.
+5. Operational lesson.
+
+## Post Type Decision Tree
+
+Choose the post model before drafting:
+
+- Has numbers or benchmark data? Use Model A.
+- Has a release with practical workflow value? Use Model C.
+- Has a painful constraint, bottleneck, or trade-off? Use Model B.
+- Has a changed workflow? Use Model F.
+- Has a debugging or investigation story? Use Model G.
+- Has progress without metrics? Use Model D.
+- Is the task profile/headline/about text? Use Model E.
+
+If two models fit, generate both internally and keep the one with the stronger
+hook and clearer evidence path.
+
 ## Hook Rules
 
 The first 1-3 lines must make the target audience want to read the next lines.
@@ -340,6 +444,11 @@ Strong hook types:
 5. Release value
    - "New Memgraph Ingester release: faster ingestion, cleaner incremental
      updates, and better instructions for coding agents."
+
+6. Debugging/investigation hook
+   - "The first guess was wrong. The graph made the dependency path visible."
+   - "The useful signal was not another log line. It was the relationship between
+     two modules."
 
 Avoid hooks that are vague, self-focused, or generic:
 - "I'm excited to share..."
@@ -406,6 +515,27 @@ For project/story posts:
 4. Share the result or lesson.
 5. End with what is next.
 
+## Readability And Formatting
+
+LinkedIn post formatting must make scanning easy on mobile.
+
+Use:
+- short paragraphs, usually 1-3 lines
+- a clear first screen: hook + context + why it matters
+- bullets for changes, scenarios, or findings
+- whitespace between ideas
+- one clear CTA, not several competing CTAs
+
+Avoid:
+- dense paragraphs
+- too many emojis
+- long setup before the point
+- multiple unrelated asks at the end
+- hashtag blocks that look like spam
+
+Default length for posts: 120-220 words unless the user asks for short, long, or
+thread-like detail. For benchmark posts with attached PDF, prefer 140-260 words.
+
 ## Intonation
 
 Default tone: senior technical, precise, grounded, readable, and lightly friendly.
@@ -429,6 +559,41 @@ Tone calibration:
 - Too defensive: reads like an apology; state limitations calmly and move on.
 - Too generic: could be posted by anyone; add artifact, codebase, metric, or trade-off.
 
+## CTA Rules
+
+Prefer precise, low-pressure CTAs:
+
+Good:
+- "Repository link is in the comments/attached below."
+- "I would be interested to compare this on a larger codebase next."
+- "If you work with coding agents, I would be curious where repeated context
+  reconstruction hurts most in your workflow."
+- "The benchmark PDF has the scenario details and numbers."
+
+Avoid:
+- "Comment YES if you want the link."
+- "Smash like."
+- "Agree?"
+- "What do you think?" when a more specific technical question is possible.
+
+## Hashtag Rules
+
+Use hashtags only when useful for searchability. Prefer 3-5 maximum.
+
+Good defaults for this user:
+- #SoftwareEngineering
+- #BackendEngineering
+- #PlatformEngineering
+- #DistributedSystems
+- #AIEngineering
+- #DeveloperTools
+- #OpenSource
+- #Java
+- #Kafka
+
+Avoid broad or hype-heavy hashtag piles such as #AI #Innovation #Future #Success
+unless the user explicitly wants broader reach over technical credibility.
+
 ## Profile Content
 
 For headlines, summaries, experience, and project descriptions, optimize for
@@ -437,6 +602,13 @@ ownership, and production/business outcomes.
 
 Keep the user positioned as a technical contributor unless they explicitly ask
 for management positioning.
+
+Profile writing must balance searchability and authority:
+- include role keywords recruiters search for
+- include core technologies naturally
+- include scale, impact, patents, open source, or production systems when known
+- avoid management-heavy framing unless the user asks for it
+- avoid vague phrases like "passionate technologist" or "results-driven leader"
 
 ## Open Source Content
 
@@ -528,6 +700,22 @@ For important posts, generate variants internally before choosing the final text
 Score each variant with the Model-Based Quality Check. Return the strongest
 variant by default. Mention alternates only if the user asks for options.
 
+## Review Mode
+
+When the user asks to review, improve, or quality-check a LinkedIn post, respond
+with:
+
+1. Verdict: strong / usable with edits / weak.
+2. Hook assessment: whether the first 1-3 lines create honest curiosity.
+3. Wording assessment: concrete engineering wording vs generic language.
+4. Sequence assessment: whether the post flows logically.
+5. Intonation assessment: professional, friendly, too promotional, too dry, or
+   too generic.
+6. Specific rewrite suggestions.
+7. Final improved version when useful.
+
+Do not only give abstract advice. Show the improved wording.
+
 ## Model-Based Quality Check
 
 Before returning a post, perform a quality check against the best available model
@@ -578,6 +766,23 @@ Before publishing, verify:
   production result, or architecture decision?
 - Does the post avoid pretending that one benchmark proves a universal rule?
 
+## Final Selection Algorithm
+
+Before returning the final post:
+
+1. Identify the strongest available evidence.
+2. Choose the post model using the Post Type Decision Tree.
+3. Generate at least 3 hook candidates internally.
+4. Draft the strongest model.
+5. Remove hype, weak adjectives, unsupported universals, and self-focused opening.
+6. Check mobile readability.
+7. Run the Model-Based Quality Check.
+8. Return the highest-scoring version.
+
+When a trade-off appears between punchiness and credibility, choose credibility.
+A slightly less viral but more technically trustworthy post is preferred for this
+skill.
+
 ## Recommendations And Branding Reviews
 
 Recommendations: observable strengths, technical excellence, ownership,
@@ -597,6 +802,7 @@ Recommend only improvements that strengthen professional positioning.
 - Project description: one-line tagline, short version, medium version.
 - Recommendation: short version, medium version.
 - Banner review: strengths, weaknesses, recommended improvements.
+- Review mode: verdict, hook/wording/sequence/intonation assessment, and rewrite.
 - Skill improvement: changed behavior, research findings used, quality rubric,
   and files changed.
 
@@ -617,3 +823,6 @@ For Software Engineering community posts, completion additionally requires:
 - intonation is professional with a friendly human touch
 - claims are bounded by evidence, benchmark setup, or clearly stated assumptions
 - the final selected post is the best match among plausible hook/sequence variants
+- the CTA is specific and low-pressure
+- mobile formatting is readable
+- hashtags, if used, support searchability without looking spammy
