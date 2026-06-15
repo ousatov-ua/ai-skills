@@ -12,7 +12,7 @@ evaluation_command: manual rubric review against fixed prompt set and current pu
 
 result_extraction: record score and keep/discard decision in `results.tsv`.
 
-max_iterations: 32 after user extension. Initial run used 12 iterations; extension added 20 more iterations. User maximum was 40.
+max_iterations: 52 total after second user extension. Initial run used 12 iterations; first extension added 20 more; second extension added 20 more. The second extension request stated max number 40, interpreted as the maximum for that extension because the existing run already had 32 total iterations.
 
 per_iteration_timeout: one bounded review/edit pass.
 
@@ -31,7 +31,8 @@ constraints:
 - Do not add clickbait, hype, or generic influencer formulas.
 - Add actionable wording, sequencing, hook, intonation, and quality-check rules.
 - Claims about public LinkedIn popularity must be bounded if exact engagement is not available.
-- Continue the existing branch/PR and keep total iterations no higher than 40.
+- Continue the existing branch/PR.
+- For the second extension, add at least 20 iterations and stay below the extension maximum of 40 iterations.
 
 ## Fixed Evaluation Prompt Set
 
@@ -43,6 +44,12 @@ constraints:
 6. Generate a short release post when the user provides only a repository link and one sentence of context.
 7. Generate a debugging/investigation story post without turning it into generic motivation.
 8. Produce a reviewer-style critique with concrete rewritten lines.
+9. Generate a LinkedIn campaign asset with post, first comment, attachment title, and hashtags.
+10. Generate a comparison post that avoids declaring one option universally best.
+11. Generate a failure/lesson-learned post from a discarded experiment.
+12. Polish a post line-by-line for mobile readability and strong first-screen value.
+13. Generate a post for an attached benchmark PDF without duplicating the whole PDF.
+14. Generate a post that includes a small code snippet only when it supports the message.
 
 ## Rubric
 
@@ -66,3 +73,16 @@ Iterations 13-32 focused on making the skill more operational rather than merely
 - CTA and hashtag rules
 - review mode
 - final selection algorithm
+
+Iterations 33-52 focused on publishing workflow and edge cases:
+- repository/release fact extraction
+- comparison and failure post models
+- visual/attachment-led posts
+- line-level editing
+- human voice rules
+- link/comment strategy
+- attachment title guidance
+- code snippet rules
+- quality levels
+- benchmark uncertainty wording
+- campaign asset output
