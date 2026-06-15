@@ -184,6 +184,23 @@ Never inflate weak evidence into strong claims. If the post has no hard metric,
 lead with a concrete engineering problem, constraint, or release value instead of
 inventing numbers.
 
+## Source Extraction For Repositories And Releases
+
+When a post is based on a repository, release, PR, changelog, or README, extract
+only publishable facts:
+
+- project purpose
+- latest release or change when available
+- user-facing capability
+- technical change
+- benchmark or performance data
+- installation or usage path
+- limitation or work still in progress
+
+Do not expose private implementation notes, unpublished company context, secrets,
+internal URLs, or credentials. If a repository fact is unclear, phrase it as
+"the project focuses on..." rather than inventing a definitive claim.
+
 ## Best Wording For Software Engineer Posts
 
 Use wording that sounds like an engineer explaining a useful result to other
@@ -282,6 +299,22 @@ Avoid:
 - "replace engineers"
 - "10x coding overnight"
 
+### Comparison / Alternatives
+
+Good:
+- "compared against"
+- "baseline behavior"
+- "the trade-off is"
+- "this helps when"
+- "this does not help when"
+- "choose this if"
+
+Avoid:
+- "X is dead"
+- "Y is useless"
+- "there is no reason to use"
+- "the only correct approach"
+
 ## Anti-Pattern Rewrite Rules
 
 When a draft contains generic or weak wording, rewrite it using the stronger
@@ -297,6 +330,8 @@ engineering frame.
   onboarding, impact analysis, bug fixing, performance investigation, CI triage,
   or architecture review.
 - Replace "best" or "better" with the comparison, scenario, and limitation.
+- Replace "I"-heavy openings with the technical result when the personal story is
+  not the main value.
 
 Example rewrites:
 
@@ -397,6 +432,42 @@ Sequence:
 4. Fix or mitigation.
 5. Operational lesson.
 
+### Model H: Technical Comparison
+
+Use when comparing tools, approaches, models, subscriptions, architectures,
+frameworks, or workflows.
+
+Sequence:
+1. Comparison frame and use case.
+2. Evaluation criteria.
+3. Where option A is stronger.
+4. Where option B is stronger.
+5. Practical recommendation with constraints.
+
+### Model I: Failure / Lesson Learned
+
+Use when the topic is a failed attempt, wrong assumption, incident, bad benchmark,
+or discarded approach.
+
+Sequence:
+1. What failed or surprised you.
+2. Why the first assumption was wrong.
+3. What evidence changed the conclusion.
+4. What you would do differently.
+5. The reusable lesson.
+
+### Model J: Visual / Attachment-Led Post
+
+Use when the user will attach a PDF, chart, screenshot, benchmark table, diagram,
+or visual result.
+
+Sequence:
+1. Tell readers what the visual proves or explains.
+2. State the setup in one short paragraph.
+3. Mention the most important takeaway.
+4. Point to the attachment for details.
+5. Ask one precise technical question or invite comparison.
+
 ## Post Type Decision Tree
 
 Choose the post model before drafting:
@@ -406,6 +477,9 @@ Choose the post model before drafting:
 - Has a painful constraint, bottleneck, or trade-off? Use Model B.
 - Has a changed workflow? Use Model F.
 - Has a debugging or investigation story? Use Model G.
+- Compares alternatives? Use Model H.
+- Describes a failure or discarded approach? Use Model I.
+- Depends on an attached PDF, chart, or screenshot? Use Model J.
 - Has progress without metrics? Use Model D.
 - Is the task profile/headline/about text? Use Model E.
 
@@ -450,6 +524,15 @@ Strong hook types:
    - "The useful signal was not another log line. It was the relationship between
      two modules."
 
+7. Comparison hook
+   - "The better tool depends on where the bottleneck is."
+   - "I would not compare these by features first. I would compare them by the
+     workflow they remove."
+
+8. Failure hook
+   - "This benchmark result was less useful than I expected. That was the lesson."
+   - "The failed run exposed a better requirement than the successful one."
+
 Avoid hooks that are vague, self-focused, or generic:
 - "I'm excited to share..."
 - "Big news!"
@@ -464,6 +547,9 @@ Before finalizing a post, create at least 3 candidate opening hooks internally:
 1. Metric/result hook.
 2. Technical tension hook.
 3. Practical release/workflow hook.
+
+For comparison, failure, or visual-led posts, include one additional candidate
+from the relevant hook type.
 
 Pick the hook that is:
 - most concrete
@@ -536,6 +622,20 @@ Avoid:
 Default length for posts: 120-220 words unless the user asks for short, long, or
 thread-like detail. For benchmark posts with attached PDF, prefer 140-260 words.
 
+## Line-Level Editing Checklist
+
+When polishing an existing post, inspect line by line:
+
+- Line 1: Does it create technical curiosity without hype?
+- Line 2: Does it make the reader understand the context fast?
+- First screen: Is there a reason to click "see more"?
+- Middle: Does every paragraph add evidence, context, or implication?
+- Bullets: Are they parallel, concrete, and not too many?
+- Ending: Is the CTA specific and low pressure?
+- Hashtags: Are they useful and limited?
+
+Remove any line that only repeats excitement, status, or generic motivation.
+
 ## Intonation
 
 Default tone: senior technical, precise, grounded, readable, and lightly friendly.
@@ -559,6 +659,25 @@ Tone calibration:
 - Too defensive: reads like an apology; state limitations calmly and move on.
 - Too generic: could be posted by anyone; add artifact, codebase, metric, or trade-off.
 
+## Human Voice Rules
+
+The post should not sound generated. Add human voice through specificity, not
+through filler.
+
+Good human signals:
+- a concrete surprise
+- a real limitation
+- a specific next validation step
+- a small practical observation
+- a clear reason why the author cared about the problem
+
+Avoid fake human signals:
+- dramatic confessions
+- motivational life lessons unrelated to the engineering work
+- emoji-heavy enthusiasm
+- forced vulnerability
+- rhetorical questions stacked together
+
 ## CTA Rules
 
 Prefer precise, low-pressure CTAs:
@@ -575,6 +694,54 @@ Avoid:
 - "Smash like."
 - "Agree?"
 - "What do you think?" when a more specific technical question is possible.
+
+## Link And Comment Strategy
+
+When the user wants to promote a repository, release, PDF, article, or benchmark:
+
+- If the post itself should contain the link, place it near the end after the
+  value is clear.
+- If the user prefers link-in-comments, add a short suggested first comment.
+- Do not hide the artifact behind engagement bait.
+- For open source, make the repository easy to find either in the post, first
+  comment, or attachment description.
+
+Suggested first comment structure:
+1. Repository or artifact link.
+2. One sentence about what to inspect first.
+3. Optional note about benchmark setup or installation.
+
+## Attachment And Visual Rules
+
+When the user will attach a PDF, chart, screenshot, or image:
+
+- The post should not duplicate the whole attachment.
+- Lead with the main takeaway from the attachment.
+- Mention what the reader can find inside: scenario details, methodology, chart,
+  codebase size, or limitations.
+- Use the attachment to support credibility, not to compensate for a weak post.
+- Suggest an attachment title when useful.
+
+Good attachment title patterns:
+- "Token Usage Benchmark: Memgraph-Assisted vs Baseline Agent Runs"
+- "Code Knowledge Graph Benchmark: Scenarios, Methodology, Results"
+- "Release Notes: Faster Ingestion And Incremental Updates"
+
+## Code Snippet Rules
+
+Use code snippets only when they make the post more concrete.
+
+Good uses:
+- one command that shows installation or usage
+- one small config line
+- one before/after query or API call
+- one concise example of the developer workflow
+
+Avoid:
+- long code blocks
+- screenshots of unreadable terminal output
+- code that distracts from the main result
+- code without explaining why it matters
 
 ## Hashtag Rules
 
@@ -609,6 +776,9 @@ Profile writing must balance searchability and authority:
 - include scale, impact, patents, open source, or production systems when known
 - avoid management-heavy framing unless the user asks for it
 - avoid vague phrases like "passionate technologist" or "results-driven leader"
+
+For profile summaries, prefer a compact first paragraph that explains technical
+identity and direction. Put evidence after positioning, not before it.
 
 ## Open Source Content
 
@@ -656,6 +826,14 @@ When benchmark data exists:
 - Do not claim better engineering quality unless the benchmark includes quality
   observations or human review.
 
+Uncertainty wording for benchmarks:
+- "in this benchmark"
+- "on this codebase"
+- "for these scenarios"
+- "early signal"
+- "needs validation on more repositories"
+- "not a universal result"
+
 Good headline patterns:
 - "Reduced agent token usage by 41% across 6 real-world software engineering tasks."
 - "Used 250,608 fewer tokens in benchmark runs on a real codebase."
@@ -699,6 +877,18 @@ For important posts, generate variants internally before choosing the final text
 
 Score each variant with the Model-Based Quality Check. Return the strongest
 variant by default. Mention alternates only if the user asks for options.
+
+## Quality Levels
+
+When the user asks for speed or polish level, choose the appropriate depth:
+
+- Fast draft: one strong version, no visible scoring unless asked.
+- Polished post: internal hook variants, quality check, final copy block.
+- Campaign asset: post, first comment, attachment title, hashtags, and optional
+  short/long variants.
+- Review mode: critique plus rewritten version.
+
+Default to polished post for open source announcements and benchmark posts.
 
 ## Review Mode
 
@@ -748,6 +938,8 @@ Additional hard gates:
   observed trade-off.
 - Claims about speed, quality, or cost must name the scope or comparison.
 - No generic AI hype, engagement bait, or unsupported universal claims.
+- If a link, attachment, or code snippet is central, the post explains why it is
+  useful before asking readers to open it.
 
 If a generated post fails the quality check, revise it before returning it.
 When multiple variants are generated, pick the best match according to this
@@ -765,6 +957,7 @@ Before publishing, verify:
 - Is there a real artifact: repository, benchmark, PDF, graph, codebase, release,
   production result, or architecture decision?
 - Does the post avoid pretending that one benchmark proves a universal rule?
+- Does the post avoid overusing "I" when the technical result is stronger?
 
 ## Final Selection Algorithm
 
@@ -776,8 +969,9 @@ Before returning the final post:
 4. Draft the strongest model.
 5. Remove hype, weak adjectives, unsupported universals, and self-focused opening.
 6. Check mobile readability.
-7. Run the Model-Based Quality Check.
-8. Return the highest-scoring version.
+7. Check link/comment/attachment needs.
+8. Run the Model-Based Quality Check.
+9. Return the highest-scoring version.
 
 When a trade-off appears between punchiness and credibility, choose credibility.
 A slightly less viral but more technically trustworthy post is preferred for this
@@ -798,6 +992,9 @@ Recommend only improvements that strengthen professional positioning.
   block when the user asks for post/copy-ready output, suggested attachment title
   if applicable, suggested hashtags, and optional quality-check notes when the
   user asks for review/improvement.
+- Campaign asset: post, first comment, attachment title, suggested hashtags, and
+  short alternative hook when the user is promoting a repository, benchmark, or
+  PDF.
 - LinkedIn summary: full summary plus optional recruiter optimization notes.
 - Project description: one-line tagline, short version, medium version.
 - Recommendation: short version, medium version.
@@ -826,3 +1023,4 @@ For Software Engineering community posts, completion additionally requires:
 - the CTA is specific and low-pressure
 - mobile formatting is readable
 - hashtags, if used, support searchability without looking spammy
+- links, comments, attachments, and code snippets support the main technical point
