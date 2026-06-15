@@ -12,7 +12,7 @@ evaluation_command: manual rubric review against fixed prompt set and current pu
 
 result_extraction: record score and keep/discard decision in `results.tsv`.
 
-max_iterations: 12.
+max_iterations: 32 after user extension. Initial run used 12 iterations; extension added 20 more iterations. User maximum was 40.
 
 per_iteration_timeout: one bounded review/edit pass.
 
@@ -31,6 +31,7 @@ constraints:
 - Do not add clickbait, hype, or generic influencer formulas.
 - Add actionable wording, sequencing, hook, intonation, and quality-check rules.
 - Claims about public LinkedIn popularity must be bounded if exact engagement is not available.
+- Continue the existing branch/PR and keep total iterations no higher than 40.
 
 ## Fixed Evaluation Prompt Set
 
@@ -39,6 +40,9 @@ constraints:
 3. Generate an architecture lesson post about AI agents repeatedly rediscovering codebase relationships.
 4. Rewrite a technical LinkedIn summary for a Lead Backend Engineer who wants to stay technical.
 5. Review a generated post for wording, sequence of lines, hook strength, and intonation.
+6. Generate a short release post when the user provides only a repository link and one sentence of context.
+7. Generate a debugging/investigation story post without turning it into generic motivation.
+8. Produce a reviewer-style critique with concrete rewritten lines.
 
 ## Rubric
 
@@ -49,3 +53,16 @@ constraints:
 - Professional + friendly intonation: 10
 - Evidence/boundedness: 10
 - Operational usefulness of the skill: 5
+
+## Extension Notes
+
+Iterations 13-32 focused on making the skill more operational rather than merely descriptive:
+- stronger intake behavior
+- explicit evidence hierarchy
+- anti-pattern rewrites
+- additional post models
+- post type decision tree
+- mobile readability rules
+- CTA and hashtag rules
+- review mode
+- final selection algorithm
