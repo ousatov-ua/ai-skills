@@ -22,7 +22,6 @@ description: >-
 
 - `general.md` from `__ROOT__/general.md`
 - `engineering.md` from `__ROOT__/shared/engineering.md`
-- `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh`
 
 ### On Demand
 
