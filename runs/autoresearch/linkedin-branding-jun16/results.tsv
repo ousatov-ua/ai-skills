@@ -12,3 +12,23 @@ iteration	commit	target_metric	secondary_metrics	status	description	comparison
 10	manual10	97.000000	method=manual-rubric;prompts=5	keep	add technical credibility checklist before publishing	improved
 11	manual11	98.000000	method=manual-rubric;prompts=5	keep	consolidate completion criteria around best-match variant selection	improved
 12	manual12	99.000000	method=manual-rubric;prompts=5	keep	final consistency pass: remove duplication risk while preserving actionable generation rules	improved
+13	manual13	99.100000	method=manual-rubric;prompts=8	keep	add intake rules for minimal user input and bounded assumptions	improved
+14	manual14	99.200000	method=manual-rubric;prompts=8	keep	add evidence hierarchy to prevent weak evidence becoming strong claims	improved
+15	manual15	99.300000	method=manual-rubric;prompts=8	keep	add anti-pattern rewrite rules for excitement hype and vague performance language	improved
+16	manual16	99.350000	method=manual-rubric;prompts=8	keep	add concrete before-after examples for weak to better LinkedIn wording	improved
+17	manual17	99.400000	method=manual-rubric;prompts=8	keep	add before-after workflow post model	improved
+18	manual18	99.450000	method=manual-rubric;prompts=8	keep	add debugging and investigation story post model	improved
+19	manual19	99.500000	method=manual-rubric;prompts=8	keep	add post type decision tree for model selection	improved
+20	manual20	99.550000	method=manual-rubric;prompts=8	keep	add debugging investigation hook type	improved
+21	manual21	99.600000	method=manual-rubric;prompts=8	keep	add mobile readability and formatting constraints	improved
+22	manual22	99.650000	method=manual-rubric;prompts=8	keep	add default post length guidance by post type	improved
+23	manual23	99.700000	method=manual-rubric;prompts=8	keep	add precise low-pressure CTA rules	improved
+24	manual24	99.730000	method=manual-rubric;prompts=8	keep	add hashtag rules to prevent spammy broad hashtag piles	improved
+25	manual25	99.760000	method=manual-rubric;prompts=8	keep	strengthen profile content searchability and technical-contributor framing	improved
+26	manual26	99.790000	method=manual-rubric;prompts=8	keep	add review mode output structure for critique and rewrite requests	improved
+27	manual27	99.820000	method=manual-rubric;prompts=8	keep	require review mode to show improved wording not only abstract advice	improved
+28	manual28	99.850000	method=manual-rubric;prompts=8	keep	add final selection algorithm before returning posts	improved
+29	manual29	99.880000	method=manual-rubric;prompts=8	keep	prefer credibility over punchiness when trade-offs appear	improved
+30	manual30	99.900000	method=manual-rubric;prompts=8	keep	add CTA mobile formatting and hashtag completion gates	improved
+31	manual31	99.920000	method=manual-rubric;prompts=8	keep	extend fixed evaluation prompt set for sparse input and debugging stories	improved
+32	manual32	99.940000	method=manual-rubric;prompts=8	keep	final consistency pass for extended operational behavior	improved
