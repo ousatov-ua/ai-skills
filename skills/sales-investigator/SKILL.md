@@ -43,6 +43,25 @@ For current market, legal, macroeconomic, credit, or pricing questions, use up-t
 
 Ask questions only if ambiguity blocks meaningful progress. Otherwise, state assumptions briefly and continue.
 
+## Required Inputs
+
+When the user asks for a prediction, market investigation, buy-vs-wait analysis, or negotiation view, first identify the minimum missing inputs.
+
+Minimum useful inputs:
+
+- city, district, neighborhood, or target area
+- property type and market: apartment, house, primary market, or secondary market
+- room count, area range, building age, floor constraints, renovation state, heating, parking, balcony, elevator, and other hard requirements
+- target budget, currency, and acceptable price range
+- decision goal: buy now, wait, sell, negotiate, reject, or compare options
+- forecast horizon, for example 3, 6, or 12 months
+- candidate listings or selected segment prices, if the user already has them
+- cash available, monthly savings, current rent, credit availability, interest rate, reserve requirement, and repair/furnishing budget for buy-vs-wait analysis
+- hard requirements, soft preferences, deal-breakers, and risk tolerance
+- legal or transaction concerns, such as registered residents, minors, ownership shares, inheritance, mortgage, arrest, or layout mismatch
+
+If an input is missing but can be sourced or reasonably modeled, proceed with explicit assumptions. Ask the user only for missing facts that materially change the decision or cannot be sourced.
+
 ## Real Estate Segmentation
 
 When analyzing apartments, preserve all user-requested segmentation dimensions.
@@ -189,6 +208,109 @@ expected_total_return =
   - financing_costs
   - opportunity_cost_of_cash
 ```
+
+When a numeric forecast is needed, use calibrated pessimistic and optimistic factor formulas rather than a single market-growth guess.
+
+```text
+error_band =
+  0.03 when evidence is strong, recent, segment-specific, and backtest MAPE is near or below 1%
+  0.04 as the default calibrated band
+  0.05 when data is sparse, the segment is noisy, or war/security/liquidity risk is material
+
+optimistic_change =
+  clamp(-0.30, 0.35,
+    error_band
+    +
+    horizon_years * (
+      optimistic_intercept
+      + optimistic_w_momentum * segment_momentum
+      + optimistic_w_affordability * affordability
+      + optimistic_w_supply * supply
+      + optimistic_w_credit * credit
+      + optimistic_w_fx * fx
+      + optimistic_w_rent * rent
+      + optimistic_w_migration_security * migration_security
+      + optimistic_w_liquidity * liquidity
+      + optimistic_room_adjustment
+      + optimistic_tier_adjustment
+      + optimistic_condition_adjustment
+    )
+  )
+
+pessimistic_change =
+  clamp(-0.30, 0.35,
+    -error_band
+    +
+    horizon_years * (
+      pessimistic_intercept
+      + pessimistic_w_momentum * segment_momentum
+      + pessimistic_w_affordability * affordability
+      + pessimistic_w_supply * supply
+      + pessimistic_w_credit * credit
+      + pessimistic_w_fx * fx
+      + pessimistic_w_rent * rent
+      + pessimistic_w_migration_security * migration_security
+      + pessimistic_w_liquidity * liquidity
+      + pessimistic_room_adjustment
+      + pessimistic_tier_adjustment
+      + pessimistic_condition_adjustment
+    )
+  )
+
+optimistic_price = current_clean_price * (1 + optimistic_change)
+pessimistic_price = current_clean_price * (1 + pessimistic_change)
+
+optimistic_intercept = 0.000
+optimistic_w_momentum = 1.00
+optimistic_w_affordability = 0.95
+optimistic_w_supply = 1.00
+optimistic_w_credit = 1.00
+optimistic_w_fx = 1.20
+optimistic_w_rent = 1.00
+optimistic_w_migration_security = 0.80
+optimistic_w_liquidity = 0.85
+optimistic_room_1 = 0.006
+optimistic_room_2 = 0.028
+optimistic_room_3 = -0.036
+optimistic_room_adjustment =
+  optimistic_room_1 when room_count = 1
+  optimistic_room_2 when room_count = 2
+  optimistic_room_3 when room_count >= 3
+optimistic_tier_adjustment = 0.000
+optimistic_condition_adjustment = 0.000
+
+pessimistic_intercept = 0.000
+pessimistic_w_momentum = 1.00
+pessimistic_w_affordability = 1.00
+pessimistic_w_supply = 1.05
+pessimistic_w_credit = 1.15
+pessimistic_w_fx = 1.10
+pessimistic_w_rent = 1.00
+pessimistic_w_migration_security = 0.75
+pessimistic_w_liquidity = 0.90
+pessimistic_room_1 = 0.006
+pessimistic_room_2 = 0.026
+pessimistic_room_3 = -0.032
+pessimistic_room_adjustment =
+  pessimistic_room_1 when room_count = 1
+  pessimistic_room_2 when room_count = 2
+  pessimistic_room_3 when room_count >= 3
+pessimistic_tier_adjustment = 0.000
+pessimistic_condition_adjustment = 0.000
+```
+
+Score each input as an annual price-change contribution in decimal form, using only information available at the forecast date. For example, `0.04` means about +4% annual pressure and `-0.02` means about -2% annual pressure. Map:
+
+- `segment_momentum`: recent comparable segment price trend after outlier filtering
+- `affordability`: wage growth, price-to-income, savings capacity, and buyer budget pressure
+- `supply`: completions, active inventory, unsold stock, and absorption
+- `credit`: real rates, mortgage availability, installment terms, refinancing risk
+- `fx`: exchange-rate pressure, inflation pass-through, and hard-asset demand
+- `rent`: rent yield, saved rent, rent growth, and rent-vs-buy pressure
+- `migration_security`: migration / IDP flows, regional safety, war intensity, infrastructure and energy risk
+- `liquidity`: days on market, price cuts, transaction activity, and stale-listing risk
+
+Treat these coefficients as priors, not universal constants. Recalibrate when a local historical backtest shows lower error, but do not tune to only one cherry-picked period. Use a wider band than 5% when the historical backtest error, bid-ask gap, sparse data, or war/security shock risk is larger than the default band.
 
 Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
 
