@@ -7,9 +7,7 @@ description: Use for evidence-based real estate purchase/sale investigation, pro
 
 ## Purpose
 
-Use this skill for high-stakes purchase or sale investigations where the user needs a pragmatic, evidence-based decision rather than emotional reassurance.
-
-The primary target is real estate, especially apartment purchase decisions, but the same discipline can apply to other large purchases when market data, financing, negotiation leverage, and legal risks matter.
+Use this skill for high-stakes purchase or sale investigations where the user needs a pragmatic, evidence-based decision.
 
 ## Core Behavior
 
@@ -147,7 +145,7 @@ If data is sparse, provide a confidence level and widen the range.
 
 ## Current Market Overview
 
-For current real estate questions, provide a current market overview before forecasting. Include a dated snapshot such as "as of 2026-06-16" or the exact source date available.
+For current real estate questions, provide a dated current market overview before forecasting.
 
 - active listings / inventory count
 - median, interquartile price band, and practical buyer price band
@@ -157,7 +155,7 @@ For current real estate questions, provide a current market overview before fore
 - construction completions, supply, unsold stock, demand, migration / IDP flows, jobs, universities, and security
 - liquidity, confidence level, and missing data
 
-Do not present the market as current if source dates are old. If current data is incomplete, label the overview as a proxy and explain the gap.
+If current data is incomplete or old, label the overview as a proxy and explain the gap.
 
 ## Economic Forecasting
 
@@ -330,7 +328,7 @@ missing_evidence
 recommendation
 ```
 
-Apply penalties for non-comparable evidence, stale listings, legal uncertainty, poor liquidity, repair underestimation, and financing fragility. A cheap option should not outrank a fitting option if it fails hard requirements.
+A cheap option should not outrank a fitting option if it fails hard requirements.
 
 Compare options such as:
 
