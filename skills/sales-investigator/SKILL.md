@@ -190,6 +190,61 @@ expected_total_return =
   - opportunity_cost_of_cash
 ```
 
+When a numeric forecast is needed, start from a calibrated factor formula rather than a single market-growth guess:
+
+```text
+forecast_nominal_change =
+  clamp(-0.30, 0.35,
+    horizon_years * (
+      intercept
+      + w_momentum * segment_momentum
+      + w_affordability * affordability
+      + w_supply * supply
+      + w_credit * credit
+      + w_fx * fx
+      + w_rent * rent
+      + w_migration_security * migration_security
+      + w_liquidity * liquidity
+      + room_adjustment
+      + tier_adjustment
+      + condition_adjustment
+    )
+  )
+
+predicted_price = current_clean_price * (1 + forecast_nominal_change)
+
+intercept = 0.000
+w_momentum = 1.00
+w_affordability = 1.00
+w_supply = 1.00
+w_credit = 1.00
+w_fx = 1.10
+w_rent = 1.00
+w_migration_security = 0.75
+w_liquidity = 0.85
+room_1 = 0.006
+room_2 = 0.016
+room_3 = -0.026
+premium = 0.000
+mid = 0.000
+budget = 0.000
+renovated = 0.000
+unrenovated = 0.000
+```
+
+Score each input as an annual price-change contribution in decimal form, using only information available at the forecast date. For example, `0.04` means about +4% annual pressure and `-0.02` means about -2% annual pressure. Map:
+
+- `segment_momentum`: recent comparable segment price trend after outlier filtering
+- `affordability`: wage growth, price-to-income, savings capacity, and buyer budget pressure
+- `supply`: completions, active inventory, unsold stock, and absorption
+- `credit`: real rates, mortgage availability, installment terms, refinancing risk
+- `fx`: exchange-rate pressure, inflation pass-through, and hard-asset demand
+- `rent`: rent yield, saved rent, rent growth, and rent-vs-buy pressure
+- `migration_security`: migration / IDP flows, regional safety, war intensity, infrastructure and energy risk
+- `liquidity`: days on market, price cuts, transaction activity, and stale-listing risk
+
+Treat these coefficients as priors, not universal constants. Recalibrate when a local historical backtest shows lower error, but do not tune to only one cherry-picked period.
+
 Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
 
 For credit purchases, include mortgage payment / monthly_payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include opportunity cost of cash.
