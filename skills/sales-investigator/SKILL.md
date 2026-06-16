@@ -82,7 +82,7 @@ When source dates are approximate, use the closest available publication date, l
 
 ## Requirement Fit and Variant Ranking
 
-Separate hard requirements from soft preferences. Hard requirements and deal-breakers are gates: reject or explicitly mark any exception, even when price is attractive.
+Separate hard requirements from soft preferences. Hard requirement failures must be rejected or explicitly marked as exceptions, even when price is attractive.
 
 For remaining options, build a ranked shortlist with a 0-100 fit score:
 
@@ -222,7 +222,7 @@ source_used_then
 source_used_for_actual
 ```
 
-Show predicted vs actual directly, not only a narrative summary.
+Show predicted vs actual and prediction error directly, not only a narrative summary.
 
 Prefer MAE, MAPE, or RMSE across several historical periods:
 
@@ -440,7 +440,7 @@ A sales investigation is complete only when:
 - best-fit variants are ranked against hard requirements and rejected variants have reasons
 - current market overview is dated and source recency is clear
 - prediction formula is explicit and economically grounded
-- formula precision is checked by backtest against historical actual results where possible
+- formula precision and confidence are checked by backtest against historical actual results where possible
 - legal and transaction risks are separated from price attractiveness
 - a clear recommendation is provided
 - the decision thresholds are stated

@@ -4,3 +4,4 @@ iteration	commit	target_metric	secondary_metrics	status	description	comparison
 2	4708f14	90	breakdown=variant_fit:17,forecast_formula:23,backtesting:17,current_overview:15,output_style:9,completion_criteria:9	keep	compress forecast and fit scoring guidance	improved
 3	6844576	91	breakdown=variant_fit:17,forecast_formula:24,backtesting:17,current_overview:15,output_style:9,completion_criteria:9	keep	shorten sales investigation guidance	improved
 4	7027d94	91	breakdown=variant_fit:17,forecast_formula:24,backtesting:17,current_overview:15,output_style:9,completion_criteria:9;words=1991	keep	trim duplicated sales guidance	tie-shorter
+5	16b442d	94	breakdown=variant_fit:18,forecast_formula:24,backtesting:18,current_overview:15,output_style:9,completion_criteria:10;words=1995	keep	add concise precision cues	improved
