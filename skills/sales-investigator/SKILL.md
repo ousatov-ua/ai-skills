@@ -185,7 +185,7 @@ For each scenario, explain the trigger conditions and likely price impact.
 Use an explicit probability-weighted forecast with real / nominal price growth and net rent when enough data exists:
 
 ```text
-real_price_growth = nominal_price_growth - inflation
+real price growth = nominal price growth - inflation
 expected_value =
   p_base * base_case_price
   + p_downside * downside_case_price
@@ -193,7 +193,7 @@ expected_value =
 expected_total_return =
   expected_price_change
   + net_rent_or_saved_rent
-  - transaction_costs
+  - transaction cost
   - maintenance_and_repair_costs
   - financing_costs
   - opportunity_cost_of_cash
@@ -222,7 +222,7 @@ source_used_then
 source_used_for_actual
 ```
 
-Show predicted vs actual and prediction error directly, not only a narrative summary.
+Show predicted vs actual, prediction error, and horizon-specific error band directly, not only a narrative summary.
 
 Prefer MAE, MAPE, or RMSE across several historical periods:
 
