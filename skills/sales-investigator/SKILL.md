@@ -272,6 +272,10 @@ optimistic_w_liquidity = 0.85
 optimistic_room_1 = 0.006
 optimistic_room_2 = 0.028
 optimistic_room_3 = -0.036
+optimistic_room_adjustment =
+  optimistic_room_1 when room_count = 1
+  optimistic_room_2 when room_count = 2
+  optimistic_room_3 when room_count >= 3
 optimistic_tier_adjustment = 0.000
 optimistic_condition_adjustment = 0.000
 
@@ -287,6 +291,10 @@ pessimistic_w_liquidity = 0.90
 pessimistic_room_1 = 0.006
 pessimistic_room_2 = 0.026
 pessimistic_room_3 = -0.032
+pessimistic_room_adjustment =
+  pessimistic_room_1 when room_count = 1
+  pessimistic_room_2 when room_count = 2
+  pessimistic_room_3 when room_count >= 3
 pessimistic_tier_adjustment = 0.000
 pessimistic_condition_adjustment = 0.000
 ```
