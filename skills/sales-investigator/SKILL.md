@@ -149,7 +149,7 @@ For current real estate questions, provide a dated current market overview befor
 
 - active listings / inventory count
 - median, interquartile price band, and practical buyer price band
-- source recency, data freshness, days on market / stale listing proxy
+- source recency and data freshness
 - price reductions, negotiation signals, rental prices, rent yield, and rent-vs-buy pressure
 - mortgage / credit availability, central bank rate, inflation, exchange rate, wages, and affordability
 - construction completions, supply, unsold stock, demand, migration / IDP flows, jobs, universities, and security
@@ -161,16 +161,7 @@ If current data is incomplete or old, label the overview as a proxy and explain 
 
 Forecast only from economic, demographic, sociological, and supply-demand factors.
 
-Use sources such as:
-
-- central bank forecasts and rates
-- inflation and GDP forecasts
-- mortgage and credit conditions
-- wage and affordability data
-- migration / IDP statistics
-- housing supply and construction completions
-- rental market data
-- regional security and infrastructure risks when relevant
+Use sources such as central bank forecasts/rates, inflation/GDP, credit, wages, migration/IDP, supply, rental data, and regional risk.
 
 Avoid speculative hype.
 
@@ -224,7 +215,7 @@ source_used_for_actual
 
 Show predicted vs actual, prediction error, and horizon-specific error band directly, not only a narrative summary.
 
-Prefer MAE, MAPE, or RMSE across several historical periods:
+Use MAE, MAPE, or RMSE:
 
 ```text
 MAPE = mean(abs(actual - predicted) / actual)

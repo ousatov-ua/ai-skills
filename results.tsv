@@ -8,3 +8,26 @@ iteration	commit	target_metric	secondary_metrics	status	description	comparison
 6	4486347	97	breakdown=variant_fit:19,forecast_formula:24,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1999	keep	add minimal fit and audit cues	improved
 7	fafc72b	98	breakdown=variant_fit:19,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2007	keep	strengthen forecast formula wording	improved
 8	33ac4f6	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2011	keep	restore compact weight constraint	improved
+9	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1994	discard	remove purpose sentence	superseded
+10	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1994	discard	remove current overview proxy warning	superseded
+11	INMEM	97	breakdown=variant_fit:18,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1979	discard	remove scorecard distinction sentence	worse
+12	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2005	discard	shorten overview bullet data freshness	superseded
+13	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2004	discard	remove sensitivity word	kept-prediction-detail
+14	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2005	discard	remove confidence interval word	kept-prediction-detail
+15	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1998	discard	remove future value sentence	kept-prediction-detail
+16	INMEM	96	breakdown=variant_fit:20,forecast_formula:25,backtesting:16,current_overview:15,output_style:10,completion_criteria:10;words=1937	discard	remove backtest calibration rules	worse
+17	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2007	discard	merge backtest metrics sentence	superseded
+18	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2011	discard	remove buy now total formula	kept-prediction-detail
+19	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1998	discard	remove wait total formula	kept-prediction-detail
+20	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1991	discard	remove weighted decision variant table	kept-fit-output
+21	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2017	discard	add prediction priority sentence	longer
+22	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2013	discard	add forecast horizon to output	longer
+23	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2013	discard	replace annual waiting cost formula	longer
+24	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2015	discard	add regime break warning	longer
+25	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1980	discard	shorten source list	superseded
+26	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1984	discard	remove legal output style	protected-adjacent
+27	INMEM	98	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:9;words=2006	discard	shorten completion criteria	worse
+28	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2011	discard	add MAPE threshold cue	longer
+29	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2014	discard	add downside risk phrase	longer
+30	INMEM	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=2013	discard	add insufficient precision output	longer
+31	HEAD	99	breakdown=variant_fit:20,forecast_formula:25,backtesting:19,current_overview:15,output_style:10,completion_criteria:10;words=1970	keep	apply compact non-prediction-risky shortening	tie-shorter
