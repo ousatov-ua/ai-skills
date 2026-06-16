@@ -96,7 +96,7 @@ fit_score =
   - risk_penalties
 ```
 
-Use user priorities when available; otherwise state assumed weights. Score each candidate against:
+Weights sum to 100. Use user priorities when available; otherwise state assumed weights. Score each candidate against:
 
 - requirement coverage and missing evidence
 - comparable price per m2 after outlier filtering
