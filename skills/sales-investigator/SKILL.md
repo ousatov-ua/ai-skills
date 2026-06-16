@@ -7,9 +7,7 @@ description: Use for evidence-based real estate purchase/sale investigation, pro
 
 ## Purpose
 
-Use this skill for high-stakes purchase or sale investigations where the user needs a pragmatic, evidence-based decision rather than emotional reassurance.
-
-The primary target is real estate, especially apartment purchase decisions, but the same discipline can apply to other large purchases when market data, financing, negotiation leverage, and legal risks matter.
+Use this skill for high-stakes purchase or sale investigations where the user needs a pragmatic, evidence-based decision.
 
 ## Core Behavior
 
@@ -82,6 +80,32 @@ For Ukrainian real estate analysis:
 
 When source dates are approximate, use the closest available publication date, listing date, or monthly period and state the assumption.
 
+## Requirement Fit and Variant Ranking
+
+Separate hard requirements from soft preferences. Hard requirement failures must be rejected or explicitly marked as exceptions, even when price is attractive.
+
+For remaining options, build a ranked shortlist with a 0-100 weighted fit score:
+
+```text
+fit_score =
+  hard_requirement_coverage * 40
+  + weighted_soft_preference_score * 25
+  + price_value_score * 15
+  + liquidity_resale_score * 10
+  + evidence_quality_score * 10
+  - risk_penalties
+```
+
+Weights sum to 100. Use user priorities when available; otherwise state assumed weights. Score each candidate against:
+
+- requirement coverage and missing evidence
+- comparable price per m2 after outlier filtering
+- renovation, floor, heating, building condition, location, source date, listing age, price cuts, and stale listing risk
+- legal, technical, financing, liquidity, and risk penalty
+- walk-away price and negotiation threshold
+
+Tie-breakers: lower legal risk, stronger evidence, better liquidity, lower all-in cost, and better downside protection. Output a scorecard / scoring table with best-fit variants, price-interesting compromises, and rejected variants with reject reason.
+
 ## Robust Statistics and Outlier Filtering
 
 Real estate prices often have a long right tail. Avoid simple averages when luxury objects can distort the result.
@@ -119,20 +143,25 @@ Exclude or separately label:
 
 If data is sparse, provide a confidence level and widen the range.
 
+## Current Market Overview
+
+For current real estate questions, provide a dated current market overview before forecasting.
+
+- active listings / inventory count
+- median, interquartile price band, and practical buyer price band
+- source recency and data freshness
+- price reductions, negotiation signals, rental prices, rent yield, and rent-vs-buy pressure
+- mortgage / credit availability, central bank rate, inflation, exchange rate, wages, and affordability
+- construction completions, supply, unsold stock, demand, migration / IDP flows, jobs, universities, and security
+- liquidity, confidence level, and missing data
+
+If current data is incomplete or old, label the overview as a proxy and explain the gap.
+
 ## Economic Forecasting
 
 Forecast only from economic, demographic, sociological, and supply-demand factors.
 
-Use sources such as:
-
-- central bank forecasts and rates
-- inflation and GDP forecasts
-- mortgage and credit conditions
-- wage and affordability data
-- migration / IDP statistics
-- housing supply and construction completions
-- rental market data
-- regional security and infrastructure risks when relevant
+Use sources such as central bank forecasts/rates, inflation/GDP, credit, wages, migration/IDP, supply, rental data, and regional risk.
 
 Avoid speculative hype.
 
@@ -143,6 +172,62 @@ Provide scenarios:
 - upside case
 
 For each scenario, explain the trigger conditions and likely price impact.
+
+Use an explicit probability-weighted forecast with real / nominal price growth and net rent when enough data exists:
+
+```text
+real price growth = nominal price growth - inflation
+expected_value =
+  p_base * base_case_price
+  + p_downside * downside_case_price
+  + p_upside * upside_case_price
+expected_total_return =
+  expected_price_change
+  + net_rent_or_saved_rent
+  - transaction cost
+  - maintenance_and_repair_costs
+  - financing_costs
+  - opportunity_cost_of_cash
+```
+
+Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
+
+For credit purchases, include mortgage payment / monthly_payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include opportunity cost of cash.
+
+Report an error band or confidence interval rather than a single-point prediction when evidence is noisy.
+
+### Forecast Backtesting
+
+Before trusting a formula, backtest and calibrate it where historical data exists. Use the same formula on past publication dates, then compare predicted results with actual realized prices or indexes for the same segment and 3-12 months forecast horizon.
+
+Minimum backtest table:
+
+```text
+forecast_date
+forecast_horizon_months
+predicted_price_or_change
+actual_price_or_change
+prediction_error
+absolute_error
+source_used_then
+source_used_for_actual
+```
+
+Show predicted vs actual, prediction error, and horizon-specific error band directly, not only a narrative summary.
+
+Use MAE, MAPE, or RMSE:
+
+```text
+MAPE = mean(abs(actual - predicted) / actual)
+```
+
+Calibration rules:
+
+- Do not tune the formula to one cherry-picked historical case.
+- Prefer out-of-sample or holdout periods when data allows.
+- If historical error is high, widen the forecast range and reduce confidence.
+- If the current situation is structurally different from the backtest period, state why the backtest may understate risk.
+- Treat prediction precision as insufficient when the error band is larger than the expected advantage of buying or waiting.
 
 ## Buy vs Wait Modeling
 
@@ -158,17 +243,13 @@ required_reserve_after_purchase
 available_credit
 credit_interest_cost
 expected_price_growth_or_decline
+expected_inflation
+expected_rent_change
+opportunity_cost_of_cash
+repair_or_furnishing_costs
 ```
 
-Calculate:
-
-- safe current buying capacity
-- aggressive current buying capacity
-- time needed to buy with credit
-- time needed to buy without credit
-- annual cost of waiting
-- break-even price decline needed to justify waiting
-- sensitivity to price growth, stagnation, and decline
+Calculate safe and aggressive buying capacity, time needed with/without credit, annual cost of waiting, break-even decline, expected value of buying now versus waiting, confidence interval / error band, and sensitivity to growth, stagnation, and decline.
 
 Use explicit formulas where helpful.
 
@@ -185,6 +266,26 @@ annual_waiting_cost = annual_rent + expected_price_growth_amount
 ```text
 break_even_decline = annual_rent / current_target_price
 ```
+
+buy_now_total_cost =
+  purchase_price
+  + transaction_costs
+  + repair_or_furnishing_costs
+  + credit_interest_cost
+  + maintenance_costs
+  - saved_rent
+```
+
+```text
+wait_total_cost =
+  future_purchase_price
+  + future_transaction_costs
+  + rent_paid_while_waiting
+  + risk_premium_for_worse_selection
+  - return_on_cash_while_waiting
+```
+
+Recommend waiting only when the probability-weighted wait_total_cost is lower than buy_now_total_cost by more than the forecast error band and transaction friction.
 
 ## Weighted Decision Matrix
 
@@ -203,6 +304,22 @@ Typical criteria:
 - exit liquidity
 
 Use weights that sum to 100.
+
+For individual property variants, use a compact scoring table:
+
+```text
+variant
+hard_requirement_status
+fit_score_0_100
+price_vs_comps
+expected_total_cost
+forecast_adjusted_value
+main_risks
+missing_evidence
+recommendation
+```
+
+A cheap option should not outrank a fitting option if it fails hard requirements.
 
 Compare options such as:
 
@@ -271,23 +388,28 @@ For market investigation:
 
 1. Assumptions
 2. Current market evidence
-3. Cleaned price ranges
-4. Segment matrix
-5. Trend analysis
-6. Forecast scenarios
-7. Risks
-8. Practical conclusion
+3. Current market overview
+4. Cleaned price ranges
+5. Segment matrix
+6. Ranked shortlist / best-fit variants
+7. Trend analysis
+8. Forecast scenarios
+9. Prediction audit / historical backtest when possible, including predicted vs actual, source dates, precision, and confidence
+10. Risks
+11. Practical conclusion
 
 For buy-vs-wait decisions:
 
 1. Hard constraints
 2. Realistic target price
-3. Current buying capacity
-4. Cost of waiting
-5. Credit impact
-6. Weighted decision matrix
-7. Recommendation
-8. Trigger thresholds
+3. Best-fit variants and rejected variants
+4. Current buying capacity
+5. Cost of waiting
+6. Credit impact
+7. Forecast formula and backtest precision
+8. Weighted decision matrix
+9. Recommendation
+10. Trigger thresholds
 
 For legal/transaction screening:
 
@@ -306,6 +428,10 @@ A sales investigation is complete only when:
 - prices are normalized and outliers are controlled
 - assumptions are explicit
 - financial trade-offs are quantified
+- best-fit variants are ranked against hard requirements and rejected variants have reasons
+- current market overview is dated and source recency is clear
+- prediction formula is explicit and economically grounded
+- formula precision and confidence are checked by backtest against historical actual results where possible
 - legal and transaction risks are separated from price attractiveness
 - a clear recommendation is provided
 - the decision thresholds are stated
