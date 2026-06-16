@@ -84,7 +84,7 @@ When source dates are approximate, use the closest available publication date, l
 
 Separate hard requirements from soft preferences. Hard requirement failures must be rejected or explicitly marked as exceptions, even when price is attractive.
 
-For remaining options, build a ranked shortlist with a 0-100 fit score:
+For remaining options, build a ranked shortlist with a 0-100 weighted fit score:
 
 ```text
 fit_score =
@@ -207,7 +207,7 @@ Report an error band or confidence interval rather than a single-point predictio
 
 ### Forecast Backtesting
 
-Before trusting a formula, backtest it where historical data exists. Use the same formula on past publication dates, then compare predicted results with actual realized prices or indexes for the same segment and 3-12 months forecast horizon.
+Before trusting a formula, backtest and calibrate it where historical data exists. Use the same formula on past publication dates, then compare predicted results with actual realized prices or indexes for the same segment and 3-12 months forecast horizon.
 
 Minimum backtest table:
 
@@ -403,7 +403,7 @@ For market investigation:
 6. Ranked shortlist / best-fit variants
 7. Trend analysis
 8. Forecast scenarios
-9. Prediction audit / historical backtest when possible, including predicted vs actual, source dates, and precision
+9. Prediction audit / historical backtest when possible, including predicted vs actual, source dates, precision, and confidence
 10. Risks
 11. Practical conclusion
 
