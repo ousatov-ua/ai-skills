@@ -98,30 +98,15 @@ fit_score =
   - risk_penalties
 ```
 
-Use weights that sum to 100 when the user gives priorities. Otherwise, state assumed weights.
-
-Score each candidate against:
+Use user priorities when available; otherwise state assumed weights. Score each candidate against:
 
 - requirement coverage and missing evidence
 - comparable price per m2 after outlier filtering
-- renovation, floor, heating, building condition, and location fit
-- source date, listing age, repeated price cuts, and stale listing risk
+- renovation, floor, heating, building condition, location, source date, listing age, price cuts, and stale listing risk
 - legal, technical, financing, liquidity, and risk penalty
 - walk-away price and negotiation threshold
 
-Tie-breakers:
-
-1. lower legal and transaction risk
-2. stronger comparable evidence
-3. better liquidity / resale depth
-4. lower total cost after repairs and transaction costs
-5. better downside protection
-
-The output should include a scorecard / scoring table and distinguish:
-
-- best-fit variants that satisfy requirements
-- price-interesting variants with meaningful compromises
-- rejected variants that do not fit requirements, with a reject reason
+Tie-breakers: lower legal risk, stronger evidence, better liquidity, lower all-in cost, and better downside protection. Output a scorecard / scoring table with best-fit variants, price-interesting compromises, and rejected variants with reject reason.
 
 ## Robust Statistics and Outlier Filtering
 
@@ -166,9 +151,9 @@ For current real estate questions, provide a current market overview before fore
 
 - active listings / inventory count
 - median, interquartile price band, and practical buyer price band
-- source recency, data freshness, days on market, and stale listing proxy
+- source recency, data freshness, days on market / stale listing proxy
 - price reductions, negotiation signals, rental prices, rent yield, and rent-vs-buy pressure
-- mortgage / credit availability, central bank rate, inflation, exchange rate, wage, and affordability pressure
+- mortgage / credit availability, central bank rate, inflation, exchange rate, wages, and affordability
 - construction completions, supply, unsold stock, demand, migration / IDP flows, jobs, universities, and security
 - liquidity, confidence level, and missing data
 
@@ -199,7 +184,7 @@ Provide scenarios:
 
 For each scenario, explain the trigger conditions and likely price impact.
 
-Use an explicit probability-weighted forecast when enough data exists:
+Use an explicit probability-weighted forecast with real / nominal price growth and net rent when enough data exists:
 
 ```text
 real_price_growth = nominal_price_growth - inflation
@@ -218,7 +203,7 @@ expected_total_return =
 
 Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
 
-For credit purchases, include mortgage payment / monthly_payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include opportunity cost of cash in deposits, bonds, business use, or another defensible alternative.
+For credit purchases, include mortgage payment / monthly_payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include opportunity cost of cash.
 
 Report an error band or confidence interval rather than a single-point prediction when evidence is noisy.
 
@@ -275,17 +260,7 @@ opportunity_cost_of_cash
 repair_or_furnishing_costs
 ```
 
-Calculate:
-
-- safe current buying capacity
-- aggressive current buying capacity
-- time needed to buy with credit
-- time needed to buy without credit
-- annual cost of waiting
-- break-even price decline needed to justify waiting
-- sensitivity to price growth, stagnation, and decline
-- expected value of buying now versus waiting
-- confidence interval / error band for the decision
+Calculate safe and aggressive buying capacity, time needed with/without credit, annual cost of waiting, break-even decline, expected value of buying now versus waiting, confidence interval / error band, and sensitivity to growth, stagnation, and decline.
 
 Use explicit formulas where helpful.
 
@@ -303,17 +278,6 @@ annual_waiting_cost = annual_rent + expected_price_growth_amount
 break_even_decline = annual_rent / current_target_price
 ```
 
-More complete decision formulas:
-
-```text
-net_wait_cost =
-  rent_paid
-  + expected_price_increase
-  + lost_best_variant_value
-  - interest_or_return_on_cash
-```
-
-```text
 buy_now_total_cost =
   purchase_price
   + transaction_costs
@@ -330,13 +294,6 @@ wait_total_cost =
   + rent_paid_while_waiting
   + risk_premium_for_worse_selection
   - return_on_cash_while_waiting
-```
-
-```text
-break_even_future_price =
-  buy_now_total_cost
-  - rent_paid_while_waiting
-  + return_on_cash_while_waiting
 ```
 
 Recommend waiting only when the probability-weighted wait_total_cost is lower than buy_now_total_cost by more than the forecast error band and transaction friction.
@@ -359,7 +316,7 @@ Typical criteria:
 
 Use weights that sum to 100.
 
-For individual property variants, use a scoring table:
+For individual property variants, use a compact scoring table:
 
 ```text
 variant
