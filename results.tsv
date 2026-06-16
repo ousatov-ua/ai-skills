@@ -1,2 +1,3 @@
 iteration	commit	target_metric	secondary_metrics	status	description	comparison
 0	4d110bb	41	breakdown=variant_fit:7,forecast_formula:11,backtesting:6,current_overview:12,output_style:3,completion_criteria:2	keep	baseline	baseline
+1	9f713fb	86	breakdown=variant_fit:17,forecast_formula:23,backtesting:17,current_overview:15,output_style:7,completion_criteria:7	keep	add variant ranking current overview forecast backtesting	improved
