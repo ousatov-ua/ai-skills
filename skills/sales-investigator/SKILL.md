@@ -84,9 +84,7 @@ When source dates are approximate, use the closest available publication date, l
 
 ## Requirement Fit and Variant Ranking
 
-When comparing available variants, first separate hard requirements from soft preferences.
-
-Hard requirements and deal-breakers are gates. A variant that violates a hard requirement must be rejected or explicitly marked as an exception, even if the price is attractive. Keep a rejection reason for every rejected option.
+Separate hard requirements from soft preferences. Hard requirements and deal-breakers are gates: reject or explicitly mark any exception, even when price is attractive.
 
 For remaining options, build a ranked shortlist with a 0-100 fit score:
 
@@ -100,7 +98,7 @@ fit_score =
   - risk_penalties
 ```
 
-Use weights that sum to 100 when the user gives explicit priorities. Otherwise, state the assumed weights.
+Use weights that sum to 100 when the user gives priorities. Otherwise, state assumed weights.
 
 Score each candidate against:
 
@@ -108,7 +106,7 @@ Score each candidate against:
 - comparable price per m2 after outlier filtering
 - renovation, floor, heating, building condition, and location fit
 - source date, listing age, repeated price cuts, and stale listing risk
-- legal, technical, financing, and liquidity penalties
+- legal, technical, financing, liquidity, and risk penalty
 - walk-away price and negotiation threshold
 
 Tie-breakers:
@@ -119,11 +117,11 @@ Tie-breakers:
 4. lower total cost after repairs and transaction costs
 5. better downside protection
 
-The output should distinguish:
+The output should include a scorecard / scoring table and distinguish:
 
 - best-fit variants that satisfy requirements
 - price-interesting variants with meaningful compromises
-- rejected variants that do not fit requirements
+- rejected variants that do not fit requirements, with a reject reason
 
 ## Robust Statistics and Outlier Filtering
 
@@ -164,24 +162,15 @@ If data is sparse, provide a confidence level and widen the range.
 
 ## Current Market Overview
 
-For current real estate questions, provide a current market overview before forecasting.
+For current real estate questions, provide a current market overview before forecasting. Include a dated snapshot such as "as of 2026-06-16" or the exact source date available.
 
-Include a dated snapshot such as "as of 2026-06-16" or the exact source date available from the evidence.
-
-Cover:
-
-- active listings / inventory count in the relevant segment
+- active listings / inventory count
 - median, interquartile price band, and practical buyer price band
-- source recency and data freshness
-- days on market or stale listing proxy when available
-- recent price reductions and negotiation signals
-- rental prices, rent yield, and rent-vs-buy pressure
-- mortgage / credit availability and central bank rate context
-- inflation, exchange rate, wage, and affordability pressure
-- construction completions, new supply, and unsold stock
-- demand drivers such as migration, IDP flows, employment, universities, or security conditions
-- liquidity: how easy the object should be to resell without a deep discount
-- confidence level and missing data
+- source recency, data freshness, days on market, and stale listing proxy
+- price reductions, negotiation signals, rental prices, rent yield, and rent-vs-buy pressure
+- mortgage / credit availability, central bank rate, inflation, exchange rate, wage, and affordability pressure
+- construction completions, supply, unsold stock, demand, migration / IDP flows, jobs, universities, and security
+- liquidity, confidence level, and missing data
 
 Do not present the market as current if source dates are old. If current data is incomplete, label the overview as a proxy and explain the gap.
 
@@ -227,15 +216,15 @@ expected_total_return =
   - opportunity_cost_of_cash
 ```
 
-For credit purchases, include mortgage payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include the opportunity cost of not keeping cash in deposits, bonds, business use, or another defensible alternative.
+Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
+
+For credit purchases, include mortgage payment / monthly_payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include opportunity cost of cash in deposits, bonds, business use, or another defensible alternative.
 
 Report an error band or confidence interval rather than a single-point prediction when evidence is noisy.
 
 ### Forecast Backtesting
 
-Before trusting a formula, backtest it where historical data exists.
-
-Use the same formula on past publication dates, then compare predicted results with actual realized prices or price indexes for the same segment and forecast horizon.
+Before trusting a formula, backtest it where historical data exists. Use the same formula on past publication dates, then compare predicted results with actual realized prices or indexes for the same segment and 3-12 months forecast horizon.
 
 Minimum backtest table:
 
@@ -249,6 +238,8 @@ absolute_error
 source_used_then
 source_used_for_actual
 ```
+
+Show predicted vs actual directly, not only a narrative summary.
 
 Prefer MAE, MAPE, or RMSE across several historical periods:
 
@@ -457,7 +448,7 @@ For market investigation:
 6. Ranked shortlist / best-fit variants
 7. Trend analysis
 8. Forecast scenarios
-9. Prediction audit / historical backtest when possible
+9. Prediction audit / historical backtest when possible, including predicted vs actual, source dates, and precision
 10. Risks
 11. Practical conclusion
 
@@ -491,10 +482,10 @@ A sales investigation is complete only when:
 - prices are normalized and outliers are controlled
 - assumptions are explicit
 - financial trade-offs are quantified
-- variants are ranked against hard requirements and rejected variants have reasons
+- best-fit variants are ranked against hard requirements and rejected variants have reasons
 - current market overview is dated and source recency is clear
 - prediction formula is explicit and economically grounded
-- forecast precision is checked against historical actuals where possible
+- formula precision is checked by backtest against historical actual results where possible
 - legal and transaction risks are separated from price attractiveness
 - a clear recommendation is provided
 - the decision thresholds are stated
