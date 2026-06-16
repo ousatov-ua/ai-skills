@@ -43,6 +43,25 @@ For current market, legal, macroeconomic, credit, or pricing questions, use up-t
 
 Ask questions only if ambiguity blocks meaningful progress. Otherwise, state assumptions briefly and continue.
 
+## Required Inputs
+
+When the user asks for a prediction, market investigation, buy-vs-wait analysis, or negotiation view, first identify the minimum missing inputs.
+
+Minimum useful inputs:
+
+- city, district, neighborhood, or target area
+- property type and market: apartment, house, primary market, or secondary market
+- room count, area range, building age, floor constraints, renovation state, heating, parking, balcony, elevator, and other hard requirements
+- target budget, currency, and acceptable price range
+- decision goal: buy now, wait, sell, negotiate, reject, or compare options
+- forecast horizon, for example 3, 6, or 12 months
+- candidate listings or selected segment prices, if the user already has them
+- cash available, monthly savings, current rent, credit availability, interest rate, reserve requirement, and repair/furnishing budget for buy-vs-wait analysis
+- hard requirements, soft preferences, deal-breakers, and risk tolerance
+- legal or transaction concerns, such as registered residents, minors, ownership shares, inheritance, mortgage, arrest, or layout mismatch
+
+If an input is missing but can be sourced or reasonably modeled, proceed with explicit assumptions. Ask the user only for missing facts that materially change the decision or cannot be sourced.
+
 ## Real Estate Segmentation
 
 When analyzing apartments, preserve all user-requested segmentation dimensions.
