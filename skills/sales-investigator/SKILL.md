@@ -190,46 +190,86 @@ expected_total_return =
   - opportunity_cost_of_cash
 ```
 
-When a numeric forecast is needed, start from a calibrated factor formula rather than a single market-growth guess:
+When a numeric forecast is needed, use calibrated pessimistic and optimistic factor formulas rather than a single market-growth guess.
 
 ```text
-forecast_nominal_change =
+error_band =
+  0.03 when evidence is strong, recent, segment-specific, and backtest MAPE is near or below 1%
+  0.04 as the default calibrated band
+  0.05 when data is sparse, the segment is noisy, or war/security/liquidity risk is material
+
+optimistic_change =
   clamp(-0.30, 0.35,
+    error_band
+    +
     horizon_years * (
-      intercept
-      + w_momentum * segment_momentum
-      + w_affordability * affordability
-      + w_supply * supply
-      + w_credit * credit
-      + w_fx * fx
-      + w_rent * rent
-      + w_migration_security * migration_security
-      + w_liquidity * liquidity
-      + room_adjustment
-      + tier_adjustment
-      + condition_adjustment
+      optimistic_intercept
+      + optimistic_w_momentum * segment_momentum
+      + optimistic_w_affordability * affordability
+      + optimistic_w_supply * supply
+      + optimistic_w_credit * credit
+      + optimistic_w_fx * fx
+      + optimistic_w_rent * rent
+      + optimistic_w_migration_security * migration_security
+      + optimistic_w_liquidity * liquidity
+      + optimistic_room_adjustment
+      + optimistic_tier_adjustment
+      + optimistic_condition_adjustment
     )
   )
 
-predicted_price = current_clean_price * (1 + forecast_nominal_change)
+pessimistic_change =
+  clamp(-0.30, 0.35,
+    -error_band
+    +
+    horizon_years * (
+      pessimistic_intercept
+      + pessimistic_w_momentum * segment_momentum
+      + pessimistic_w_affordability * affordability
+      + pessimistic_w_supply * supply
+      + pessimistic_w_credit * credit
+      + pessimistic_w_fx * fx
+      + pessimistic_w_rent * rent
+      + pessimistic_w_migration_security * migration_security
+      + pessimistic_w_liquidity * liquidity
+      + pessimistic_room_adjustment
+      + pessimistic_tier_adjustment
+      + pessimistic_condition_adjustment
+    )
+  )
 
-intercept = 0.000
-w_momentum = 1.00
-w_affordability = 1.00
-w_supply = 1.00
-w_credit = 1.00
-w_fx = 1.10
-w_rent = 1.00
-w_migration_security = 0.75
-w_liquidity = 0.85
-room_1 = 0.006
-room_2 = 0.016
-room_3 = -0.026
-premium = 0.000
-mid = 0.000
-budget = 0.000
-renovated = 0.000
-unrenovated = 0.000
+optimistic_price = current_clean_price * (1 + optimistic_change)
+pessimistic_price = current_clean_price * (1 + pessimistic_change)
+
+optimistic_intercept = 0.000
+optimistic_w_momentum = 1.00
+optimistic_w_affordability = 0.95
+optimistic_w_supply = 1.00
+optimistic_w_credit = 1.00
+optimistic_w_fx = 1.20
+optimistic_w_rent = 1.00
+optimistic_w_migration_security = 0.80
+optimistic_w_liquidity = 0.85
+optimistic_room_1 = 0.006
+optimistic_room_2 = 0.028
+optimistic_room_3 = -0.036
+optimistic_tier_adjustment = 0.000
+optimistic_condition_adjustment = 0.000
+
+pessimistic_intercept = 0.000
+pessimistic_w_momentum = 1.00
+pessimistic_w_affordability = 1.00
+pessimistic_w_supply = 1.05
+pessimistic_w_credit = 1.15
+pessimistic_w_fx = 1.10
+pessimistic_w_rent = 1.00
+pessimistic_w_migration_security = 0.75
+pessimistic_w_liquidity = 0.90
+pessimistic_room_1 = 0.006
+pessimistic_room_2 = 0.026
+pessimistic_room_3 = -0.032
+pessimistic_tier_adjustment = 0.000
+pessimistic_condition_adjustment = 0.000
 ```
 
 Score each input as an annual price-change contribution in decimal form, using only information available at the forecast date. For example, `0.04` means about +4% annual pressure and `-0.02` means about -2% annual pressure. Map:
@@ -243,7 +283,7 @@ Score each input as an annual price-change contribution in decimal form, using o
 - `migration_security`: migration / IDP flows, regional safety, war intensity, infrastructure and energy risk
 - `liquidity`: days on market, price cuts, transaction activity, and stale-listing risk
 
-Treat these coefficients as priors, not universal constants. Recalibrate when a local historical backtest shows lower error, but do not tune to only one cherry-picked period.
+Treat these coefficients as priors, not universal constants. Recalibrate when a local historical backtest shows lower error, but do not tune to only one cherry-picked period. Use a wider band than 5% when the historical backtest error, bid-ask gap, sparse data, or war/security shock risk is larger than the default band.
 
 Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
 
