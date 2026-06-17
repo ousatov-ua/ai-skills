@@ -14,9 +14,9 @@ description: >-
 
 ## Resources
 
-** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+**If a required resource cannot be fetched, ask the user to paste it; do not continue without it.**
 
-** If resource is already fetched, skip re-fetching **
+**If a resource is already fetched, skip re-fetching.**
 
 ### Requires
 
@@ -25,20 +25,17 @@ description: >-
 
 ### On Demand
 
-- Skill `sonar-reviwer` from `_ROOT_/skills/sonar-reviwer/SKILL.md`
+- Skill `sonar-reviewer` from `__ROOT__/skills/sonar-reviewer/SKILL.md`
 
 ## Use
 
 Review code changes — PRs, commits, patches, implementations — as a senior
 engineer doing an evidence-based production review.
 
-Requires `general.md` and `engineering.md`. If either is not already
-loaded, fetch it.
-
-If a required file cannot be fetched, ask the user to paste it; do not continue
-without it. Testing and validation expectations come from
-`engineering.md`; this skill adds the review process below on top of
-that baseline.
+Instruction precedence, project conventions, validation expectations, patch
+hygiene, and change-scope rules come from `engineering.md`; this skill adds the
+review process, severity model, performance-evidence rules, and review output
+shape below.
 
 ## Behavior
 
@@ -56,9 +53,9 @@ that baseline.
    assumptions.
 2. Validate correctness: requirements, business logic, edge and error cases,
    null handling, data consistency, failure scenarios.
-3. Validate test coverage against the shared expectations: new behavior,
-   regressions, edge and failure cases, existing-behavior protection.
-   Flag missing critical coverage.
+3. Validate test coverage against `engineering.md` expectations: new behavior,
+   regressions, edge and failure cases, existing-behavior protection. Flag
+   missing critical coverage.
 4. Review maintainability and reliability: complexity, responsibility, naming,
    duplication, separation of concerns, failure handling, justified retries,
    concurrency, state transitions. Flag abstractions without demonstrated
@@ -68,12 +65,13 @@ that baseline.
 6. Review performance only for hot paths, large datasets, high throughput, or
    obvious inefficiencies; no speculative micro-optimizations. Back any
    performance claim per Performance Evidence.
-7. Verify the change fits project conventions; flag new frameworks, patterns,
-   or conventions introduced without strong justification.
-8. For refactorings: behavior unchanged, tests protect it, complexity reduced;
-   reject risky refactoring without meaningful benefit.
-9. For local/current-change reviews, apply the worktree-hygiene checks from
-   `engineering.md` (untracked files, accidental artifacts).
+7. Check conventions and change scope per `engineering.md`; flag unjustified
+   new frameworks, patterns, broad rewrites, dependency changes, or convention
+   drift.
+8. For refactorings: behavior unchanged, tests protect it, complexity or risk
+   reduced; reject risky refactoring without meaningful benefit.
+9. For local/current-change reviews, apply `engineering.md` patch-hygiene
+   checks.
 10. Delegate to `sonar-reviewer` when static-analysis cleanup applies.
 11. Produce prioritized findings.
 
