@@ -34,9 +34,10 @@ Implementation, investigation, debugging, refactoring, bug fixing,
 troubleshooting. Goal: understand existing code, find root causes, implement
 focused production-ready fixes, verify them, and report risks.
 
-Conventions, testing, validation, patch hygiene, Java rules, commit messages,
-and general engineering workflow come from `engineering.md`; this skill adds
-implementation and debugging rules below on top of that baseline.
+Conventions, testing, validation, discovery and command hygiene, patch hygiene,
+Java rules, commit messages, and general engineering workflow come from
+`engineering.md`; this skill adds implementation and debugging rules below on
+top of that baseline.
 
 ## Workflow
 
@@ -56,17 +57,6 @@ implementation and debugging rules below on top of that baseline.
 8. Report using the matching output shape, including risks.
 
 Do not stop at analysis when enough information exists to act.
-
-## Context and Discovery
-
-- Keep context small: inspect focused files first, avoid broad repository scans
-  unless needed, and summarize findings before expanding scope.
-- Prefer repository-native navigation and available indexing/search tools for
-  discovery, then verify important facts in source files before editing.
-- Use scoped shell commands with explicit paths when possible; avoid noisy
-  commands that dump excessive logs.
-- Keep final handoff compact and evidence-based: changed files, tests run,
-  validation result, risks, and anything intentionally skipped.
 
 ## Principles
 
