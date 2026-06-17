@@ -17,10 +17,6 @@ description: >-
 
 ** If resource is already fetched, skip re-fetching **
 
-### Requires
-
-- `general.md` from `__ROOT__/general.md`
-
 ### On Demand
 
 - Fresh public examples, platform changes, profile/recruiting trends, or comparable

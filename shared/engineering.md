@@ -4,16 +4,15 @@
 
 **If a resource is already fetched, skip re-fetching.**
 
-**BLOCKING:** Fetch and follow `__ROOT__/shared/compress.md`. For engineering tasks, final handoffs and progress updates are not “prose explanation” unless the user explicitly asks for an explanation. If it cannot be loaded, ask the user to paste it.
-
 ### Requires
 
 - `general.md` from `__ROOT__/general.md`
+- `compress.md` from `__ROOT__/shared/compress.md`
+- Skill `ponytail` from `__ROOT__/skills/ponytail/SKILL.md`
 
 ### On Demand
 
 - Skill `sonar-reviewer` from `__ROOT__/skills/sonar-reviewer/SKILL.md`
-- Skill `ponytail` from `__ROOT__/skills/ponytail/SKILL.md`
 - **Only for Maven projects:** `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` — to run Maven verification.
 
 ## Engineering Baseline

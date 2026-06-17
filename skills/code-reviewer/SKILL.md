@@ -20,7 +20,6 @@ description: >-
 
 ### Requires
 
-- `general.md` from `__ROOT__/general.md`
 - `engineering.md` from `__ROOT__/shared/engineering.md`
 
 ### On Demand
