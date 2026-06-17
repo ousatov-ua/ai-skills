@@ -14,9 +14,9 @@ description: >-
 
 ## Resources
 
-** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+**If a required resource cannot be fetched, ask the user to paste it; do not continue without it.**
 
-** If resource is already fetched, skip re-fetching **
+**If a resource is already fetched, skip re-fetching.**
 
 ### Requires
 
@@ -25,14 +25,17 @@ description: >-
 
 ### On Demand
 
+- None.
+
 ## Use
 
 Review changed or added code/tests for likely SonarQube, SonarLint, or
 equivalent static-analysis issues and resolve practical findings before
 implementation work is complete.
 
-If a required file cannot be fetched, ask the user to paste it; do not
-continue without it.
+Instruction precedence, validation evidence, patch hygiene, Maven verification,
+and change-scope rules come from `engineering.md`; this skill adds
+static-analysis cleanup rules and suppression policy below.
 
 ## Scope
 
@@ -81,10 +84,10 @@ known.
    findings.
 3. Fix clear issues, or report them when review-only.
 4. Apply the Suppression Policy to intentional or better-left-as-is issues.
-5. Before the final response: run formatting if available, run relevant
-   tests per `engineering.md` (Maven through `maven-summary.sh`), and
-   search changed/added files for obvious patterns such as `{}`, setup
-   inside `assertThrows`, manual close patterns, and reflection in tests.
+5. Before final response: run relevant formatting/tests per `engineering.md`,
+   then search changed/added files for obvious Sonar-prone patterns such as
+   `{}`, setup inside `assertThrows`, manual close patterns, and reflection in
+   tests.
 6. Report fixed issues, suppressions, remaining concerns, skipped
    verification, and unresolved Sonar issues with reasons.
 
