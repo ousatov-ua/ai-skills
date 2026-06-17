@@ -52,6 +52,13 @@ For implementation, debugging, refactoring, review, and static-analysis tasks:
 
 Do not stop at analysis when enough information exists to act.
 
+## Discovery and Command Hygiene
+
+- Keep context focused: inspect targeted files first, avoid broad repository scans unless needed, and summarize findings before expanding scope.
+- Prefer repository-native navigation, search, indexing, or RAG tools when available; verify important facts in source files before editing or reporting.
+- Use scoped shell commands with explicit paths when possible; avoid noisy commands that dump excessive logs.
+- Treat generated summaries, compressed logs, and search snippets as leads, not proof. Confirm important claims with source files, exit status, reports, artifacts, named tests, or focused full logs.
+
 ## Change Scope
 
 - Follow existing project conventions, architecture, naming, testing, and error handling before personal preferences.
@@ -97,7 +104,7 @@ Before completion:
 
 - Default to Java 25 LTS and Maven unless the repository or user request says otherwise.
 - New classes: add a short class-level Javadoc with `@author Oleksii Usatov`.
-- New public methods: add brief Javadoc.
+- New public methods: add brief Javadoc when project style supports public API documentation.
 - Do not add `@author` to classes that are only being modified.
 - Never embed SQL, Cypher, or similar query languages in Java production source; keep them in `.sql`, `.cypher`, or equivalent resource files.
 - Exception: queries inside tests are allowed.
