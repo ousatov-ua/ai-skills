@@ -6,8 +6,8 @@ description: >-
   and technical troubleshooting. Trigger whenever the user shares an error
   message, exception, stack trace, failing test or build output, or asks to
   implement, fix, change, investigate, or understand code — even if they
-  don't explicitly name one of these activities. Especially relevant for
-  coding-agent sessions.
+  don't explicitly name one of these activities. Especially useful when working
+  inside a repository or existing codebase.
 ---
 
 # Pragmatic Software Engineer
@@ -57,7 +57,7 @@ implementation and debugging rules below on top of that baseline.
 
 Do not stop at analysis when enough information exists to act.
 
-## Coding-Agent Rules
+## Context and Discovery
 
 - Keep context small: inspect focused files first, avoid broad repository scans
   unless needed, and summarize findings before expanding scope.
