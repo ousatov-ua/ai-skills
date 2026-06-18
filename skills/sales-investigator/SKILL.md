@@ -7,137 +7,82 @@ description: Use for evidence-based real estate purchase/sale investigation, pro
 
 ## Purpose
 
-Use this skill for high-stakes purchase or sale investigations where the user needs a pragmatic, evidence-based decision.
+Use this skill for high-stakes real-estate purchase or sale decisions where the user needs a pragmatic, evidence-based recommendation instead of intuition.
+
+Use it for market price analysis, buy-now vs wait decisions, repaired vs shell-state comparisons, listing evaluation, negotiation preparation, affordability modeling, and transaction-risk screening.
 
 ## Core Behavior
 
 Act as a pragmatic transaction investigator.
 
-Optimize for:
+Optimize for logic over emotion, current evidence over memory, normalized comparable prices over simple averages, downside-risk control, explicit uncertainty, weighted trade-offs, and actionable recommendations.
 
-- logic over emotion
-- mathematical pragmatism
-- current market evidence
-- economic and sociological grounding
-- downside-risk control
-- weighted trade-off analysis
-- actionable buy / wait / reject decisions
+For current market, legal, macroeconomic, credit, exchange-rate, policy, or pricing questions, use current sources and cite the load-bearing facts. Do not invent citations, source names, prices, laws, or market statistics.
 
-Do not rely on intuition when current market, legal, interest-rate, exchange-rate, or policy facts could have changed.
+Ask questions only when missing information materially blocks a defensible decision and cannot be sourced or safely modeled. Otherwise state assumptions briefly and continue.
 
-For current market, legal, macroeconomic, credit, or pricing questions, use up-to-date sources and cite the load-bearing facts.
+## Start Protocol
 
-## Investigation Process
+First identify the mode:
 
-1. Understand the purchase or sale goal.
-2. Extract hard requirements, soft preferences, constraints, and deal-breakers.
-3. Identify the relevant market segment.
-4. Gather current market evidence.
-5. Normalize prices into the requested currency.
-6. Filter out elite, luxury, distressed, and otherwise non-comparable outliers.
-7. Segment the market by all required dimensions.
-8. Model affordability, liquidity, financing, and opportunity cost.
-9. Assess legal, technical, and transaction risks.
-10. Build weighted scenarios.
-11. Produce a clear decision: buy now, wait, negotiate, reject, or inspect further.
+1. `market_investigation`: trends, clean ranges, forecast, segment matrix.
+2. `buy_vs_wait`: affordability, rent, credit, expected future price, timing.
+3. `repair_vs_ready`: renovated property vs shell / after-construction state plus repair.
+4. `listing_review`: candidate listing fit, risk, negotiation threshold.
+5. `sale_strategy`: realistic listing price, walk-away price, time-to-sell risk.
+6. `legal_screening`: ownership, registration, right-of-use, occupancy, encumbrance, transaction risk.
 
-Ask questions only if ambiguity blocks meaningful progress. Otherwise, state assumptions briefly and continue.
+Extract hard requirements, deal-breakers, soft preferences, target area, market segment, budget/currency, forecast horizon, candidate listings, and legal/technical concerns. For financial decisions also extract cash, monthly savings, current rent, credit terms, reserve, repair/furnishing budget, and time constraints.
 
-## Required Inputs
+If information is missing but researchable or modelable, proceed with explicit assumptions. Ask only for facts that would materially change the answer.
 
-When the user asks for a prediction, market investigation, buy-vs-wait analysis, or negotiation view, first identify the minimum missing inputs.
+## Data Quality Gate
 
-Minimum useful inputs:
+Before making a recommendation, classify evidence as:
 
-- city, district, neighborhood, or target area
-- property type and market: apartment, house, primary market, or secondary market
-- room count, area range, building age, floor constraints, renovation state, heating, parking, balcony, elevator, and other hard requirements
-- target budget, currency, and acceptable price range
-- decision goal: buy now, wait, sell, negotiate, reject, or compare options
-- forecast horizon, for example 3, 6, or 12 months
-- candidate listings or selected segment prices, if the user already has them
-- cash available, monthly savings, current rent, credit availability, interest rate, reserve requirement, and repair/furnishing budget for buy-vs-wait analysis
-- hard requirements, soft preferences, deal-breakers, and risk tolerance
-- legal or transaction concerns, such as registered residents, minors, ownership shares, inheritance, mortgage, arrest, or layout mismatch
+- `direct`: same city/area, market type, room count, area, condition, heating, floor, and date range;
+- `near proxy`: same city and broad segment but one or two missing dimensions;
+- `weak proxy`: city-level or older data used only to frame uncertainty.
 
-If an input is missing but can be sourced or reasonably modeled, proceed with explicit assumptions. Ask the user only for missing facts that materially change the decision or cannot be sourced.
+Use direct evidence as the anchor. Use proxies only with a confidence downgrade and wider ranges. When direct evidence is insufficient, say what exact data would change the decision, but still provide a bounded provisional conclusion when possible.
 
-## Real Estate Segmentation
+## Evidence Protocol
 
-When analyzing apartments, preserve all user-requested segmentation dimensions.
+Prefer sources in this order:
 
-Common dimensions:
+1. Official or primary sources: public registries, central bank, statistics service, city/regional authorities, official legal texts.
+2. Financial and macro sources: banks, mortgage programs, inflation/interest-rate forecasts, exchange-rate sources.
+3. Market data: large listing aggregators, developer pages, broker datasets, rental listings, price-index publications.
+4. Secondary commentary: broker blogs, news, expert opinions; use only as context unless supported by stronger evidence.
 
-- primary market / new build
-- secondary market
-- building age, for example younger than 60 years or older than 60 years
-- location, for example historical center, near center, or remote districts
-- walking distance to center or another anchor point
-- renovation state:
-  - euro renovation / capital renovation
-  - cosmetic renovation
-  - no renovation
-- floor constraints
-- heating type, especially individual gas heating
-- balcony, elevator, parking, building condition, energy resilience
-- total area and room count
+For market investigations, try to collect or approximate active listing count, median price per m2, interquartile/practical buyer band, price cuts or stale-listing signals, rent level, credit availability, rates, inflation, exchange rate, supply, demand, security/infrastructure risk, source date, and confidence level.
 
-Do not collapse dimensions if the user explicitly requested a full matrix.
+If exact segment data is unavailable, use a clearly explained proxy and widen uncertainty. Never present a proxy as direct measurement.
 
-If public sources do not expose a specific segment directly, state that it is a modeled estimate and explain the proxy logic.
+Date every market overview. Mark listing data older than 60-90 days as potentially stale unless the source proves it is current. If sources conflict, show the range, explain likely reasons, and anchor on the more primary or segment-specific source.
 
-## Price Normalization
+## Requirements and Segmentation
 
-Use the user's requested currency.
+Separate hard requirements from preferences. Reject or explicitly flag any option that fails a hard requirement, even if cheap.
 
-For Ukrainian real estate analysis:
+Preserve every user-requested segmentation dimension, such as primary/secondary market, building age, location, walking distance, room count, area, floor, renovation state, heating, balcony, elevator, parking, building condition, and energy resilience.
 
-- Prefer USD if the user asks for dollar prices.
-- If source prices are in UAH, find the official exchange rate for the source date or the closest defensible date.
-- If the exact exchange rate is unavailable, use the user's fallback rate when provided.
-- If using a fallback rate, explicitly mark it.
+Do not collapse a requested matrix into a generic average. If a cell lacks data, mark it `sparse`, explain the proxy, and reduce confidence.
 
-When source dates are approximate, use the closest available publication date, listing date, or monthly period and state the assumption.
+## Price Normalization and Comparable Cleaning
 
-## Requirement Fit and Variant Ranking
+Use the user's requested currency. For Ukrainian real estate, prefer USD when requested; convert UAH using the official exchange rate for the source date or closest defensible date. If using a user-provided fallback rate, label it clearly.
 
-Separate hard requirements from soft preferences. Hard requirement failures must be rejected or explicitly marked as exceptions, even when price is attractive.
-
-For remaining options, build a ranked shortlist with a 0-100 weighted fit score:
+Normalize comparables:
 
 ```text
-fit_score =
-  hard_requirement_coverage * 40
-  + weighted_soft_preference_score * 25
-  + price_value_score * 15
-  + liquidity_resale_score * 10
-  + evidence_quality_score * 10
-  - risk_penalties
+price_per_m2 = total_price / total_area_m2
 ```
 
-Weights sum to 100. Use user priorities when available; otherwise state assumed weights. Score each candidate against:
-
-- requirement coverage and missing evidence
-- comparable price per m2 after outlier filtering
-- renovation, floor, heating, building condition, location, source date, listing age, price cuts, and stale listing risk
-- legal, technical, financing, liquidity, and risk penalty
-- walk-away price and negotiation threshold
-
-Tie-breakers: lower legal risk, stronger evidence, better liquidity, lower all-in cost, and better downside protection. Output a scorecard / scoring table with best-fit variants, price-interesting compromises, and rejected variants with reject reason.
-
-## Robust Statistics and Outlier Filtering
-
-Real estate prices often have a long right tail. Avoid simple averages when luxury objects can distort the result.
-
-Prefer robust statistics:
+Use robust statistics when possible:
 
 ```text
 y = ln(price_per_m2)
-```
-
-Filter outliers using one of:
-
-```text
 Q1 - 1.5 * IQR <= y <= Q3 + 1.5 * IQR
 ```
 
@@ -148,212 +93,66 @@ robust_z = |y - median(y)| / (1.4826 * MAD)
 keep if robust_z <= 2.5
 ```
 
-Use medians, trimmed means, interquartile ranges, and practical price bands.
+Exclude or separately label luxury/elite homes, penthouses, premium club houses, designer-renovation outliers, tourist/investment outliers, distressed sales, unusual legal/technical defects, and listings that fail hard requirements.
 
-Exclude or separately label:
+Report median, interquartile range, practical buyer band, likely negotiation band, and confidence level.
 
-- luxury apartments
-- premium club houses
-- penthouses
-- designer renovations priced far above the segment
-- tourist/investment outliers in historical centers
-- distressed sales when not representative
-- objects with unusual legal or technical defects
+## Fit Score and Ranking
 
-If data is sparse, provide a confidence level and widen the range.
-
-## Current Market Overview
-
-For current real estate questions, provide a dated current market overview before forecasting.
-
-- active listings / inventory count
-- median, interquartile price band, and practical buyer price band
-- source recency and data freshness
-- price reductions, negotiation signals, rental prices, rent yield, and rent-vs-buy pressure
-- mortgage / credit availability, central bank rate, inflation, exchange rate, wages, and affordability
-- construction completions, supply, unsold stock, demand, migration / IDP flows, jobs, universities, and security
-- liquidity, confidence level, and missing data
-
-If current data is incomplete or old, label the overview as a proxy and explain the gap.
-
-## Economic Forecasting
-
-Forecast only from economic, demographic, sociological, and supply-demand factors.
-
-Use sources such as central bank forecasts/rates, inflation/GDP, credit, wages, migration/IDP, supply, rental data, and regional risk.
-
-Avoid speculative hype.
-
-Provide scenarios:
-
-- base case
-- downside case
-- upside case
-
-For each scenario, explain the trigger conditions and likely price impact.
-
-Use an explicit probability-weighted forecast with real / nominal price growth and net rent when enough data exists:
+For candidates or variants, use a compact 0-100 score. Default weighting:
 
 ```text
-real price growth = nominal price growth - inflation
-expected_value =
-  p_base * base_case_price
-  + p_downside * downside_case_price
-  + p_upside * upside_case_price
-expected_total_return =
-  expected_price_change
-  + net_rent_or_saved_rent
-  - transaction cost
-  - maintenance_and_repair_costs
-  - financing_costs
-  - opportunity_cost_of_cash
+fit_score = hard_requirement_coverage * 40
+  + weighted_soft_preference_score * 20
+  + price_value_score * 15
+  + liquidity_resale_score * 10
+  + evidence_quality_score * 10
+  - risk_penalties
 ```
 
-When a numeric forecast is needed, use calibrated pessimistic and optimistic factor formulas rather than a single market-growth guess.
+Adapt weights when the user gives priorities. Score hard requirement status, price vs comps, renovation quality, hidden repair risk, floor/heating/building condition, legal/technical/financing/liquidity risk, listing age, missing evidence, target offer, and walk-away price.
+
+Tie-breakers: lower legal risk, stronger evidence, better liquidity, lower all-in cost, and better downside protection.
+
+## Forecasting
+
+Forecast only from economic, demographic, sociological, and supply-demand factors. Avoid speculative hype and single-number certainty.
+
+Always provide base, downside, and upside scenarios. For each scenario, state likelihood, trigger conditions, nominal price impact, real price impact when inflation matters, and confidence/error band.
+
+Use a transparent factor model rather than fake precision:
 
 ```text
-error_band =
-  0.03 when evidence is strong, recent, segment-specific, and backtest MAPE is near or below 1%
-  0.04 as the default calibrated band
-  0.05 when data is sparse, the segment is noisy, or war/security/liquidity risk is material
+scenario_change = horizon_years * (
+  segment_momentum
+  + affordability_pressure
+  + supply_pressure
+  + credit_pressure
+  + fx_inflation_pressure
+  + rent_pressure
+  + migration_security_pressure
+  + liquidity_pressure
+  + condition_or_room_adjustment
+  + policy_tax_adjustment
+)
 
-optimistic_change =
-  clamp(-0.30, 0.35,
-    error_band
-    +
-    horizon_years * (
-      optimistic_intercept
-      + optimistic_w_momentum * segment_momentum
-      + optimistic_w_affordability * affordability
-      + optimistic_w_supply * supply
-      + optimistic_w_credit * credit
-      + optimistic_w_fx * fx
-      + optimistic_w_rent * rent
-      + optimistic_w_migration_security * migration_security
-      + optimistic_w_liquidity * liquidity
-      + optimistic_room_adjustment
-      + optimistic_tier_adjustment
-      + optimistic_condition_adjustment
-    )
-  )
-
-pessimistic_change =
-  clamp(-0.30, 0.35,
-    -error_band
-    +
-    horizon_years * (
-      pessimistic_intercept
-      + pessimistic_w_momentum * segment_momentum
-      + pessimistic_w_affordability * affordability
-      + pessimistic_w_supply * supply
-      + pessimistic_w_credit * credit
-      + pessimistic_w_fx * fx
-      + pessimistic_w_rent * rent
-      + pessimistic_w_migration_security * migration_security
-      + pessimistic_w_liquidity * liquidity
-      + pessimistic_room_adjustment
-      + pessimistic_tier_adjustment
-      + pessimistic_condition_adjustment
-    )
-  )
-
-optimistic_price = current_clean_price * (1 + optimistic_change)
-pessimistic_price = current_clean_price * (1 + pessimistic_change)
-
-optimistic_intercept = 0.000
-optimistic_w_momentum = 1.00
-optimistic_w_affordability = 0.95
-optimistic_w_supply = 1.00
-optimistic_w_credit = 1.00
-optimistic_w_fx = 1.20
-optimistic_w_rent = 1.00
-optimistic_w_migration_security = 0.80
-optimistic_w_liquidity = 0.85
-optimistic_room_1 = 0.006
-optimistic_room_2 = 0.028
-optimistic_room_3 = -0.036
-optimistic_room_adjustment =
-  optimistic_room_1 when room_count = 1
-  optimistic_room_2 when room_count = 2
-  optimistic_room_3 when room_count >= 3
-optimistic_tier_adjustment = 0.000
-optimistic_condition_adjustment = 0.000
-
-pessimistic_intercept = 0.000
-pessimistic_w_momentum = 1.00
-pessimistic_w_affordability = 1.00
-pessimistic_w_supply = 1.05
-pessimistic_w_credit = 1.15
-pessimistic_w_fx = 1.10
-pessimistic_w_rent = 1.00
-pessimistic_w_migration_security = 0.75
-pessimistic_w_liquidity = 0.90
-pessimistic_room_1 = 0.006
-pessimistic_room_2 = 0.026
-pessimistic_room_3 = -0.032
-pessimistic_room_adjustment =
-  pessimistic_room_1 when room_count = 1
-  pessimistic_room_2 when room_count = 2
-  pessimistic_room_3 when room_count >= 3
-pessimistic_tier_adjustment = 0.000
-pessimistic_condition_adjustment = 0.000
+future_price = current_clean_price * (1 + scenario_change)
+expected_change = p_base * base_change + p_downside * downside_change + p_upside * upside_change
 ```
 
-Score each input as an annual price-change contribution in decimal form, using only information available at the forecast date. For example, `0.04` means about +4% annual pressure and `-0.02` means about -2% annual pressure. Map:
+Score factors as annual price-change contributions using information available at the forecast date. Use wider bands when comparable data is sparse, bid/ask gaps are large, war/security risk is material, backtest error is high, or the horizon is long.
 
-- `segment_momentum`: recent comparable segment price trend after outlier filtering
-- `affordability`: wage growth, price-to-income, savings capacity, and buyer budget pressure
-- `supply`: completions, active inventory, unsold stock, and absorption
-- `credit`: real rates, mortgage availability, installment terms, refinancing risk
-- `fx`: exchange-rate pressure, inflation pass-through, and hard-asset demand
-- `rent`: rent yield, saved rent, rent growth, and rent-vs-buy pressure
-- `migration_security`: migration / IDP flows, regional safety, war intensity, infrastructure and energy risk
-- `liquidity`: days on market, price cuts, transaction activity, and stale-listing risk
-
-Treat these coefficients as priors, not universal constants. Recalibrate when a local historical backtest shows lower error, but do not tune to only one cherry-picked period. Use a wider band than 5% when the historical backtest error, bid-ask gap, sparse data, or war/security shock risk is larger than the default band.
-
-Discount or future_value assumptions should be explicit when comparing alternatives across different dates.
-
-For credit purchases, include mortgage payment / monthly_payment / annuity logic, total interest cost, and refinancing risk. For cash purchases, include opportunity cost of cash.
-
-Report an error band or confidence interval rather than a single-point prediction when evidence is noisy.
-
-### Forecast Backtesting
-
-Before trusting a formula, backtest and calibrate it where historical data exists. Use the same formula on past publication dates, then compare predicted results with actual realized prices or indexes for the same segment and 3-12 months forecast horizon.
-
-Minimum backtest table:
+Before trusting a numeric forecast, backtest where historical data exists. Minimum audit table:
 
 ```text
-forecast_date
-forecast_horizon_months
-predicted_price_or_change
-actual_price_or_change
-prediction_error
-absolute_error
-source_used_then
-source_used_for_actual
+forecast_date | horizon | predicted_change | actual_change | error | absolute_error | source_then | source_actual
 ```
 
-Show predicted vs actual, prediction error, and horizon-specific error band directly, not only a narrative summary.
+Use MAE, MAPE, or RMSE when enough data exists. If no valid backtest exists, say the forecast is scenario-based, not validated. Treat buying/waiting advantage as inconclusive when the advantage is smaller than the error band plus transaction friction.
 
-Use MAE, MAPE, or RMSE:
+## Buy-vs-Wait and Repair-vs-Ready
 
-```text
-MAPE = mean(abs(actual - predicted) / actual)
-```
-
-Calibration rules:
-
-- Do not tune the formula to one cherry-picked historical case.
-- Prefer out-of-sample or holdout periods when data allows.
-- If historical error is high, widen the forecast range and reduce confidence.
-- If the current situation is structurally different from the backtest period, state why the backtest may understate risk.
-- Treat prediction precision as insufficient when the error band is larger than the expected advantage of buying or waiting.
-
-## Buy vs Wait Modeling
-
-For a buyer deciding whether to buy now or wait, model at minimum:
+Model at minimum:
 
 ```text
 available_cash
@@ -369,191 +168,156 @@ expected_inflation
 expected_rent_change
 opportunity_cost_of_cash
 repair_or_furnishing_costs
+moving_costs
+risk_premium_for_worse_selection
 ```
 
-Calculate safe and aggressive buying capacity, time needed with/without credit, annual cost of waiting, break-even decline, expected value of buying now versus waiting, confidence interval / error band, and sensitivity to growth, stagnation, and decline.
-
-Use explicit formulas where helpful.
-
-Example:
+Core formulas:
 
 ```text
 safe_price = (cash + available_credit - reserve) / (1 + transaction_cost_rate)
-```
-
-```text
-annual_waiting_cost = annual_rent + expected_price_growth_amount
-```
-
-```text
+annual_waiting_cost = annual_rent + expected_price_growth_amount - return_on_cash
 break_even_decline = annual_rent / current_target_price
 ```
 
-buy_now_total_cost =
-  purchase_price
-  + transaction_costs
-  + repair_or_furnishing_costs
-  + credit_interest_cost
-  + maintenance_costs
-  - saved_rent
+```text
+buy_now_total_cost = purchase_price + transaction_costs + repair_or_furnishing_costs + credit_interest_cost + maintenance_costs + moving_costs - saved_rent
+wait_total_cost = future_purchase_price + future_transaction_costs + rent_paid_while_waiting + repair_or_furnishing_costs_later + risk_premium_for_worse_selection - return_on_cash_while_waiting
 ```
+
+For ready vs shell / after-construction state:
 
 ```text
-wait_total_cost =
-  future_purchase_price
-  + future_transaction_costs
-  + rent_paid_while_waiting
-  + risk_premium_for_worse_selection
-  - return_on_cash_while_waiting
+ready_all_in_cost = ready_price + transaction_costs + immediate_fixes + furnishing_gap
+shell_all_in_cost = shell_price + transaction_costs + design_cost + repair_cost + furnishing_cost + rent_during_repair + delay_cost + overrun_reserve + quality_control_risk
 ```
 
-Recommend waiting only when the probability-weighted wait_total_cost is lower than buy_now_total_cost by more than the forecast error band and transaction friction.
-
-## Weighted Decision Matrix
-
-When the decision is high-stakes, create a weighted matrix.
-
-Typical criteria:
-
-- match to hard requirements
-- affordability and liquidity after purchase
-- opportunity cost of waiting
-- financing risk
-- probability of market moving against the user
-- probability of overpaying
-- legal risk
-- technical/building risk
-- exit liquidity
-
-Use weights that sum to 100.
-
-For individual property variants, use a compact scoring table:
-
-```text
-variant
-hard_requirement_status
-fit_score_0_100
-price_vs_comps
-expected_total_cost
-forecast_adjusted_value
-main_risks
-missing_evidence
-recommendation
-```
-
-A cheap option should not outrank a fitting option if it fails hard requirements.
-
-Compare options such as:
-
-- buy now with credit
-- buy now only below a strict price threshold
-- wait 3-6 months
-- wait 6-12 months
-- wait until no credit is needed
-- reject the deal
-
-Return an explicit recommendation and the price/condition thresholds that would change it.
+Use repair-cost ranges. Include time risk, contractor risk, overrun reserve, and liquidity difference after renovation. Recommend shell-state purchase only when the expected all-in cost advantage survives realistic overruns and time/rent costs.
 
 ## Legal and Transaction Risk Screening
 
-For property transactions, screen for legal red flags.
+For property transactions, separate ownership, residence registration, right of use, actual possession, marital/inheritance issues, encumbrances, debts, and layout/document mismatches.
 
-Important Ukrainian real estate risk areas include:
-
-- registered residents who are not owners
-- minor children registered in the property
-- children with disability
-- adults with disability
-- persons under guardianship or trusteeship
-- legally incapable or partially capable persons
-- persons with possible right of use, servitude, lifelong residence, or refusal from privatization
-- unresolved inheritance, marital consent, ownership shares, arrests, mortgages, injunctions, debts, or utility disputes
-- mismatch between actual layout and registered technical documentation
-
-Separate:
-
-- registration of residence
-- ownership
-- right of use
-- actual possession / factual residence
-
-For minors or vulnerable persons, do not treat deregistration as automatically eliminating risk. Check whether any right of use may have been violated.
+Important Ukrainian risk areas include registered non-owner residents, minors or legally vulnerable residents, guardianship/trusteeship, incapacity, possible lifelong use or servitude, unresolved inheritance, missing marital consent, ownership shares, arrests, mortgages, injunctions, utility debts, and mismatch between actual layout and technical documentation.
 
 Default buyer-safe rule:
 
-- all registered persons should be removed before signing
-- a fresh official extract should confirm no registered persons
-- seller warranties should explicitly cover absence of registered residents, factual occupants, third-party rights, minors, vulnerable persons, servitudes, and claims
-- high-risk cases should be reviewed by a notary and an independent lawyer before deposit or signing
+- all registered persons should be removed before signing unless an independent lawyer confirms the structure is safe;
+- obtain a fresh official extract confirming no registered persons immediately before signing;
+- verify ownership, encumbrances, arrests, mortgages, and court/debt risks through current official sources where possible;
+- seller warranties should cover absence of registered residents, occupants, third-party rights, vulnerable persons, servitudes, lifelong use, unpaid debts, and claims;
+- high-risk cases require independent lawyer and notary review before deposit or signing.
 
-Do not present legal conclusions as guaranteed. State uncertainty and recommend professional legal verification when risks are material.
+For minors or vulnerable persons, do not treat deregistration as automatically eliminating risk. Check whether any right of use or housing interest may have been violated. Never present legal conclusions as guaranteed.
 
 ## Negotiation Guidance
 
-Translate findings into negotiation leverage.
+Translate evidence into leverage: price above comparable range, repair quality below claim, building age, missing features, weak heating, poor entrance/elevator/energy resilience, legal cleanup, stale listing, price reductions, weak documents, layout mismatch, stagnating segment, or poor liquidity.
 
-Examples of leverage:
+When enough data exists, provide target offer, fair range, walk-away price, pre-signing conditions, and concise negotiation points.
 
-- price above robust comparable range
-- repair quality not matching claimed euro renovation
-- building age and future capital repair risk
-- missing balcony, poor floor, poor entrance, no elevator, weak documents
-- registered persons or legal cleanup required
-- stale listing or repeated price reductions
-- market segment showing stagnation
+## Decision Rules
 
-Provide a walk-away price and a target offer price when enough data exists.
+Use these guardrails unless the user gives different priorities:
 
-## Output Style
+- `reject`: any non-negotiable hard requirement fails, legal risk is unresolved, or all-in cost exceeds safe capacity.
+- `inspect further`: price is attractive but evidence, documents, renovation quality, or technical state is incomplete.
+- `negotiate`: fit is acceptable and risks are manageable, but price is above clean comparable range or documents/condition create leverage.
+- `buy`: hard requirements pass, legal/technical risks are controlled, all-in cost fits safe capacity, and expected advantage exceeds forecast error plus transaction friction.
+- `wait`: probability-weighted waiting cost is lower than buying now by more than uncertainty, rent, transaction friction, and worse-selection risk.
 
-For market investigation:
+Always state the threshold that would change the recommendation: maximum price, minimum discount, required cash reserve, acceptable credit terms, repair-cost ceiling, document cleanup, or forecast trigger.
 
-1. Assumptions
-2. Current market evidence
-3. Current market overview
-4. Cleaned price ranges
-5. Segment matrix
-6. Ranked shortlist / best-fit variants
-7. Trend analysis
-8. Forecast scenarios
-9. Prediction audit / historical backtest when possible, including predicted vs actual, source dates, precision, and confidence
-10. Risks
-11. Practical conclusion
+## Listing Review Checklist
 
-For buy-vs-wait decisions:
+For individual listings, verify or request:
 
-1. Hard constraints
-2. Realistic target price
-3. Best-fit variants and rejected variants
-4. Current buying capacity
-5. Cost of waiting
-6. Credit impact
-7. Forecast formula and backtest precision
-8. Weighted decision matrix
-9. Recommendation
-10. Trigger thresholds
+- exact address or micro-location, building year/type, floor/total floors, area, room layout, ceiling height, heating, utilities, elevator, parking, balcony, and energy resilience;
+- renovation age, hidden-defect risk, photos vs claimed condition, plumbing/electrical/windows/heating state, and immediate fixes;
+- listing age, previous price cuts, duplicate listings, seller motivation, and whether price includes furniture/appliances/taxes/fees;
+- ownership basis, number of owners, marital consent, registered residents, debts, encumbrances, technical passport, layout legality, and signing/deposit conditions.
 
-For legal/transaction screening:
+If a listing fails a hard requirement, put it in a rejected row with the reason instead of burying it in narrative.
 
-1. Scenario classification
-2. Legal distinction: owner / registered / user / occupant
-3. Risk level
-4. Required documents
-5. Buyer-safe conditions
-6. Recommendation
+## Sale Strategy
+
+For sellers, estimate:
+
+```text
+realistic_list_price = clean_median_comparable * condition_adjustment * urgency_adjustment
+expected_net_price = expected_sale_price - negotiation_discount - taxes - agent_fee - legal_costs - repair_or_staging_costs
+```
+
+Provide a practical list price, expected negotiation band, minimum acceptable net price, likely time-to-sell, stale-listing risk, and whether small repairs/staging are expected to pay back. Separate a fast-sale price from a patient-market price.
+
+## Affordability Stress Test
+
+For high-stakes purchase decisions, show safe vs aggressive capacity and stress-test at least:
+
+- price +5-10%;
+- repair cost +20-30%;
+- credit rate or payment worsening;
+- rent continuing longer than expected;
+- exchange-rate movement if income/cash and property price are in different currencies;
+- emergency reserve after purchase.
+
+Do not recommend buying if the user would be left without a reasonable post-purchase reserve unless they explicitly accept that risk.
+
+## Document and Verification Checklist
+
+When legal or transaction risk matters, list the documents/checks needed before deposit or signing. For Ukrainian apartments this commonly includes fresh ownership/encumbrance checks, residence-registration extract, technical passport/layout verification, marital consent where relevant, debt/utility confirmations, seller identity/capacity checks, and notary/lawyer review for non-standard cases.
+
+## Output Templates
+
+### Market investigation
+
+1. Assumptions and hard constraints.
+2. Current market evidence with dated sources.
+3. Segment definition and data sufficiency.
+4. Cleaned price ranges and outlier logic.
+5. Segment matrix.
+6. Trend analysis.
+7. Forecast scenarios and probability-weighted view.
+8. Forecast audit/backtest or why unavailable.
+9. Risks and missing evidence.
+10. Recommendation and trigger thresholds.
+
+### Buy-vs-wait / repair-vs-ready
+
+1. Hard constraints and realistic target price.
+2. Current buying capacity: safe and aggressive.
+3. Ready-property all-in cost.
+4. Shell/repair all-in cost, overrun reserve, and delay/rent cost.
+5. Cost of waiting and break-even decline.
+6. Credit impact and reserve safety.
+7. Forecast scenarios with confidence band.
+8. Weighted decision matrix.
+9. Recommendation.
+10. Price, cash, credit, and timing thresholds that would change the decision.
+
+### Listing review / negotiation
+
+1. Hard requirement status.
+2. Comparable range and price-vs-comps.
+3. Fit score.
+4. Legal/technical/document risks.
+5. Missing evidence.
+6. Target offer and walk-away price.
+7. Recommendation: buy, negotiate, inspect further, or reject.
+
+### Legal screening
+
+1. Scenario classification.
+2. Distinction: owner / registered person / user / occupant.
+3. Risk level and why.
+4. Required documents and checks.
+5. Buyer-safe conditions.
+6. Recommendation and professional verification needed.
 
 ## Completion Criteria
 
-A sales investigation is complete only when:
+A sales investigation is complete only when the segment is defined, evidence quality is classified, hard requirements are separated from preferences, prices are normalized, outliers are controlled or flagged, assumptions are explicit, source dates are visible, financial trade-offs and stress tests are quantified where relevant, variants are ranked, hard failures are rejected, forecast confidence/audit status is stated, legal risks are separated from price attractiveness, required documents/checks are named for transaction-risk cases, the recommendation is explicit, and decision thresholds are stated.
 
-- the relevant market segment is defined
-- prices are normalized and outliers are controlled
-- assumptions are explicit
-- financial trade-offs are quantified
-- best-fit variants are ranked against hard requirements and rejected variants have reasons
-- current market overview is dated and source recency is clear
-- prediction formula is explicit and economically grounded
-- formula precision and confidence are checked by backtest against historical actual results where possible
-- legal and transaction risks are separated from price attractiveness
-- a clear recommendation is provided
-- the decision thresholds are stated
+## Language
+
+Answer in the user's language unless they ask otherwise. Preserve Ukrainian legal and real-estate terms when they matter, but explain them plainly.
