@@ -5,3 +5,4 @@
 - `sales-investigator`: evidence-based real estate purchase/sale investigation, property price analysis, buy-vs-wait decisions, negotiation preparation, affordability modeling, and legal/transaction risk screening.
 - `ponytail`: use whenever the user says "ponytail", "be lazy", "lazy mode", "simplest solution", "minimal solution", "yagni", "do less", or "shortest path", and whenever they complain about over-engineering, bloat, boilerplate, or unnecessary dependencies.
 - `autoresearcher`: when specified directly
+- `ponytail-review`: always loaded togather with skill `code-reviewer`
