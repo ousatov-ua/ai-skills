@@ -49,7 +49,3 @@ skill file when the user accepts and repository access is available.
 ## Incremental Work
 
 **BLOCKING:** Before broad reads or repository scans, summarize current findings into a short plan. If context grows large, compact and continue from the compacted summary.
-
-## Other
-
-**`Claude` will review your output once you are done.**
