@@ -21,6 +21,7 @@ description: >-
 ### Requires
 
 - `engineering.md` from `__ROOT__/shared/engineering.md`
+- Skill `ponytail-review` from `__ROOT__/skill/ponytail-review/SKILL.md`
 
 ### On Demand
 
