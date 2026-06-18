@@ -8,7 +8,7 @@
 
 - `general.md` from `__ROOT__/general.md`
 - `compress.md` from `__ROOT__/shared/compress.md`
-- Skill `ponytail` from `__ROOT__/skills/ponytail/SKILL.md`
+- **Load skill `ponytail` from `__ROOT__/skills/ponytail/SKILL.md`**
 
 ### On Demand
 
