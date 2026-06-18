@@ -1,234 +1,295 @@
 ---
 name: autoresearcher
 description: >-
-  Use this skill only if specified directly
+  Use this skill only when the user explicitly asks for autoresearch/autoresearcher or an autonomous improvement loop. Supports any task, investigation, optimization, benchmark, evaluation, skill/document/code improvement, or research workflow where Codex should define a fixed evaluation, iterate independently, keep improvements, discard regressions, and produce durable run artifacts.
 ---
 
 # autoresearcher
 
-This is a task-generic version of `program.md`: an experiment to have the LLM do its own research for a user-specified goal. It runs an autonomous loop where Codex changes only approved files, runs a fixed evaluation, compares each result to the best kept result, records the result, keeps improvements, and discards regressions.
+Run a universal autonomous research loop:
 
-The user must specify:
+1. Define the goal, input data, metric contract, scope, constraints, outputs, and stop conditions.
+2. Establish a same-environment baseline before editing.
+3. Iterate with one hypothesis per iteration.
+4. Run the fixed evaluation.
+5. Keep only valid improvements according to the predeclared comparison rule.
+6. Discard or abandon regressions and invalid runs.
+7. Record every result and hand off the best artifact with evidence.
 
-- **Goal**: what to improve.
-- **Evaluation logic**: how to measure the goal target.
-- **Comparison rule**: how to decide if an iteration improved the target.
-- **Maximum iterations**: hard cap for the loop.
+Do not start any experiment loop until every required field is set and the quality metric check has been validated.
 
-If any of these are missing, ask the user for them before setup. Do not begin an autoresearch loop without all four.
+## Hard Gate
 
-**Monorepo note:** The target project may live inside a larger repo. Always stage only explicitly in-scope paths. Never use blind `git add -A`.
+Before baseline or looping, require a complete run specification. If anything below is missing, ambiguous, unavailable, or internally inconsistent, ask for the missing information or create the missing artifact when it is in scope. Do not begin the loop.
+
+Required run specification:
+
+```text
+run_tag: <short unique tag for branch/artifact names>
+goal: <what to improve or investigate>
+task_type: <code | docs | prompt | benchmark | investigation | design | data | other>
+input_data: <files, datasets, prompts, logs, requirements, user facts, services, URLs, or examples used as inputs>
+output_artifacts: <files/reports/patches/models/tables/docs/results expected from the run>
+can_modify: <paths/artifacts Codex may edit or create>
+cannot_modify: <paths/artifacts Codex must not edit>
+protected_evaluation: <benchmark, rubric, tests, fixtures, prompts, data, parser, judge, or manual check that must stay fixed>
+target_metric: <primary metric or quality score>
+metric_direction: <lower_is_better | higher_is_better | pass_fail | rubric | multi_metric>
+comparison_rule: <exact keep/discard rule, including constraints and tie-breakers>
+evaluation_command_or_process: <command, script, rubric procedure, review process, or manual measurement>
+result_extraction: <how to parse or record metric/status from the evaluation>
+metric_validity_check: <how to prove the metric measures the goal and cannot be trivially gamed>
+baseline_required: <yes unless the user explicitly defines a valid reason it is impossible>
+max_iterations: <positive integer hard cap, or explicit user-approved unbounded run policy>
+per_iteration_timeout: <duration or bounded review budget>
+stop_conditions: <target threshold, max iterations, blocker, budget, user interruption, or definition of done>
+constraints: <runtime, memory, cost, style, compatibility, policy, dependency, or quality limits>
+artifact_location: <where to write run spec, results.tsv, logs, reports, and generated artifacts>
+```
+
+Use a task-local `program.md` when the run is complex or long-lived. `program.md` is the standalone run contract for this skill, not an external template. For small runs, the conversation can hold the spec, but durable artifacts are still required once the loop begins.
+
+## Input Data
+
+Treat input data as immutable unless the run explicitly says the goal is to improve the input set itself.
+
+Input data can be:
+
+- repository files, docs, specs, tests, scripts, prompts, examples, benchmark cases, logs, datasets, URLs, screenshots, design references, business constraints, or human-provided facts;
+- current environment details that affect evaluation, such as branch, commit, hardware, model, dependency lockfile, service endpoint, or date;
+- evaluation inputs such as test fixtures, gold answers, scoring rubrics, judge prompts, validation datasets, or acceptance criteria.
+
+Before looping:
+
+1. Read enough in-scope input data to understand the task.
+2. Verify every required file, dataset, fixture, service, dependency, credential, and tool exists.
+3. Identify which inputs are protected and which are editable.
+4. Record the input versions when reproducibility matters.
+5. Stop if the evaluation depends on missing, stale, private, or changing data and no valid fallback is defined.
+
+## Quality Metric Check
+
+Validate the metric before trusting it. A metric is valid only if all checks pass:
+
+```text
+aligned: it measures the stated goal or a justified proxy for it
+parseable: result_extraction reliably returns the target metric and status
+directional: lower/higher/pass/rubric semantics are unambiguous
+fixed: the benchmark, rubric, fixtures, prompts, and judge stay unchanged across iterations
+bounded: timeout, cost, resource limits, and failure sentinels are defined
+anti_gaming: improvements cannot come from weakening tests, deleting hard cases, hardcoding answers, skipping checks, or changing protected inputs
+noise_handled: noisy metrics define repeats, confidence threshold, minimum delta, or tie policy
+constraints_checked: required tests, style, compatibility, safety, and policy constraints are evaluated
+baseline_parseable: the baseline can be run and parsed in this environment
+```
+
+If the user provides a quality metric check, audit it against this list. If it fails, fix the evaluation contract when that is in scope; otherwise ask the user. Do not start the loop with an invalid metric.
+
+For rubric or qualitative work, define the score scale, subcriteria, evidence required, pass/fail constraints, and tie-breakers before scoring. Do not use "looks better" as the sole metric.
+
+For investigations where the output is knowledge rather than an optimized artifact, use evidence quality metrics such as source authority, recency, contradiction resolution, coverage of hypotheses, reproducibility of commands, or confidence calibration.
+
+## Output Data
+
+Create all artifacts needed to make the run auditable and reusable. At minimum:
+
+- `program.md`: standalone run specification, metric contract, scope, execution plan, and stop conditions for non-trivial runs.
+- `results.tsv`: append-only experiment table with baseline and every iteration.
+- `run.log` or per-iteration logs: raw evaluation output, kept concise in context.
+- changed artifacts: code, docs, prompts, configs, data transforms, reports, or other in-scope outputs.
+- final handoff: summary of baseline, best result, artifacts, validation, and risks.
+
+Use TSV for experiment results. Include enough columns for the task:
+
+```text
+iteration	artifact_id	target_metric	secondary_metrics	status	description	comparison	evidence
+```
+
+Column definitions:
+
+1. `iteration`: `0` for baseline, then increasing integers.
+2. `artifact_id`: git commit hash, file version, report path, model/checkpoint id, or other stable identifier.
+3. `target_metric`: primary score, pass/fail value, or explicit failure sentinel.
+4. `secondary_metrics`: constraints such as time, memory, cost, tests, rubric subscores, or coverage.
+5. `status`: `keep`, `discard`, `crash`, `invalid`, or `blocked`.
+6. `description`: one short sentence describing the hypothesis.
+7. `comparison`: `baseline`, `improved`, `worse`, `tie-kept`, `tie-discarded`, `invalid`, `timeout`, or `blocked`.
+8. `evidence`: log path, report path, command, score sheet, source list, or reviewer note.
+
+Do not leave required artifacts implied. If an artifact is required by the run specification, create or update it before final handoff.
+
+## `program.md`
+
+When the run is non-trivial, long-lived, or expected to continue autonomously, create `program.md` before baseline and execute it after setup approval.
+
+`program.md` must contain:
+
+- the complete required run specification;
+- input data and protected evaluation definitions;
+- output artifact definitions and artifact locations;
+- quality metric check and validation result;
+- baseline command or scoring process;
+- exact iteration procedure;
+- keep/discard comparison rule;
+- timeout, crash, noisy metric, and blocker policy;
+- definition of done and final handoff requirements.
+
+After writing `program.md`:
+
+1. Re-read it and verify every hard-gate field is present.
+2. Fix missing or inconsistent fields before baseline.
+3. Run the baseline exactly as specified.
+4. Execute the iteration loop from `program.md`.
+5. Update `results.tsv`, logs, and required artifacts as execution proceeds.
+
+Do not treat `program.md` as documentation only. It is the executable operating plan for the run.
 
 ## Setup
 
-To set up a new autoresearch run, work with the user to:
+Set up a fresh autoresearch run:
 
-1. **Agree on a run tag**: propose a tag based on today's date or the goal name (for example `jun15`, `coverage-jun15`, or `skill-jun15`). The branch `autoresearch/<tag>` must not already exist - this is a fresh run.
-2. **Create the branch**: `git checkout -b autoresearch/<tag>` from the current stable base branch or current checked-out commit, unless the user gives a different base. If `autoresearch/<tag>` cannot be created because of a Git ref namespace conflict, use a clear equivalent branch such as `autoresearch-<tag>`.
-3. **Read the in-scope files**: Read all files needed for full context:
-   - repository or task documentation;
-   - evaluation harness, benchmark, rubric, prompt set, coverage config, or test command;
-   - files the user allows Codex to modify;
-   - files the user marks read-only or protected.
-4. **Verify required resources exist**: Check that all data, fixtures, dependencies, benchmark inputs, eval prompts, scripts, services, credentials, and tools required by the evaluation are available. If something is missing, tell the human the exact command or action needed to prepare it.
-5. **Initialize `results.tsv`**: Create `results.tsv` with a header row and baseline entry. Run the evaluation once before editing to establish YOUR baseline in this environment. Do NOT use baseline numbers from other machines, branches, datasets, prompt sets, or stale reports.
-6. **Confirm and go**: Confirm setup looks good, including goal, editable scope, protected scope, evaluation command or rubric, comparison rule, timeout, and max iterations.
+1. Choose a unique `run_tag`, usually based on date and goal.
+2. Create or switch to a dedicated branch such as `autoresearch/<run_tag>` when the work is in git. If a slash branch conflicts, use `autoresearch-<run_tag>`.
+3. Read the in-scope files and protected evaluation assets.
+4. Verify required resources and inputs exist.
+5. Create or update `program.md` when the run is non-trivial, long-lived, or expected to continue autonomously.
+6. Re-read `program.md` and verify it contains all hard-gate fields.
+7. Validate the quality metric check.
+8. Run the baseline without edits, parse the output, and record iteration `0` in `results.tsv`.
+9. Confirm the complete setup with the user before starting the autonomous loop unless the user already explicitly authorized running after setup.
+10. Execute `program.md` by following its baseline, iteration, comparison, logging, and done instructions until a stop condition is reached.
 
-Once the user confirms, kick off the experimentation.
+Monorepo rule: stage only explicitly in-scope paths. Never use blind `git add -A`.
 
-## Run Specification
+## Iteration Definition
 
-Before the first baseline run, write down the run specification in the conversation or in a task-local `program.md` when the run is complex.
+One iteration is exactly one hypothesis tested against the fixed evaluation.
 
-Required fields:
+An iteration includes:
 
-```text
-goal: <user-specified goal>
-target_metric: <primary metric or score>
-comparison_rule: <lower is better | higher is better | pass/fail | rubric rule>
-evaluation_command: <command to run, or rubric/scoring process>
-result_extraction: <grep command, report parser, score sheet, or manual rubric>
-max_iterations: <positive integer>
-per_iteration_timeout: <duration>
-can_modify: <paths/artifacts Codex may edit>
-cannot_modify: <paths/artifacts Codex must not edit>
-constraints: <tests, memory, runtime, quality, compatibility, or policy limits>
-```
+1. Start from the current best kept state.
+2. Select one clear hypothesis or intervention.
+3. Modify only in-scope artifacts.
+4. Save a stable artifact id, usually a git commit.
+5. Run the fixed evaluation within the timeout.
+6. Extract target metric, status, secondary metrics, and evidence.
+7. Validate that the result did not violate the metric contract.
+8. Append the result to `results.tsv`.
+9. Keep, discard, or mark blocked according to the comparison rule.
 
-Examples:
+Do not count typo fixes or reruns for the same broken hypothesis as separate iterations unless the run specification says to. Keep them inside the same iteration budget.
 
-```text
-goal: reduce parser latency
-target_metric: p95_ms
-comparison_rule: lower is better, tests must pass
-evaluation_command: uv run pytest && uv run python bench_parser.py
-result_extraction: grep "^p95_ms:" run.log
-max_iterations: 12
-```
+## Experiment Loop
 
-```text
-goal: improve test coverage
-target_metric: branch_coverage_percent
-comparison_rule: higher is better, tests must pass, tests must assert meaningful behavior
-evaluation_command: mvn test jacoco:report
-result_extraction: read branch coverage from target/site/jacoco/index.html or generated CSV
-max_iterations: 8
-```
+After the hard gate passes and the user has authorized the run, loop until `max_iterations`, target threshold, blocker, timeout policy, definition of done, or user interruption:
 
-```text
-goal: improve skill reliability
-target_metric: eval_score
-comparison_rule: higher is better; tie goes to shorter clearer skill
-evaluation_command: validate skill frontmatter and score fixed benchmark prompts
-result_extraction: total rubric score across prompts
-max_iterations: 10
-```
+1. Inspect the current branch, best artifact, previous results, and working tree.
+2. Generate the next hypothesis from observed evidence, near misses, baseline weaknesses, or domain knowledge.
+3. Edit only allowed files or artifacts.
+4. Commit or otherwise identify the candidate artifact.
+5. Run `evaluation_command_or_process`, redirecting noisy output to logs.
+6. Extract the result with `result_extraction`.
+7. If the result is missing, invalid, crashed, or timed out, inspect concise failure output and fix only obvious implementation mistakes inside the same hypothesis. Otherwise log `crash` or `invalid`.
+8. Compare against the best kept result using only the predeclared comparison rule.
+9. Keep valid improvements; discard regressions; handle ties only if a tie-breaker was predeclared.
+10. Continue without asking whether to keep going.
 
-## Experimentation
+Keep advancing the branch or best artifact only through kept experiments. For discarded experiments, return to the previous best state using non-destructive methods when possible. Use destructive reverts only when the run explicitly allows it and they will not destroy unrelated user changes.
 
-Each experiment runs through the user-specified evaluation logic with a fixed per-iteration budget. Launch it exactly as specified by the run specification. Redirect noisy output to `run.log` or an equivalent log file so context is not flooded.
+## Keep/Discard Logic
 
-**What you CAN do:**
+The comparison rule is the ground truth.
 
-- Modify only files listed in `can_modify`.
-- Change implementation, architecture, tests, prompts, skill text, configuration, hyperparameters, scripts, or documentation only when they are in scope.
-- Add focused helper files only if the user or run specification allows new files.
-
-**What you CANNOT do:**
-
-- Modify files listed in `cannot_modify`.
-- Modify the evaluation harness, scoring rubric, benchmark inputs, test fixtures, prompt set, or target metric unless the run goal is explicitly to improve the evaluation itself.
-- Install new packages or add dependencies unless the run specification allows it.
-- Skip required checks or weaken constraints to make the metric look better.
-- Compare results from different environments, branches, datasets, prompts, or evaluation logic unless the run specification explicitly allows that.
-
-**The goal is simple: improve the user-specified target.** If the comparison rule says lower is better, keep lower scores. If higher is better, keep higher scores. If pass/fail, keep only changes that pass and improve the defined tie-breakers. The only universal constraints are that the code or artifact must not crash, must finish within the per-iteration timeout, and must satisfy all run constraints.
-
-**Resource constraints** are soft or hard according to the run specification. Some extra memory, runtime, complexity, or artifact size may be acceptable for meaningful target gains if the run allows it, but it should not blow up dramatically.
-
-**Simplicity criterion**: All else being equal, simpler is better. A small improvement that adds ugly complexity is not worth it unless the run explicitly values raw score above maintainability. Conversely, removing something and getting equal or better results is a great outcome. When evaluating whether to keep a change, weigh complexity cost against improvement magnitude. A tiny metric improvement that adds hacky code is suspect. A tiny metric improvement from deleting code is worth keeping. An improvement of approximately zero with much simpler code may be kept if the comparison rule allows tie-breakers.
-
-**The first run**: Your very first run should always establish the baseline, so run the evaluation as-is before making changes.
-
-## Output Format
-
-The evaluation must produce or be reduced to a parseable summary. Prefer a summary like this:
+Common patterns:
 
 ```text
----
-target_metric:       123.456
-comparison_rule:     lower_is_better
-status:              pass
-total_seconds:       42.1
-memory_mb:           512.0
-secondary_metric:    optional
-notes:               optional
+lower_is_better: keep if new_metric < best_metric and constraints pass
+higher_is_better: keep if new_metric > best_metric and constraints pass
+pass_fail: keep if pass status improves or tie-breakers improve
+rubric: keep if score improves and evidence supports the score
+multi_metric: keep if primary metric improves and all hard constraints pass
+tie: keep equal primary metric only for predeclared improvements such as simpler, faster, safer, cheaper, or clearer
 ```
 
-For command-based evaluation, provide an extraction command in the run specification, for example:
+Invalid improvements do not count. Mark `discard` or `invalid` if the apparent improvement comes from:
 
-```bash
-grep "^target_metric:\|^status:\|^total_seconds:" run.log
-```
-
-For rubric-based evaluation, record the rubric score and enough evidence to justify it.
-
-Compare only against your own baseline and kept results from the same run, same evaluation logic, and same environment.
-
-## Logging Results
-
-When an experiment is done, log it to `results.tsv` (tab-separated, NOT comma-separated - commas break in descriptions).
-
-The TSV has a header row and 7 columns:
-
-```text
-iteration	commit	target_metric	secondary_metrics	status	description	comparison
-```
-
-1. iteration number, with baseline as `0`;
-2. git commit hash, short 7 chars, or artifact/version id when git is unavailable;
-3. target metric achieved, using the run's required precision; use an explicit sentinel such as `0.000000`, `NA`, or `FAIL` for crashes as defined by the run specification;
-4. secondary metrics or constraints, such as `time=42.1s;memory=512MB;tests=pass`;
-5. status: `keep`, `discard`, or `crash`;
-6. short text description of what this experiment tried;
-7. comparison against the previous best, such as `improved`, `worse`, `tie-simpler`, `invalid`, or `timeout`.
-
-Example:
-
-```text
-iteration	commit	target_metric	secondary_metrics	status	description	comparison
-0	383abb4	2.667000	time=405.7s;memory=26.9GB	keep	baseline	baseline
-1	909dd59	2.588904	time=390.2s;memory=26.9GB	keep	halve total batch size	improved
-2	4161af3	2.610000	time=389.0s;memory=25.1GB	discard	reduce model width	worse
-```
-
-## The Experiment Loop
-
-The experiment runs on a dedicated branch, for example `autoresearch/<tag>` or `autoresearch-<tag>`.
-
-LOOP UNTIL `max_iterations`:
-
-1. Look at the git state: the current branch/commit we're on.
-2. Tune the in-scope files with one experimental idea by directly hacking the code, skill, tests, prompt, config, documentation, or other approved artifact.
-3. Stage only in-scope files and commit with `git commit -m "experiment: <description>"` (never `git add -A` - this may be inside a larger repo).
-4. Run the experiment using the evaluation command from the run specification. Redirect noisy output, for example `<evaluation_command> > run.log 2>&1`. Do NOT use `tee` or let output flood your context unless the command is intentionally short.
-5. Read out the result using the extraction command, generated reports, or rubric scoring specified by the run.
-6. If the result is missing or invalid, the run crashed. Read the relevant failure output, such as `tail -n 50 run.log`, and attempt a fix only if the mistake is obvious and belongs to the same hypothesis. If you cannot get things to work after more than a few attempts, give up on that hypothesis.
-7. Record the result in `results.tsv`.
-8. If the target improved according to the comparison rule, stage `results.tsv` and amend the experiment commit with `git commit --amend --no-edit` to include the log entry, advancing the branch.
-9. If the target is equal or worse and the tie-breaker does not justify keeping it, record the discard result, then return to the previous kept state. Use `git reset --hard <previous kept commit>` only when it will not destroy user changes and the run explicitly allows clean reverts.
-10. Stop when the iteration count reaches `max_iterations`, the target threshold is reached, verification becomes blocked, or the user interrupts.
-
-The idea is that you are a completely autonomous researcher trying things out. If they work, keep. If they do not, discard. You advance the branch only through kept experiments. If you feel stuck, rewind sparingly if ever, re-read the in-scope files, inspect previous near-misses, combine ideas, or try a more radical but still in-scope change.
-
-**Timeout**: Each experiment must finish within `per_iteration_timeout`. If a run exceeds that timeout, kill it if possible, treat it as a failure, log `crash` or `discard` according to the run specification, and revert or abandon the experiment.
-
-**Crashes**: If a run crashes, use your judgment. If it is something dumb and easy to fix, such as a typo, missing import, invalid command flag, or malformed config, fix it and rerun within the same iteration. If the idea itself is fundamentally broken, skip it, log `crash` in the TSV, and move on.
-
-**NEVER STOP EARLY**: Once the experiment loop has begun after setup confirmation, do NOT pause to ask the human if you should continue. Do NOT ask "should I keep going?" or "is this a good stopping point?". Continue autonomously until `max_iterations`, target threshold, blocker, timeout policy, or user interruption stops the run. If you run out of ideas, think harder: re-read the in-scope files, study the evaluation signal, inspect previous kept and discarded attempts, try combinations of near-misses, and test more radical in-scope changes.
-
-As an example use case, a user might leave you running while they sleep. If `max_iterations` is 20 and each experiment takes 7 minutes, the loop should run up to 20 iterations unless stopped by the user, a target threshold, or a blocker.
-
-## Comparison Logic
-
-The comparison rule is the ground truth for keep/discard decisions.
-
-Supported comparison patterns:
-
-```text
-lower is better: keep if new_metric < best_metric
-higher is better: keep if new_metric > best_metric
-pass/fail: keep if required checks pass and tie-breakers improve
-rubric score: keep if new_score > best_score
-multi-metric: keep if primary metric improves and all constraints pass
-tie-breaker: keep equal primary metric only if the run explicitly allows simpler/faster/safer tie wins
-```
-
-Invalid improvements do not count. Mark an experiment `discard` or `crash` if it improves the target by:
-
-- changing protected evaluation logic;
-- reducing benchmark difficulty;
-- deleting or weakening tests that are constraints;
-- hardcoding benchmark answers;
+- changing protected evaluation logic or input data;
+- weakening tests, rubrics, fixtures, prompts, acceptance criteria, or constraints;
+- reducing benchmark difficulty without authorization;
+- hardcoding benchmark answers or overfitting known examples;
 - skipping required checks;
-- violating scope;
-- exceeding hard resource limits;
-- relying on unavailable local-only state.
+- violating editable scope;
+- exceeding hard resource, cost, compatibility, or policy limits;
+- relying on local-only or non-reproducible state not declared in the spec.
 
-For noisy metrics, repeat near-tie experiments when practical or require a minimum improvement margin. Record the rule in the run specification before using it.
+For noisy metrics, require the predeclared repeat policy, minimum delta, confidence rule, or tie-breaker before keeping near-ties.
 
-## Final Handoff
+## Universal Examples
 
-When the loop stops, report:
+Code performance:
 
-- goal;
-- branch and best kept commit;
-- baseline result;
-- best result;
-- max iterations and iterations actually run;
-- kept, discarded, and crashed counts;
-- files changed;
-- verification command or rubric used;
-- unresolved risks, blockers, or metric noise.
+```text
+goal: reduce parser p95 latency
+target_metric: p95_ms
+metric_direction: lower_is_better
+comparison_rule: keep if p95_ms improves by >=2% and tests pass
+evaluation_command_or_process: run unit tests, then benchmark parser
+result_extraction: parse p95_ms from benchmark report
+```
+
+Skill improvement:
+
+```text
+goal: improve skill reliability across benchmark prompts
+target_metric: rubric_total
+metric_direction: higher_is_better
+comparison_rule: keep if total score improves and SKILL.md stays concise
+evaluation_command_or_process: validate frontmatter, run fixed prompt suite, score with rubric
+result_extraction: total rubric score plus per-prompt notes
+```
+
+Investigation:
+
+```text
+goal: identify the root cause of flaky CI failures
+target_metric: evidence_score
+metric_direction: rubric
+comparison_rule: keep if hypothesis explains more failures with cited logs and no contradictions
+evaluation_command_or_process: inspect fixed CI logs, reproduce when possible, score evidence coverage
+result_extraction: rubric score and cited evidence list
+```
+
+Documentation:
+
+```text
+goal: improve onboarding doc task success
+target_metric: task_completion_score
+metric_direction: higher_is_better
+comparison_rule: keep if fixed checklist passes with fewer ambiguities and no factual regressions
+evaluation_command_or_process: run doc lint plus rubric over required user tasks
+result_extraction: checklist pass count and ambiguity count
+```
+
+## Definition of Done
+
+The run is done only when one stop condition is reached and all required artifacts are current:
+
+- `max_iterations` reached;
+- target threshold or success criterion reached;
+- evaluation is blocked by a missing external resource, repeated infrastructure failure, or invalid metric that cannot be fixed in scope;
+- budget, timeout, or user interruption stops the run;
+- no valid in-scope hypothesis remains after re-reading inputs, results, and near misses.
+
+Final handoff must include:
+
+- goal and run tag;
+- branch and best artifact id;
+- baseline result and best result;
+- iterations run, kept/discarded/crashed/invalid counts;
+- final changed artifacts and output artifacts;
+- evaluation command or rubric used;
+- metric validity notes and any noise policy used;
+- definition-of-done reason;
+- unresolved risks, blockers, and what the metric does not prove.
 
 Do not claim success beyond what the evaluation proves.
