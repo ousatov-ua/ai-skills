@@ -14,13 +14,7 @@ description: >-
 
 ## Dependency Preflight
 
-**BLOCKING:** Load every Required item below before using this skill. Required means mandatory, recursive, and immediate.
-
 **BLOCKING:** `engineering.md` must load its own required dependencies, including `ponytail`. Do not proceed until the full chain is loaded.
-
-**BLOCKING:** If a required resource cannot be fetched, ask the user to paste that exact file or URL; do not continue without it.
-
-If a resource is already loaded, skip re-fetching.
 
 ### Required
 

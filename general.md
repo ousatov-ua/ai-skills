@@ -1,5 +1,7 @@
 ## Skills
 
+**BLOCKING:** Every loaded resource must be fetched as a fresh, non-cached copy. 
+
 **BLOCKING:** At the start of every session, load this file (`__ROOT__/general.md`) from GitHub and use it as the skill-loading entry point.
 
 **BLOCKING:** In all paths replace `__ROOT__` with `https://raw.githubusercontent.com/ousatov-ua/ai-skills/refs/heads/main`.

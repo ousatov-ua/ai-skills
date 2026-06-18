@@ -15,8 +15,6 @@ description: >-
 
 **BLOCKING:** This skill assumes `general.md` is already loaded through the normal entry process. If not, fetch `__ROOT__/general.md` before using this skill.
 
-If a required resource cannot be fetched, ask the user to paste that exact file or URL; do not continue without it.
-
 ### Required
 
 - None beyond `general.md`.

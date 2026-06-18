@@ -1,11 +1,5 @@
 ## Dependency Preflight
 
-**BLOCKING:** Load every Required item below before applying this baseline. Required means mandatory, recursive, and immediate.
-
-**BLOCKING:** If a required resource cannot be fetched, ask the user to paste that exact file or URL; do not continue without it.
-
-If a resource is already loaded, skip re-fetching.
-
 ### Required
 
 - `general.md` from `__ROOT__/general.md`
