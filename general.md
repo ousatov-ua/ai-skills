@@ -29,8 +29,9 @@ skill file when the user accepts and repository access is available.
 ### Hard
 - Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
 - Never pre-load skills, shared files, or scripts that are not required for the current task
-- Don't make any changes until you have **95% confidence** in what you need to build. Ask me
-follow up questions until you reach confidence level.
+- Don't make changes without thinking them through first. State your assumptions and recommendation briefly,
+  then continue. Only ask follow-up questions when the ambiguity would lead to fundamentally
+  different outcomes and you can't resolve it on your own.
 - Before building anything multistep, include a verification plan.
 
 ### Fallback
