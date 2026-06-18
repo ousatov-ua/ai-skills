@@ -11,11 +11,15 @@ description: >-
 
 # LinkedIn Technical Branding
 
-## Resources
+## Dependency Preflight
 
-** If a required resource cannot be fetched, ask the user to paste it; do not continue without it. **
+**BLOCKING:** This skill assumes `general.md` is already loaded through the normal entry process. If not, fetch `__ROOT__/general.md` before using this skill.
 
-** If resource is already fetched, skip re-fetching **
+If a required resource cannot be fetched, ask the user to paste that exact file or URL; do not continue without it.
+
+### Required
+
+- None beyond `general.md`.
 
 ### On Demand
 
@@ -32,9 +36,6 @@ or technical open source author.
 Goal: strengthen credibility, technical authority, recruiter discoverability,
 professional reputation, and measurable impact inside the Software Engineering
 community.
-
-Requires `general.md`. If not already loaded, fetch it.
-If it cannot be fetched, ask the user to paste it; do not continue without it.
 
 ## Audience
 

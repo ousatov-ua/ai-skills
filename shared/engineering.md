@@ -1,14 +1,16 @@
-## Resources
+## Dependency Preflight
 
-**If a required resource cannot be fetched, ask the user to paste it; do not continue without it.**
+**BLOCKING:** Load every Required item below before applying this baseline. Required means mandatory, recursive, and immediate.
 
-**If a resource is already fetched, skip re-fetching.**
+**BLOCKING:** If a required resource cannot be fetched, ask the user to paste that exact file or URL; do not continue without it.
 
-### Requires
+If a resource is already loaded, skip re-fetching.
+
+### Required
 
 - `general.md` from `__ROOT__/general.md`
 - `compress.md` from `__ROOT__/shared/compress.md`
-- **Load skill `ponytail` from `__ROOT__/skills/ponytail/SKILL.md`**
+- Skill `ponytail` from `__ROOT__/skills/ponytail/SKILL.md`
 
 ### On Demand
 

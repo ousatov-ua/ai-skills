@@ -12,16 +12,22 @@ description: >-
 
 # Code Reviewer
 
-## Resources
+## Dependency Preflight
 
-**If a required resource cannot be fetched, ask the user to paste it; do not continue without it.**
+**BLOCKING:** Load every Required item below before using this skill. Required means mandatory, recursive, and immediate.
 
-**If a resource is already fetched, skip re-fetching.**
+**BLOCKING:** `engineering.md` must load its own required dependencies, including `ponytail`. Do not proceed until the full chain is loaded.
 
-### Requires
+**BLOCKING:** `ponytail-review` is a required companion skill for code reviews, not an optional follow-up.
+
+**BLOCKING:** If a required resource cannot be fetched, ask the user to paste that exact file or URL; do not continue without it.
+
+If a resource is already loaded, skip re-fetching.
+
+### Required
 
 - `engineering.md` from `__ROOT__/shared/engineering.md`
-- Skill `ponytail-review` from `__ROOT__/skill/ponytail-review/SKILL.md`
+- Skill `ponytail-review` from `__ROOT__/skills/ponytail-review/SKILL.md`
 
 ### On Demand
 

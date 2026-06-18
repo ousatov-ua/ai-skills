@@ -5,6 +5,14 @@ description: Use for evidence-based real estate purchase/sale investigation, pro
 
 # Sales Investigator
 
+## Dependency Preflight
+
+Required:
+- None beyond `general.md`.
+
+On demand:
+- Current market, legal, macroeconomic, credit, exchange-rate, policy, or pricing sources whenever the decision depends on facts that can change.
+
 ## Purpose
 
 Use this skill for high-stakes real-estate purchase or sale decisions where the user needs a pragmatic, evidence-based recommendation instead of intuition.

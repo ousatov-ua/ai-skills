@@ -6,6 +6,11 @@ description: >-
 
 # autoresearcher
 
+## Dependency Preflight
+
+Required:
+- None beyond `general.md`.
+
 Run a universal autonomous research loop:
 
 1. Define the goal, input data, metric contract, scope, constraints, outputs, and stop conditions.
