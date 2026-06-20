@@ -14,7 +14,7 @@ description: >-
 
 ## Dependency Preflight
 
-**BLOCKING:** `engineering.md` must load its own required dependencies, including `ponytail`. Do not proceed until the full chain is loaded.
+**BLOCKING:** `engineering.md` must load its own required dependencies. Do not proceed until the full chain is loaded.
 
 ### Required
 

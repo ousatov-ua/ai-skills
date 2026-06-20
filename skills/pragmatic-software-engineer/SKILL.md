@@ -14,7 +14,7 @@ description: >-
 
 ## Dependency Preflight
 
-**BLOCKING:** `engineering.md` must load its own required dependencies, including `ponytail`. Do not proceed until the full chain is loaded.
+**BLOCKING:** `engineering.md` must load its own required dependencies. Do not proceed until the full chain is loaded.
 
 ### Required
 
@@ -65,9 +65,6 @@ management/process advice when the task is technical implementation.
 
 Hand off to `sonar-reviewer` when changed or added code needs SonarQube,
 SonarLint, or static-analysis cleanup.
-
-Use `ponytail` when the user asks for the simplest path, complains about
-bloat/over-engineering, or explicitly requests lazy/minimal/YAGNI mode.
 
 ## Output
 

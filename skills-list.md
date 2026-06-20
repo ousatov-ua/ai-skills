@@ -16,7 +16,6 @@ Required load set:
 - `__ROOT__/skills/pragmatic-software-engineer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
 - `__ROOT__/shared/compress.md`
-- `__ROOT__/skills/ponytail/SKILL.md`
 
 On demand:
 - `__ROOT__/skills/sonar-reviewer/SKILL.md` when changed or added code needs SonarQube, SonarLint, or static-analysis cleanup.
@@ -28,10 +27,8 @@ Use for PR/code/change reviews, implementation validation, correctness, reliabil
 
 Required load set:
 - `__ROOT__/skills/code-reviewer/SKILL.md`
-- `__ROOT__/skills/ponytail-review/SKILL.md`
 - `__ROOT__/shared/engineering.md`
 - `__ROOT__/shared/compress.md`
-- `__ROOT__/skills/ponytail/SKILL.md`
 
 On demand:
 - `__ROOT__/skills/sonar-reviewer/SKILL.md` when static-analysis or Sonar cleanup checks are needed.
@@ -45,30 +42,9 @@ Required load set:
 - `__ROOT__/skills/sonar-reviewer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
 - `__ROOT__/shared/compress.md`
-- `__ROOT__/skills/ponytail/SKILL.md`
 
 On demand:
 - `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
-
-### `ponytail`
-
-Use whenever the user says "ponytail", "be lazy", "lazy mode", "simplest solution", "minimal solution", "yagni", "do less", or "shortest path", and whenever they complain about over-engineering, bloat, boilerplate, or unnecessary dependencies.
-
-Required load set:
-- `__ROOT__/skills/ponytail/SKILL.md`
-
-On demand:
-- None.
-
-### `ponytail-review`
-
-Use for review focused only on over-engineering, deleting complexity, removing unnecessary dependencies, or spotting YAGNI abstractions. Required companion when `code-reviewer` is selected; when selected directly, use it only for complexity review.
-
-Required load set:
-- `__ROOT__/skills/ponytail-review/SKILL.md`
-
-On demand:
-- `__ROOT__/skills/code-reviewer/SKILL.md` only when the user also wants a full correctness/production review.
 
 ### `linkedin-technical-branding`
 

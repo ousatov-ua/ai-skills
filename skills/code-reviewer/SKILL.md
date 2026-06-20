@@ -14,14 +14,11 @@ description: >-
 
 ## Dependency Preflight
 
-**BLOCKING:** `engineering.md` must load its own required dependencies, including `ponytail`. Do not proceed until the full chain is loaded.
-
-**BLOCKING:** `ponytail-review` is a required companion skill for code reviews, not an optional follow-up.
+**BLOCKING:** `engineering.md` must load its own required dependencies. Do not proceed until the full chain is loaded.
 
 ### Required
 
 - `engineering.md` from `__ROOT__/shared/engineering.md`
-- Skill `ponytail-review` from `__ROOT__/skills/ponytail-review/SKILL.md`
 
 ### On Demand
 
