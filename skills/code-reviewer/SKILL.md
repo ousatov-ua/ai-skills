@@ -6,8 +6,7 @@ description: >-
   testing, maintainability, and production-readiness issues. Trigger whenever
   the user shares a diff, patch, PR link, or commit and asks to review, check,
   validate, or assess it, or asks whether code is ready to merge or ship —
-  even if they don't say the word "review". Use with sonar-reviewer when
-  static-analysis or Sonar cleanup checks are needed.
+  even if they don't say the word "review".
 ---
 
 # Code Reviewer
@@ -19,10 +18,6 @@ description: >-
 ### Required
 
 - `engineering.md` from `__ROOT__/shared/engineering.md`
-
-### On Demand
-
-- Skill `sonar-reviewer` from `__ROOT__/skills/sonar-reviewer/SKILL.md`
 
 ## Use
 
@@ -40,9 +35,6 @@ shape below.
   maintainability, performance, consistency.
 - Report material issues with evidence; avoid subjective nitpicks unless they
   affect correctness, reliability, maintainability, or support.
-- This skill owns the overall review; `sonar-reviewer` owns SonarQube,
-  SonarLint, and static-analysis validation. Delegate, do not duplicate
-  Sonar-specific checks.
 
 ## Review Process
 
@@ -69,8 +61,7 @@ shape below.
    reduced; reject risky refactoring without meaningful benefit.
 9. For local/current-change reviews, apply `engineering.md` patch-hygiene
    checks.
-10. Delegate to `sonar-reviewer` when static-analysis cleanup applies.
-11. Produce prioritized findings.
+10. Produce prioritized findings.
 
 ## Performance Evidence
 
