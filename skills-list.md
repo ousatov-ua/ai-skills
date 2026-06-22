@@ -40,6 +40,16 @@ Required load set:
 On demand:
 - Fresh public examples, platform changes, profile/recruiting trends, or comparable posts/sources when the task depends on current LinkedIn behavior or niche market wording.
 
+### `movie-researcher`
+
+Use for web-researched movie recommendations by movie type, short description, mood, genre, exclusions, or similarity to a seed movie.
+
+Required load set:
+- `__ROOT__/skills/movie-researcher/SKILL.md`
+
+On demand:
+- Fresh public movie sources for seed-movie traits, IMDb ratings, release year, plot summary, genre/tone, reviews, and content warnings.
+
 ### `sales-investigator`
 
 Use for evidence-based real estate purchase/sale investigation, property price analysis, buy-vs-wait decisions, negotiation preparation, affordability modeling, and legal/transaction risk screening.
