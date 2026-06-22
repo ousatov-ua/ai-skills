@@ -18,7 +18,6 @@ Required load set:
 - `__ROOT__/shared/compress.md`
 
 On demand:
-- `__ROOT__/skills/sonar-reviewer/SKILL.md` when changed or added code needs SonarQube, SonarLint, or static-analysis cleanup.
 - `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
 
 ### `code-reviewer`
@@ -27,19 +26,6 @@ Use for PR/code/change reviews, implementation validation, correctness, reliabil
 
 Required load set:
 - `__ROOT__/skills/code-reviewer/SKILL.md`
-- `__ROOT__/shared/engineering.md`
-- `__ROOT__/shared/compress.md`
-
-On demand:
-- `__ROOT__/skills/sonar-reviewer/SKILL.md` when static-analysis or Sonar cleanup checks are needed.
-- `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
-
-### `sonar-reviewer`
-
-Use for SonarQube/SonarLint cleanup, static-analysis validation, changed-code/test static-analysis issues.
-
-Required load set:
-- `__ROOT__/skills/sonar-reviewer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
 - `__ROOT__/shared/compress.md`
 
