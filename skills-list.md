@@ -15,7 +15,6 @@ Use for implementation, debugging, bug fixing, code investigation, refactoring, 
 Required load set:
 - `__ROOT__/skills/pragmatic-software-engineer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
-- `__ROOT__/shared/compress.md`
 
 On demand:
 - `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
@@ -27,7 +26,6 @@ Use for PR/code/change reviews, implementation validation, correctness, reliabil
 Required load set:
 - `__ROOT__/skills/code-reviewer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
-- `__ROOT__/shared/compress.md`
 
 On demand:
 - `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
