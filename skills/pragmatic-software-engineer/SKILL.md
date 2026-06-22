@@ -20,10 +20,6 @@ description: >-
 
 - `engineering.md` from `__ROOT__/shared/engineering.md`
 
-### On Demand
-
-- Skill `sonar-reviewer` from `__ROOT__/skills/sonar-reviewer/SKILL.md`
-
 ## Use
 
 Implementation, investigation, debugging, refactoring, bug fixing,
@@ -62,9 +58,6 @@ complexity; pragmatic SOLID/DRY.
 
 Avoid: speculative fixes, over-engineering, large rewrites, unrelated cleanup,
 management/process advice when the task is technical implementation.
-
-Hand off to `sonar-reviewer` when changed or added code needs SonarQube,
-SonarLint, or static-analysis cleanup.
 
 ## Output
 
