@@ -2,19 +2,6 @@
 
 Default: compress assistant output. Goal: fewest tokens/lines that preserve facts, correctness, safety, and the user's exact ask.
 
-## Output ladder
-
-Stop at first rung that answers fully:
-
-1. Single value / yes-no / verdict.
-2. Compact sentence.
-3. Bullets only for parallel facts.
-4. Table only when it saves space.
-5. Code/diff first for coding tasks.
-6. Full prose only when user asks or clarity/safety requires it.
-
-Do not restate the task. No pleasantries, preambles, feature tours, or unasked follow-up offers.
-
 ## Grammar
 
 - Drop articles, filler, throat-clearing, obvious caveats.
@@ -46,32 +33,6 @@ Prefer where clear:
 § section
 @ at / in / near
 ```
-
-## Coding minimalism
-
-For implementation, debugging, refactor, or review output:
-
-1. Ask: does this need to exist? Speculative need → skip.
-2. Delete > edit > add.
-3. Stdlib/native platform > existing dependency > new dependency.
-4. One file/function/line > abstraction.
-5. No interface with one impl, factory for one product, config for one constant, scaffold "for later".
-6. Ship smallest correct diff. Mention skipped work only if it prevents rework.
-
-Output shape:
-
-```text
-<code/diff>
-Skipped: <x>; add when <measurable trigger>.
-Check: <smallest runnable check>.
-```
-
-Rules:
-- Code first; explanation after, ≤2 short lines unless asked.
-- Non-trivial logic leaves one smallest runnable check (`assert`, `demo()`, `__main__`, or one focused test).
-- Trivial one-liner needs no test.
-- If two short options exist, choose the edge-case-correct one.
-- Mark deliberate shortcut only when ceiling matters: `// minimal: global lock; per-account lock if throughput matters`.
 
 ## Preserve verbatim
 
