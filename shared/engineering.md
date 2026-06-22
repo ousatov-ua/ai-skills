@@ -6,7 +6,6 @@
 
 ### On Demand
 
-- Skill `sonar-reviewer` from `__ROOT__/skills/sonar-reviewer/SKILL.md`
 - **Only for Maven projects:** `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` — to run Maven verification.
 
 ## Engineering Baseline
