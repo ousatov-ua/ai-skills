@@ -41,6 +41,17 @@ skill file when the user accepts and repository access is available.
 
 ## Rules
 
+### Visibility Boundary
+
+- User-visible output contains only: findings, decisions, actions,
+  validation, blockers, explicit assumptions, and final results.
+- Never expose scratch reasoning, live hypothesis chains, private work notes,
+  or step-by-step internal deliberation.
+- When reasoning is useful, report only the conclusion, evidence, and next
+  action.
+- Intermediary updates are status updates, not thought logs; keep them to 1-2
+  concise sentences.
+
 ### Hard
 - Load files **on demand only** — fetch each file at the moment it is needed, not upfront.
 - Required dependencies of a selected skill are needed immediately; load the full Required load set from `skills-list.md`.
