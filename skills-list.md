@@ -42,13 +42,13 @@ On demand:
 
 ### `movie-researcher`
 
-Use for web-researched movie recommendations by movie type, short description, mood, genre, exclusions, or similarity to a seed movie.
+Use for web-researched film, TV series, or miniseries recommendations by format/type, short description, mood, genre, exclusions, or similarity to a seed title.
 
 Required load set:
 - `__ROOT__/skills/movie-researcher/SKILL.md`
 
 On demand:
-- Fresh public movie sources for seed-movie traits, IMDb ratings, release year, plot summary, genre/tone, reviews, and content warnings.
+- Fresh public movie/TV sources for seed-title traits, IMDb ratings, release year, format, plot summary, genre/tone, reviews, content warnings, and format-specific metadata.
 
 ### `sales-investigator`
 
