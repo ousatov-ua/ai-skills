@@ -31,7 +31,7 @@ Identify the requested format before searching:
 format: film | TV series | miniseries | any
 ```
 
-Do not mix films with TV series/miniseries unless the user asks for mixed recommendations or the seed/query clearly allows it. Give explicit film words (`movie`, `film`) precedence over genre phrases such as `serial killer movie` or `serial murderer thriller`. Treat series triggers as TV format only when the wording clearly means episodic TV: `TV series`, `series`, `show`, `TV serial`, `television serial`, `serial drama`, `miniseries`, `episodes`, or `seasons`. Apply the stricter TV/miniseries rating rule only to TV series/miniseries.
+Do not mix films with TV series/miniseries unless the user asks for mixed recommendations or the seed/query clearly allows it. Give explicit film words (`movie`, `film`) precedence over genre phrases such as `serial killer movie` or `serial murderer thriller`. Treat `movie series` and `film series` as film/franchise wording. Treat `series` as TV format only when context clearly means episodic TV, such as `TV series`, `show`, `TV serial`, `television serial`, `serial drama`, `miniseries`, `episodes`, or `seasons`. Apply the stricter TV/miniseries rating rule only to TV series/miniseries.
 
 Accept input modes:
 
