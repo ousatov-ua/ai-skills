@@ -66,6 +66,31 @@ skill file when the user accepts and repository access is available.
 - Do not silently continue without a required skill or shared file.
 - Do not guess missing skill content or substitute unrelated README files.
 
+### Sensitive Data Boundary
+
+The agent must never read, print, summarize, index, embed, copy, upload, or expose secrets or sensitive local data.
+
+Forbidden to inspect contents of:
+
+- `.env`, `.env.*`, `*.env`
+- `.ssh/`, SSH keys, `id_rsa`, `id_ed25519`, `known_hosts`, `authorized_keys`
+- `*.pem`, `*.key`, `*.p12`, `*.pfx`, private certificates/keys
+- `.aws/`, `.gcloud/`, `.azure/`, cloud credentials/configs
+- Kubernetes configs: `.kube/`, `kubeconfig`
+- Docker/auth configs: `.docker/config.json`
+- Package/auth files: `.npmrc`, `.pypirc`, `.netrc`, `settings.xml`, `gradle.properties`
+- Git credential files: `.git-credentials`, `.gitconfig` when credentials may be present
+- Any file or directory containing: `secret`, `token`, `credential`, `password`, `private_key`, `api_key`
+
+Rules:
+
+1. Do not use commands that may reveal sensitive file contents, including `cat`, `less`, `head`, `tail`, `grep`, `rg`, `sed`, `awk`, `strings`, `xxd`, `hexdump`, `base64`, or similar.
+2. Before broad repository scans, explicitly exclude sensitive paths and patterns.
+3. It is allowed to check whether a sensitive file exists only when necessary, but never open or display its contents.
+4. Never ask the user to paste secrets, tokens, keys, passwords, or private config values.
+5. If sensitive content is accidentally encountered, stop using that content immediately, do not repeat it, and report only: “Sensitive content was encountered and ignored.”
+6. Use placeholders instead of real values, for example: `<API_KEY>`, `<TOKEN>`, `<PRIVATE_KEY>`, `<PASSWORD>`.
+
 ## Flow
 
 1. Understand the task and constraints.
