@@ -30,6 +30,16 @@ Required load set:
 On demand:
 - `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
 
+### `eval-runner`
+
+Use for turning a prompt, AI workflow, model behavior, or agent task into a light, medium, or hard evaluation; collecting the minimum needed inputs; creating a self-contained eval spec; running it through in-chat, local, repository-native, or user-provided execution; and reporting results. Do not route to external eval providers.
+
+Required load set:
+- `__ROOT__/skills/eval-runner/SKILL.md`
+
+On demand:
+- User-provided datasets, logs, existing outputs, repository-native eval/test commands, local scripts, or manual scoring procedures only when needed.
+
 ### `linkedin-technical-branding`
 
 Use for LinkedIn posts, profile content, professional branding, project/release/benchmark posts, recommendations.
