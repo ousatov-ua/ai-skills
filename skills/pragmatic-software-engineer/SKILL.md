@@ -44,8 +44,7 @@ top of that baseline.
    rank them and explain how to verify each.
 5. Implement incrementally with minimal, focused changes.
 6. Add or extend tests that pin changed behavior unless technically impossible.
-7. Validate with the most relevant available command or report; for Maven,
-   follow `engineering.md` and run through `maven-summary.sh`.
+7. Validate with the most relevant available command or report
 8. Report using the matching output shape, including risks.
 
 Do not stop at analysis when enough information exists to act.
