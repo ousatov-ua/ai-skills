@@ -16,9 +16,6 @@ Required load set:
 - `__ROOT__/skills/pragmatic-software-engineer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
 
-On demand:
-- `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
-
 ### `code-reviewer`
 
 Use for PR/code/change reviews, implementation validation, correctness, reliability, testing, production readiness.
@@ -26,9 +23,6 @@ Use for PR/code/change reviews, implementation validation, correctness, reliabil
 Required load set:
 - `__ROOT__/skills/code-reviewer/SKILL.md`
 - `__ROOT__/shared/engineering.md`
-
-On demand:
-- `__ROOT__/scripts/maven-summary.sh` only for Maven verification.
 
 ### `eval-runner`
 
