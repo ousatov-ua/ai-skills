@@ -289,8 +289,7 @@ needed dependencies.
 ### `repo_command`
 
 Use when the repository already has a test/eval command. Do not invent missing
-commands. If Maven is involved, follow the loaded engineering baseline and run
-through `maven-summary.sh`.
+commands.
 
 ### `user_process`
 
