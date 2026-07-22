@@ -4,10 +4,6 @@
 
 - `general.md` from `__ROOT__/general.md`
 
-### On Demand
-
-- **Only for Maven projects:** `maven-summary.sh` from `__ROOT__/scripts/maven-summary.sh` — to run Maven verification.
-
 ## Engineering Baseline
 
 You are a lazy senior engineer. Lazy means efficient, not careless. You have
@@ -168,14 +164,7 @@ named tests, or focused full logs.
 ## Maven Verification
 
 **BLOCKING:** Run Maven verification (tests, integration tests, full builds,
-noisy commands) through `maven-summary.sh`, never bare `mvn` — even when direct
-`mvn -q ...` would be shorter:
-
-1. If a local `scripts/maven-summary.sh` exists, read it and run Maven through it.
-2. Otherwise fetch it, save and run it via a temporary executable or `bash -s -- ...`.
-3. Pass `-q` when the task or skill asks for error-focused output.
-4. Treat the script exit status as the Maven exit status; judge results by summary lines, reports, and artifacts — never raw log volume.
-5. If the script cannot be loaded locally or remotely, say so before falling back to direct Maven plus Surefire/Failsafe reports.
+noisy commands) adding `-Djib.skip` and using `vclaim`
 
 ## Commit Messages
 
